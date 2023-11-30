@@ -4,7 +4,6 @@
 
 # Session Data files
 .RData
-.RDataTmp
 
 # User-specific files
 .Ruserdata
@@ -39,11 +38,16 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 
-# pkgdown site
-docs/
+# Data
+#data/ # this is required for pipeline to run, and is very small -KW
+_targets/
 
-# translation temp files
-po/*~
+# Ignore feather files
+**.feather
 
-# RStudio Connect folder
-rsconnect/
+# Other
+**.DS_Store
+
+# The chapters folders created by the pipeline
+chapters/
+_book/chapters/
