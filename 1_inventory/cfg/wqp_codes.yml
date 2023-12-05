@@ -21,9 +21,6 @@
     - "Chlorophyll a, uncorrected for pheophytin"
     - "Chlorophyll a - Phytoplankton (suspended)"
 
-  # depth:
-  #   - "Depth"
-
   doc:
     - "Organic carbon"
     - "Total carbon"
