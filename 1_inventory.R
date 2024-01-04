@@ -15,6 +15,13 @@ p1_targets_list <- list(
     packages = "yaml"
   ),
   
+  # Use {googledrive} to upload the yaml parameter data, which will be needed in
+  # the second pipeline. Then return a file containing the link as text to be 
+  # used outside of this pipeline
+  tar_file(p1_wqp_params_link,
+           export_single_file(target = p1_wqp_params,
+                              folder_pattern = "1_inventory/out/")),
+  
   # Format a table that indicates how various WQP characteristic names map onto 
   # more commonly-used parameter names
   tar_target(
@@ -22,10 +29,18 @@ p1_targets_list <- list(
     crosswalk_characteristics(p1_wqp_params)
   ),
   
+  # Use {googledrive} to upload the crosswalk data, which will be needed in
+  # the second pipeline. Then return a file containing the link as text to be 
+  # used outside of this pipeline
+  tar_file(p1_char_names_crosswalk_link,
+           export_single_file(target = p1_char_names_crosswalk,
+                              folder_pattern = "1_inventory/out/")),
+  
   # Get a vector of WQP characteristic names to match parameter groups of interest
   tar_target(
     p1_char_names,
-    filter_characteristics(p1_char_names_crosswalk, p0_param_groups_select)
+    filter_characteristics(p1_char_names_crosswalk, p0_param_groups_select),
+    packages = c("tidyverse", "xml2")
   ),
   
   # Save output file(s) containing WQP characteristic names that are similar to the
@@ -34,7 +49,8 @@ p1_targets_list <- list(
     p1_similar_char_names_txt,
     find_similar_characteristics(p1_char_names,
                                  p0_param_groups_select,
-                                 "1_inventory/out")
+                                 "1_inventory/out"),
+    packages = c("tidyverse", "xml2")
   ),
   
   tar_target(
@@ -47,14 +63,23 @@ p1_targets_list <- list(
   # outside of CONUS, including AK, HI, and US territories. 
   tar_target(
     p1_global_grid,
-    create_global_grid()
+    create_global_grid(),
+    packages = c("tidyverse", "sf")
   ),
+  
+  # Use {googledrive} to upload the global grid data, which will be needed in
+  # the second pipeline. Then return a file containing the link as text to be 
+  # used outside of this pipeline
+  tar_file(p1_global_grid_link,
+           export_single_file(target = p1_global_grid,
+                              folder_pattern = "1_inventory/out/")),
   
   # Use spatial subsetting to find boxes that overlap the area of interest
   # These boxes will be used to query the WQP.
   tar_target(
     p1_global_grid_aoi,
-    subset_grids_to_aoi(p1_global_grid, p1_AOI_sf)
+    subset_grids_to_aoi(p1_global_grid, p1_AOI_sf),
+    packages = c("tidyverse", "units")
   ),
   
   # Inventory data available from the WQP within each of the boxes that overlap
@@ -75,8 +100,8 @@ p1_targets_list <- list(
                     wqp_args = p0_wqp_args)
     },
     pattern = cross(p1_global_grid_aoi, p1_char_names),
-    error = "continue"#,
-    # cue = tar_cue("never")
+    error = "continue",
+    packages = c("tidyverse", "retry", "sf", "dataRetrieval", "units")
   ),
   
   # Subset the WQP inventory to only retain sites within the area of interest
@@ -84,6 +109,13 @@ p1_targets_list <- list(
     p1_wqp_inventory_aoi,
     subset_inventory(p1_wqp_inventory, p1_AOI_sf)
   ),
+  
+  # Use {googledrive} to upload the crosswalk data, which will be needed in
+  # the second pipeline. Then return a file containing the link as text to be 
+  # used outside of this pipeline
+  tar_file(p1_wqp_inventory_aoi_link,
+           export_single_file(target = p1_wqp_inventory_aoi,
+                              folder_pattern = "1_inventory/out/")),
   
   # Summarize the data that would come back from the WQP
   tar_file(

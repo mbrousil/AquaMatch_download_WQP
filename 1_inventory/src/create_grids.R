@@ -17,26 +17,26 @@
 #' 
 create_global_grid <- function(cellsize = c(2,2)){
  
-  global_box <- sf::st_bbox(c(xmin = -180, xmax = 180,
+  global_box <- st_bbox(c(xmin = -180, xmax = 180,
                               ymax = 90, ymin = -90), 
-                            crs = sf::st_crs(4326))
+                            crs = st_crs(4326))
   
   # create square grid with cell sizes equal to `cellsize` passed in degrees.
   global_grid <- global_box %>%
-    sf::st_make_grid(cellsize = c(cellsize[1],cellsize[2]), square = TRUE, 
+    st_make_grid(cellsize = c(cellsize[1],cellsize[2]), square = TRUE, 
                      # Start lower left of grid right at 180th meridian to avoid
                      # issues with WQP query bboxes crossing from E longitudes to W
                      # See https://github.com/USGS-R/dataRetrieval/issues/616
-                     offset = c(-180, sf::st_bbox(global_box)$ymin)) %>%
+                     offset = c(-180, st_bbox(global_box)$ymin)) %>%
     # convert to sf object and add an "id" attribute
-    sf::st_as_sf() %>%
+    st_as_sf() %>%
     mutate(id = row.names(.))
   
   # Check that global_grid produces a valid bounding box to pass to WQP. Check that
   # the west-east coordinates don't cross 180. Note that this behavior could 
   # result from picking a cellsize[1] that 180 is not evenly divisible by (like 7)
   # because it results in a grid cell crossing the 180th meridian.
-  grid_xmaxes <- purrr::map(global_grid$x, function(grid) st_bbox(grid)$xmax)
+  grid_xmaxes <- map(global_grid$x, function(grid) st_bbox(grid)$xmax)
   if(any(unlist(grid_xmaxes) > 180)) {
     stop("Grid cells cross over 180 deg meridian and will cause WQP 
     calls to fail. Change `cellsize[1]` so that 180 is divisible 
@@ -78,9 +78,9 @@ subset_grids_to_aoi <- function(grid, aoi_sf, buffer_dist_m = 0){
   # Filter the big grid of boxes to only include those that overlap/are within
   # a given distance of the area of interest
   grid_subset_aoi <- grid %>%
-    sf::st_filter(y = sf::st_transform(aoi_sf, sf::st_crs(grid)),
+    st_filter(y = st_transform(aoi_sf, st_crs(grid)),
                   .predicate = st_is_within_distance,
-                  dist = units::set_units(buffer_dist_m, m))   
+                  dist = set_units(buffer_dist_m, m))   
   
   return(grid_subset_aoi)
   

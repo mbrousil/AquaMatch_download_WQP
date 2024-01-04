@@ -1,0 +1,16 @@
+CharacteristicName,n_sites,n_records
+Chlorophyll a,67725,1568280
+Chlorophyll a (probe relative fluorescence),4578,1244052
+Chlorophyll a (probe),2075,241228
+Chlorophyll a - Phytoplankton (suspended),1114,4024
+"Chlorophyll a, corrected for pheophytin",71427,861561
+"Chlorophyll a, free of pheophytin",3394,89562
+"Chlorophyll a, uncorrected for pheophytin",41517,524211
+"Depth, Secchi disk depth",127057,2957168
+"Depth, Secchi disk depth (choice list)",11668,54289
+Non-purgeable Organic Carbon (NPOC),216,4599
+Organic carbon,122428,2671569
+Secchi Reading Condition (choice list),126,2490
+Total carbon,456,23699
+Total suspended solids,199121,4024736
+"Water transparency, Secchi disc",22,844

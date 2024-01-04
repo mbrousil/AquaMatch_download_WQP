@@ -25,10 +25,10 @@ identify_bad_ids <- function(sites){
   # Check that string format matches regex used in WQP
   sites_bad_ids <- sites %>%
     rename(site_id = MonitoringLocationIdentifier) %>% 
-    mutate(site_id_regex = stringr::str_extract(site_id, "[\\w]+.*[\\S]")) %>%
+    mutate(site_id_regex = str_extract(site_id, "[\\w]+.*[\\S]")) %>%
     filter(site_id != site_id_regex) %>%
     select(-site_id_regex)
-
+  
   return(sites_bad_ids)
 }
 
@@ -53,7 +53,7 @@ identify_bad_ids <- function(sites){
 #' called `download_grp` which is made up of unique groups that enable use of 
 #' `group_by()` and then `tar_group()` for downloading.
 #' 
-add_download_groups <- function(site_counts, max_sites = 500, max_results = 250000) {
+add_download_groups <- function(site_counts, max_sites = 300, max_results = 250000) {
   
   # Check whether any individual sites have a records count that exceeds `max_results`
   if(any(site_counts$results_count > max_results)){
@@ -93,14 +93,14 @@ add_download_groups <- function(site_counts, max_sites = 500, max_results = 2500
   sitecounts_grouped_good_ids <- sitecounts_good_ids %>%
     rename(site_id = MonitoringLocationIdentifier) %>% 
     split(.$grid_id) %>%
-    purrr::map_dfr(.f = function(df){
+    map_dfr(.f = function(df){
       
       df_grouped <- df %>%
         group_by(CharacteristicName) %>%
         arrange(desc(results_count), .by_group = TRUE) %>%
-        mutate(task_num_by_results = MESS::cumsumbinning(x = results_count, 
-                                                         threshold = max_results, 
-                                                         maxgroupsize = max_sites), 
+        mutate(task_num_by_results = cumsumbinning(x = results_count, 
+                                                   threshold = max_results, 
+                                                   maxgroupsize = max_sites), 
                char_group = cur_group_id()) %>%
         ungroup() %>% 
         # Each group from before (which represents a different characteristic 
@@ -136,7 +136,7 @@ add_download_groups <- function(site_counts, max_sites = 500, max_results = 2500
            download_grp, pull_by_id) 
   
   return(sitecounts_grouped_out)
-
+  
 }
 
 
@@ -175,15 +175,15 @@ create_site_bbox <- function(sites, buffer_dist_degrees = 0.005){
   
   # create a small buffer around the site(s) and then compute the bounding box
   site_bbox <- sites %>%
-    sf::st_as_sf(coords = c("lon","lat"), crs = epsg_in) %>%
-    sf::st_transform(4326) %>%
-    sf::st_buffer(buffer_dist_degrees) %>%
-    sf::st_bbox()
+    st_as_sf(coords = c("lon","lat"), crs = epsg_in) %>%
+    st_transform(4326) %>%
+    st_buffer(buffer_dist_degrees) %>%
+    st_bbox()
   
   return(site_bbox)
   
 }
-  
+
 
 
 #' @title Download data from the Water Quality Portal
@@ -243,9 +243,9 @@ fetch_wqp_data <- function(site_counts_grouped, char_names, wqp_args = NULL,
   # Define function to pull data, retrying up to the number of times
   # indicated by `max_tries`
   pull_data <- function(x){
-    retry::retry(dataRetrieval::readWQPdata(x),
-                 when = "Error:", 
-                 max_tries = max_tries)
+    retry(readWQPdata(x),
+          when = "Error:", 
+          max_tries = max_tries)
   }
   
   # Now pull the data. If verbose == TRUE, print all messages from dataRetrieval,
@@ -255,7 +255,7 @@ fetch_wqp_data <- function(site_counts_grouped, char_names, wqp_args = NULL,
   } else {
     wqp_data <- suppressMessages(pull_data(wqp_args_all))
   }
-
+  
   # We applied special handling for sites with pull_by_id = FALSE (see comments
   # above). Filter wqp_data to only include sites requested in site_counts_grouped
   # in case our bounding box approach picked up any additional, undesired sites. 

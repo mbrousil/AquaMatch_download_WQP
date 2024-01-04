@@ -42,8 +42,8 @@ crosswalk_characteristics <- function(wqp_params){
 read_wqp_characteristics <- function(){
   
   # Fetch all characteristics from WQP
-  all_characteristic_names <- xml2::read_xml("https://www.waterqualitydata.us/Codes/Characteristicname?mimeType=xml") %>% 
-    xml2::xml_children() %>% xml2::xml_attr("value") %>% na.omit()
+  all_characteristic_names <- read_xml("https://www.waterqualitydata.us/Codes/Characteristicname?mimeType=xml") %>% 
+    xml_children() %>% xml_attr("value") %>% na.omit()
   
   return(all_characteristic_names)
 }

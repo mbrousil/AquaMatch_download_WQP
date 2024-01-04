@@ -19,7 +19,7 @@
 summarize_wqp_download <- function(wqp_inventory_summary_csv, wqp_data, fileout){
   
   # Read in WQP inventory summary
-  wqp_inventory_summary <- readr::read_csv(wqp_inventory_summary_csv, show_col_types = FALSE) %>%
+  wqp_inventory_summary <- read_csv(wqp_inventory_summary_csv, show_col_types = FALSE) %>%
     rename(n_sites_expected = n_sites, n_records_expected = n_records)
   
   # Summarize WQP data pull

@@ -18,7 +18,7 @@
 #' Portal. Columns contain site information and record counts.
 #' 
 #' @examples 
-#' aoi <- sf::st_as_sf(data.frame(lon = c(-77.063, -75.333, -75.437), 
+#' aoi <- st_as_sf(data.frame(lon = c(-77.063, -75.333, -75.437), 
 #'                                     lat = c(40.547, 41.029, 39.880)), 
 #'                          coords = c("lon", "lat"), crs = 4326) 
 #' inventory_wqp(aoi, "Conductivity", wqp_args = list(siteType = "Stream"))
@@ -38,7 +38,7 @@ inventory_wqp <- function(grid, char_names, wqp_args = NULL, max_tries = 3){
   }
   
   # Get bounding box for the grid polygon
-  bbox <- sf::st_bbox(grid)
+  bbox <- st_bbox(grid)
   
   # Format characteristic names
   char_names <- as.character(unlist(char_names))
@@ -53,7 +53,7 @@ inventory_wqp <- function(grid, char_names, wqp_args = NULL, max_tries = 3){
     wqp_args_all <- c(wqp_args, list(bBox = c(bbox$xmin, bbox$ymin, bbox$xmax, bbox$ymax),
                                      characteristicName = x))
     # query WQP
-    retry::retry(dataRetrieval::whatWQPdata(wqp_args_all),
+    retry(whatWQPdata(wqp_args_all),
                  when = "Error:", 
                  max_tries = max_tries) %>%
       mutate(CharacteristicName = x, grid_id = grid$id)
@@ -65,7 +65,7 @@ inventory_wqp <- function(grid, char_names, wqp_args = NULL, max_tries = 3){
   # "Column `HorizontalCoordinateReferenceSystemDatumName` doesn't exist", return
   # an empty data frame for the site location metadata. 
   site_location_metadata <- tryCatch(
-    dataRetrieval::whatWQPsites(bBox = c(bbox$xmin, bbox$ymin, bbox$xmax, bbox$ymax)) %>%
+    whatWQPsites(bBox = c(bbox$xmin, bbox$ymin, bbox$xmax, bbox$ymax)) %>%
       select(MonitoringLocationIdentifier, HorizontalCoordinateReferenceSystemDatumName) %>%
       filter(MonitoringLocationIdentifier %in% wqp_inventory$MonitoringLocationIdentifier),
     error = function(e){
@@ -137,12 +137,12 @@ transform_site_locations <- function(sites, crs_out = "WGS84"){
       # convert data frame to sf object and transform to desired crs
       if(!is.na(epsg_in)){
         sites_transformed <- x %>%
-          sf::st_as_sf(coords=c("lon","lat"), crs = epsg_in) %>%
-          sf::st_transform(epsg_out) %>%
-          mutate(lon_new = as.numeric(sf::st_coordinates(.)[,1]),
-                 lat_new = as.numeric(sf::st_coordinates(.)[,2]),
+          st_as_sf(coords=c("lon","lat"), crs = epsg_in) %>%
+          st_transform(epsg_out) %>%
+          mutate(lon_new = as.numeric(st_coordinates(.)[,1]),
+                 lat_new = as.numeric(st_coordinates(.)[,2]),
                  datum_new = crs_out) %>%
-          sf::st_drop_geometry() %>%
+          st_drop_geometry() %>%
           select(-datum) %>%
           rename("lon" = "lon_new", "lat" = "lat_new", "datum" = "datum_new")
       } else {
@@ -183,23 +183,23 @@ subset_inventory <- function(wqp_inventory, aoi_sf, buffer_dist_m = 0){
   
   # Harmonize different coordinate reference systems used across sites
   queried_sites_transformed <- transform_site_locations(wqp_inventory, crs_out = "WGS84") 
-  queried_sites_transformed_sf <- sf::st_as_sf(queried_sites_transformed, 
+  queried_sites_transformed_sf <- st_as_sf(queried_sites_transformed, 
                                                coords = c("lon","lat"), crs = 4326) 
   
   # Filter wqp inventory to only include sites within area of interest + some user-specified 
   # buffer distance to ensure we retain all sites within the AOI. 
   # Note that the workflow below is similar to one where we would draw a buffer around the 
-  # AOI and then use sf::st_intersects to find the points that intersect the AOI polygon. 
+  # AOI and then use st_intersects to find the points that intersect the AOI polygon. 
   # st_is_within_distance is used here instead because buffers created using the s2 engine
   # are rough and can be glitchy when working with geographic coordinates. See this blog
   # post by the sf maintainers: https://r-spatial.github.io/sf/articles/sf7.html#buffers-1
   queried_sites_aoi <- queried_sites_transformed_sf %>%
-    sf::st_filter(y = sf::st_transform(aoi_sf, sf::st_crs(.)),
-                  .predicate = sf::st_is_within_distance,
-                  dist = units::set_units(buffer_dist_m, m)) %>%
-    mutate(lon = as.numeric(sf::st_coordinates(.)[,1]),
-           lat = as.numeric(sf::st_coordinates(.)[,2])) %>%
-    sf::st_drop_geometry() %>%
+    st_filter(y = st_transform(aoi_sf, st_crs(.)),
+                  .predicate = st_is_within_distance,
+                  dist = set_units(buffer_dist_m, m)) %>%
+    mutate(lon = as.numeric(st_coordinates(.)[,1]),
+           lat = as.numeric(st_coordinates(.)[,2])) %>%
+    st_drop_geometry() %>%
     select(c(any_of(names(wqp_inventory)), datum))
   
   message(sprintf("Returned %s sites within area of interest.",

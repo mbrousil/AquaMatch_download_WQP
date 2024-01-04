@@ -4,24 +4,19 @@
 required_pkgs <- c(
   "dataRetrieval",
   "feather",
-  "janitor",
-  "lubridate",
-  "ggrepel",
   "googledrive",
-  "MASS",
-  "pander",
+  "MESS",
   "retry",
-  "rvest",
-  "scales",
   "sf",
   "targets", 
   "tarchetypes",
   "tidyverse",
   "tigris",
-  "tictoc",
+  "units",
+  "xml2",
   "yaml")
 
-# helper function to install all necessary pacakges
+# Helper function to install all necessary packages
 package_installer <- function(x) {
   if (x %in% installed.packages()) {
     print(paste0("{", x ,"} package is already installed."))
@@ -47,5 +42,5 @@ library(targets)
   temp_vis$x$main$text <- paste0("Last completed: ", Sys.time())
   
   htmltools::save_html(html = temp_vis,
-                       file = "docs/current_visnetwork.html")
+                       file = "out/current_visnetwork.html")
 }
