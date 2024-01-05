@@ -29,6 +29,8 @@ package_installer <- function(x) {
 # map function using base lapply
 lapply(required_pkgs, package_installer)
 
+googledrive::drive_auth()
+
 # load targets library
 library(targets)
 
