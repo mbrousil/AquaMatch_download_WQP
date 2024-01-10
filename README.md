@@ -18,7 +18,7 @@ Technical details on {targets} workflows are available in the [{targets} User Ma
 
 #### Setup
 
-Uers will need to authorize the [{googledrive}](https://googledrive.tidyverse.org/index.html) R package. This workflow requires {googledrive} in order to store WQP downloads online. Information on authorization can be found [here](https://googledrive.tidyverse.org/reference/drive_auth.html). The `run.R` script is set up to assume that an account has already been authorized on the user's computer.
+Users will need to authorize the [{googledrive}](https://googledrive.tidyverse.org/index.html) R package. This workflow requires {googledrive} in order to store WQP downloads online. Information on authorization can be found [here](https://googledrive.tidyverse.org/reference/drive_auth.html). The `run.R` script is set up to assume that an account has already been authorized on the user's computer.
 
 #### Organization and documentation
 
