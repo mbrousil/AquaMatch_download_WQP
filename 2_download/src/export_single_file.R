@@ -17,7 +17,7 @@ export_single_file <- function(target, folder_pattern){
   
   # Once locally exported, send to Google Drive
   out_file <- drive_put(media = file_local_path,
-                        path = "~/aquamatch_download_wqp/")
+                        path = "~/aquamatch_download_wqp/chla_submission/")
   
   # Make the Google Drive link shareable: anyone can view
   out_file_share <- out_file %>%

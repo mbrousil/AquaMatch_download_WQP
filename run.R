@@ -30,6 +30,8 @@ package_installer <- function(x) {
 lapply(required_pkgs, package_installer)
 
 googledrive::drive_auth()
+# Select existing account (change if starting from scratch)
+2
 
 # load targets library
 library(targets)
