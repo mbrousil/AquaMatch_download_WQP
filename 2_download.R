@@ -13,7 +13,7 @@ p2_targets_list <- list(
                CharacteristicName, ProviderName) %>%
       # Count the number of rows per group
       summarize(results_count = sum(resultCount, na.rm = TRUE),
-                .groups = 'drop') %>%
+                .groups = "drop") %>%
       # Add the overarching parameter names to the dataset
       left_join(x = .,
                 y = p1_wqp_params %>%
@@ -26,7 +26,6 @@ p2_targets_list <- list(
                 by = "CharacteristicName") %>%
       group_by(parameter) %>%
       # In case of testing:
-      # sample_n(5) %>%
       # Split dataset into a list for iterating downloads by parameter
       split(f = .$parameter)
   ),
@@ -37,21 +36,6 @@ p2_targets_list <- list(
   tar_file(p2_site_counts_link,
            export_single_file(target = p2_site_counts,
                               folder_pattern = "2_download/out/")),
-  
-  # Manually breaking up by parameter for now. In the future this should likely
-  # be reworked into targets branching. The goal right now is to create a way for
-  # each param to be downloaded separately so that an error in one doesn't
-  # prevent others from being collected and combined
-  # tar_target(
-  #   p2_site_counts_grouped_alk,
-  #   add_download_groups(p2_site_counts$alkalinity, 
-  #                       max_sites = 100,
-  #                       max_results = 250000) %>%
-  #     group_by(download_grp) %>%
-  #     tar_group(),
-  #   iteration = "group",
-  # packages = c("tidyverse", "MESS")
-  # ),
   
   tar_target(
     p2_site_counts_grouped_chl,
@@ -65,137 +49,6 @@ p2_targets_list <- list(
   ),
   
   tar_target(
-    p2_site_counts_grouped_sdd,
-    add_download_groups(p2_site_counts$secchi, 
-                        max_sites = 100,
-                        max_results = 250000) %>%
-      group_by(download_grp) %>%
-      tar_group(),
-    iteration = "group",
-    packages = c("tidyverse", "MESS")
-  ),
-  
-  tar_target(
-    p2_site_counts_grouped_tss,
-    add_download_groups(p2_site_counts$tss, 
-                        max_sites = 100,
-                        max_results = 250000) %>%
-      group_by(download_grp) %>%
-      tar_group(),
-    iteration = "group",
-    packages = c("tidyverse", "MESS")
-  ),
-  
-  tar_target(
-    p2_site_counts_grouped_doc,
-    add_download_groups(p2_site_counts$doc, 
-                        max_sites = 100,
-                        max_results = 250000) %>%
-      group_by(download_grp) %>%
-      tar_group(),
-    iteration = "group",
-    packages = c("tidyverse", "MESS")
-  ),
-  
-  # tar_target(
-  #   p2_site_counts_grouped_temp,
-  #   add_download_groups(p2_site_counts$temperature %>%
-  #                         # For now exclude STORET - lots of high frequency
-  #                         # data there
-  #                         filter(ProviderName == "NWIS"), 
-  #                       max_sites = 100,
-  #                       max_results = 250000) %>%
-  #     group_by(download_grp) %>%
-  #     tar_group(),
-  #   iteration = "group",
-  # packages = c("tidyverse", "MESS")
-  # ),
-  
-  # tar_target(
-  #   p2_site_counts_grouped_nitro,
-  #   add_download_groups(p2_site_counts$nitrogen,
-  #                       max_sites = 100,
-  #                       max_results = 250000) %>%
-  #     group_by(download_grp) %>%
-  #     tar_group(),
-  #   iteration = "group",
-  # packages = c("tidyverse", "MESS")
-  # ),
-  
-  # tar_target(
-  #   p2_site_counts_grouped_phos,
-  #   add_download_groups(p2_site_counts$phosphorus,
-  #                       max_sites = 100,
-  #                       max_results = 250000) %>%
-  #     group_by(download_grp) %>%
-  #     tar_group(),
-  #   iteration = "group",
-  # packages = c("tidyverse", "MESS")
-  # ),
-  
-  # tar_target(
-  #   p2_site_counts_grouped_depth,
-  #   add_download_groups(p2_site_counts$depth,
-  #                       max_sites = 100,
-  #                       max_results = 250000) %>%
-  #     group_by(download_grp) %>%
-  #     tar_group(),
-  #   iteration = "group",
-  # packages = c("tidyverse", "MESS")
-  # ),
-  
-  # tar_target(
-  #   p2_site_counts_grouped_ssc,
-  #   add_download_groups(p2_site_counts$ssc,
-  #                       max_sites = 100,
-  #                       max_results = 250000) %>%
-  #     group_by(download_grp) %>%
-  #     tar_group(),
-  #   iteration = "group",
-  # packages = c("tidyverse", "MESS")
-  # ),
-  
-  # tar_target(
-  #   p2_site_counts_grouped_poc,
-  #   add_download_groups(p2_site_counts$poc,
-  #                       max_sites = 100,
-  #                       max_results = 250000) %>%
-  #     group_by(download_grp) %>%
-  #     tar_group(),
-  #   iteration = "group",
-  # packages = c("tidyverse", "MESS")
-  # ),
-  
-  
-  # Again, manual iteration that should be reworked into branches:
-  
-  # Map over groups of sites to download data.
-  # Note that because error = 'continue', {targets} will attempt to build all 
-  # of the "branches" represented by each unique combination of characteristic 
-  # name and download group, even if one branch returns an error. This way, 
-  # we will not need to re-build branches that have already run successfully. 
-  # However, if a branch fails, {targets} will throw an error reading `could
-  # not load dependencies of [immediate downstream target]. invalid 'description'
-  # argument` because it cannot merge the individual branches and so did not  
-  # complete the branching target. The error(s) associated with the failed branch 
-  # will therefore need to be resolved before the full target can be successfully 
-  # built. A common reason a branch may fail is due to WQP timeout errors. Timeout 
-  # errors can sometimes be resolved by waiting a few hours and retrying tar_make().
-  # tar_target(
-
-  # tar_target(
-  #   p2_wqp_data_aoi_alk,
-  #   fetch_wqp_data(p2_site_counts_grouped_alk,
-  #                  char_names = unique(p2_site_counts_grouped_alk$CharacteristicName),
-  #                  wqp_args = p0_wqp_args),
-  #   pattern = map(p2_site_counts_grouped_alk),
-  #   error = "continue",
-  #   format = "feather",
-  #   packages = c("dataRetrieval", "tidyverse", "sf", "retry"),
-  #   # cue = tar_cue("never")
-  # ),
-  
-  tar_target(
     p2_wqp_data_aoi_chl,
     fetch_wqp_data(p2_site_counts_grouped_chl,
                    char_names = unique(p2_site_counts_grouped_chl$CharacteristicName),
@@ -204,130 +57,12 @@ p2_targets_list <- list(
     error = "continue",
     format = "feather",
     packages = c("dataRetrieval", "tidyverse", "sf", "retry")
-    # cue = tar_cue("never")
   ),
-  
-  tar_target(
-    p2_wqp_data_aoi_sdd,
-    fetch_wqp_data(p2_site_counts_grouped_sdd,
-                   char_names = unique(p2_site_counts_grouped_sdd$CharacteristicName),
-                   wqp_args = p0_wqp_args),
-    pattern = map(p2_site_counts_grouped_sdd),
-    error = "continue",
-    format = "feather",
-    packages = c("dataRetrieval", "tidyverse", "sf", "retry")#,
-    # cue = tar_cue("never")
-  ),
-  
-  tar_target(
-    p2_wqp_data_aoi_tss,
-    fetch_wqp_data(p2_site_counts_grouped_tss,
-                   char_names = unique(p2_site_counts_grouped_tss$CharacteristicName),
-                   wqp_args = p0_wqp_args),
-    pattern = map(p2_site_counts_grouped_tss),
-    error = "continue",
-    format = "feather",
-    packages = c("dataRetrieval", "tidyverse", "sf", "retry")#,
-    # cue = tar_cue("never")
-  ),
-  
-  tar_target(
-    p2_wqp_data_aoi_doc,
-    fetch_wqp_data(p2_site_counts_grouped_doc,
-                   char_names = unique(p2_site_counts_grouped_doc$CharacteristicName),
-                   wqp_args = p0_wqp_args),
-    pattern = map(p2_site_counts_grouped_doc),
-    error = "continue",
-    format = "feather",
-    packages = c("dataRetrieval", "tidyverse", "sf", "retry")#,
-    # cue = tar_cue("never")
-  ),
-  
-  # tar_target(
-  #   p2_wqp_data_aoi_temp,
-  #   fetch_wqp_data(p2_site_counts_grouped_temp,
-  #                  char_names = unique(p2_site_counts_grouped_temp$CharacteristicName),
-  #                  wqp_args = p0_wqp_args),
-  #   pattern = map(p2_site_counts_grouped_temp),
-  #   error = "continue",
-  #   format = "feather",
-  #   packages = c("dataRetrieval", "tidyverse", "sf", "retry"),
-  #   # cue = tar_cue("never")
-  # ),
-  
-  # tar_target(
-  #   p2_wqp_data_aoi_phos,
-  #   fetch_wqp_data(p2_site_counts_grouped_phos,
-  #                  char_names = unique(p2_site_counts_grouped_phos$CharacteristicName),
-  #                  wqp_args = p0_wqp_args),
-  #   pattern = map(p2_site_counts_grouped_phos),
-  #   error = "continue",
-  #   format = "feather",
-  #   packages = c("dataRetrieval", "tidyverse", "sf", "retry"),
-  #   # cue = tar_cue("never")
-  # ),
-  
-  # tar_target(
-  #   p2_wqp_data_aoi_nitro,
-  #   fetch_wqp_data(p2_site_counts_grouped_nitro,
-  #                  char_names = unique(p2_site_counts_grouped_nitro$CharacteristicName),
-  #                  wqp_args = p0_wqp_args),
-  #   pattern = map(p2_site_counts_grouped_nitro),
-  #   error = "continue",
-  #   format = "feather",
-  #   packages = c("dataRetrieval", "tidyverse", "sf", "retry"),
-  #   # cue = tar_cue("never")
-  # ),
-  
-  # tar_target(
-  #   p2_wqp_data_aoi_depth,
-  #   fetch_wqp_data(p2_site_counts_grouped_depth,
-  #                  char_names = unique(p2_site_counts_grouped_depth$CharacteristicName),
-  #                  wqp_args = p0_wqp_args),
-  #   pattern = map(p2_site_counts_grouped_depth),
-  #   error = "continue",
-  #   format = "feather",
-  #   packages = c("dataRetrieval", "tidyverse", "sf", "retry"),
-  #   # cue = tar_cue("never")
-  # ),
-  
-  # tar_target(
-  #   p2_wqp_data_aoi_ssc,
-  #   fetch_wqp_data(p2_site_counts_grouped_ssc,
-  #                  char_names = unique(p2_site_counts_grouped_ssc$CharacteristicName),
-  #                  wqp_args = p0_wqp_args),
-  #   pattern = map(p2_site_counts_grouped_ssc),
-  #   error = "continue",
-  #   format = "feather",
-  #   packages = c("dataRetrieval", "tidyverse", "sf", "retry"),
-  #   # cue = tar_cue("never")
-  # ),
-  
-  # tar_target(
-  #   p2_wqp_data_aoi_poc,
-  #   fetch_wqp_data(p2_site_counts_grouped_poc,
-  #                  char_names = unique(p2_site_counts_grouped_poc$CharacteristicName),
-  #                  wqp_args = p0_wqp_args),
-  #   pattern = map(p2_site_counts_grouped_poc),
-  #   error = "continue",
-  #   format = "feather",
-  #   packages = c("dataRetrieval", "tidyverse", "sf", "retry"),
-  #   # cue = tar_cue("never")
-  # ),
   
   # A named list of the datasets to facilitate exporting them to Google Drive
   tar_target(p2_wqp_data_aoi_list,
              list(
-               # "alkalinity" = p2_wqp_data_aoi_alk,
-               "chlorophyll" = p2_wqp_data_aoi_chl,
-               "doc" = p2_wqp_data_aoi_doc,
-               "tss" = p2_wqp_data_aoi_tss,
-               "sdd" = p2_wqp_data_aoi_sdd
-               # "temperature" = p2_wqp_data_aoi_temp,
-               # "phosphorus" = p2_wqp_data_aoi_phos, 
-               # "nitrogen" = p2_wqp_data_aoi_nitro,
-               # "ssc" = p2_wqp_data_aoi_ssc,
-               # "poc" = p2_wqp_data_aoi_poc
+               "chlorophyll" = p2_wqp_data_aoi_chl
              )),
   
   # Use {googledrive} to upload the final outputs of this pipeline, then return
@@ -352,7 +87,7 @@ p2_targets_list <- list(
                          
                          # Once locally exported, send to Google Drive
                          out_file <- drive_put(media = file_local_path,
-                                               path = "~/aquamatch_download_wqp/")
+                                               path = "~/aquamatch_download_wqp/chla_submission/")
                          
                          # Make the Google Drive link shareable: anyone can view
                          out_file_share <- out_file %>%
