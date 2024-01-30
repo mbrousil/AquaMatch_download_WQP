@@ -1,0 +1,173 @@
+The following characteristics are already included in the WQP codes cfg file: 
+
+
+The following characteristics might be relevant to the selected parameter and are not included in the WQP codes cfg file: 
+13C-p,p'-DDE
+1-Heptanesulfonic acid, 1,1,2,2,3,3,4,4,5,5,6,6,7,7,7-pentadecafluoro-,sodium salt (1:1)
+1-Octanesulfonic acid, 1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,8-heptadecafluoro-, sodium salt (1:1)
+2,3,3-Trichloro-2-propene-1-sulfonic acid (sodium salt)
+37Cl4-2,3,7,8-TCDD
+4,4'-DDE-13C12
+4,4'-DDE-D8
+4-MUB-a-D-galactoside
+4-MUB-a-D-glucoside
+4-MUB-b-D-galactoside
+4-MUB-b-D-glucoside
+4-MUB-b-D-xylopyranoside
+Acifluorfen, sodium salt
+Activities - Residences (choice list)
+a-D-galactosidase (corrected for carbon content)
+a-D-glucosidase (corrected for carbon content)
+Athripsodes
+b-D-galactosidase (corrected for carbon content)
+b-D-glucosidase (corrected for carbon content)
+b-D-xylosidase (corrected for carbon content)
+Bedload sediment flux
+Bedload sediment particle size
+Bed sediment particle size
+Biomass, mysid
+Bispyribac sodium
+BOD, Sediment Load
+Carbon Preference Index (CPI), Odd/Even Carbon Alkane Ratio
+Chlorbenside
+Chlorine, Total Residual
+Chlorpyrifos-d10
+cis-Decalin
+Coral Diseased Cover
+DDD, o,o'-, o,p'-, and p,p'- isomers
+DDD, o,p'- and p,p'- isomers
+DDE, o,o'-, o,p'-, and p,p'- isomers
+DDE, o,p'- and p,p'- isomers
+DDMU
+DDT/DDD/DDE, sum of o,p' isomers
+DDT/DDD/DDE, sum of p,p' isomers
+DDT/DDD/DDE, sum of p,p' & o,p' isomers
+DDT, o,p'- and p,p'- isomers
+Depth, from bottom of the sediment core
+Diesel and residual range hydrocarbons
+Diisodecyl phthalate
+Dioxin-like PCB cogeners as 2,3,7,8-TCDD TEQs
+Dioxins and furans as 2,3,7,8-TCDD TEQs***retired***use Chlorinated dioxins and furans -- 2,3,7,8 congeners only
+EDDP perchlorate
+Elapsed Time Since Last Measurement
+Embeddedness
+Embeddedness, riffle (%)
+Etoposide
+Etoposide-d3
+Floating foam/suds - severity (choice list)
+Floating foam/suds (Y/N) (choice list)
+Flucarbazon-sodium
+Gross alpha radioactivity, (Americium-241 ref std)
+Gross alpha radioactivity, (nat-Uranium ref std)
+Gross alpha radioactivity, (Thorium-230 ref std)
+Gross beta radioactivity, (Cesium-137 ref std)
+Gross beta radioactivity, (Strontium-Yttrium-90 ref std)
+Inundation Evidence: Sediment deposits (choice list)
+Isodrin
+Lloyd - Zar - Karr Species Diversity Index
+Macrohabitat Type - Inside Bend
+Macrohabitat Type - Outside Bend
+Mysidacea
+Nanocladius distinctus
+N-Nitrosodiethylamine
+N-Nitrosodimethylamine
+N-Nitrosodimethylamine-d6
+N-Nitrosodi-n-butylamine
+N-Nitrosodi-n-propylamine
+N-Nitrosodiphenylamine
+o,p-DDD
+o,p'-DDD
+o,p-DDE
+o,p'-DDE
+o,p-DDT
+o,p'-DDT
+Organic halides, total -- SWDA NPDWR
+Other Hydrologic Evidence: Raised ant mounds (choice list)
+Other Hydrologic Evidence: Stunted or stressed plants (choice list)
+PCB-110 + 2,4-DDD
+Percent Residue
+p,p'-DDD
+p,p'-DDE
+p,p' DDE + DDT
+p,p'-DDT
+p,p'-DDT-d8
+Propoxycarbazone-sodium
+Pyrithiobac Sodium
+RBP2, High G, Embeddedness (choice list)
+RBP2, High G, Sediment Deposition (choice list)
+RBP2, Low G, Sediment Deposition (choice list)
+RBP2, Sediment/Substrate, Deposits (choice list)
+RBP2, Sediment/Substrate, Embedded Stone Undersides Black (choice list)
+RBP2, Sediment/Substrate, Odors (choice list)
+RBP2, Sediment/Substrate, Oils (choice list)
+RBP3, Riffle/Run, Embeddedness (choice list)
+RBP3, Riffle/Run, Sediment Deposition (choice list)
+RBP Embeddedness (choice list)
+RBP Sediment Deposition (choice list)
+RBP Sediment Odors (choice list)
+RBP Sediment Oils (choice list)
+RBP Undersides of Loose Stones Black Y/N (choice list)
+Refined used lubricating oils
+Residual Depth
+Residue, Total
+Riffle Run Embeddedness
+Riparian - Buildings - Residential (choice list)
+Riparian Zone Left Bank Plant Cover - Exposed Soil
+Riparian Zone Right Bank Plant Cover - Exposed Soil
+Sample time, elapsed
+Sedaxane
+Sediment
+Sediment compaction
+Sediment Depth
+Sediment, inorganic, classification (choice list)
+Sediment, organic, classification (choice list)
+Sediment Oxygen Demand
+Sediment percent organic
+Sediment/ Substrate Odors (choice list)
+Sida
+Siduron
+Simultaneously extracted metals/acid volatile sulfides (Metals ESB based on Final Chron. Value for AVS (fOC))
+Sodium
+Sodium 1H,1H,2H,2H-perfluoro1-decanesulfonate
+Sodium adsorption ratio [(Na)/(sq root of 1/2 Ca + Mg)]
+Sodium carbonate
+Sodium chlorate
+Sodium chromate(VI)
+Sodium dodecafluoro-3H-4,8-dioxanonanoate
+Sodium methyldithiocarbamate
+Sodium, percent total cations
+Sodium, Percent Total Cations
+Sodium perfluoro-1-(1,2,3,4-13C4)octanesulfonate
+Sodium perfluoro-1-[1,2,3,4-18O2]octanesulfonate
+Sodium perfluoro-1-(2,3,4-13C)butanesulfonate
+Sodium perfluoro-1-hexane[18O2]sulfonate
+Sodium perfluorodecanesulfonate
+Sodium perfluorohexanesulfonate
+Sodium Perfluorononanesulfonate
+Sodium perfluoropentanesulfonate
+Sodium plus potassium
+Soil Saturation Evidence: Fiddler crab burrows (choice list)
+Substrate Embeddedness
+Substrate - sediment thickness
+Sulfur HCl Residue
+Sulfur HNO3 Residue
+Sulfur Organic Residual Mod
+Suspended sediment concentration (SSC)
+Suspended Sediment Concentration (SSC)
+Suspended Sediment Discharge
+Temperature, sediment
+Teniposide
+Toxicity, sediment, Ampelisca abdita, significant (choice list)
+Toxicity, sediment, Ampelisca abdita, survival**retired**useBiologicalSample,SubjectTaxon,IntentToxicity
+Toxicity sediment control survival
+Toxicity, sediment, Leptocheirus plumulosus, survival**retired**useBiologicalSample,SubjectTaxon,IntentToxicity
+Toxicity, sediment, microtox, Vibrio fischeri, EC50**retired**useBiologicalSample,SubjectTaxon,IntentToxicity
+Toxicity sediment survival
+trans-Diethyl-1,1,1',1'-d4-stilbestrol-3,3',5,5'-d4
+trans-Diethylstilbestrol
+Trifloxysulfuron-sodium
+USDA Soil Texture Classification (choice list)
+Vegetation Density, Nudds Board Left
+Vegetation Density, Nudds Board Right
+Volatile Residue
+Wind direction (direction from, expressed 0-360 deg)

@@ -9,3 +9,21 @@
     - "Chlorophyll a, free of pheophytin"
     - "Chlorophyll a, uncorrected for pheophytin"
     - "Chlorophyll a - Phytoplankton (suspended)"
+    
+  doc:
+    - "Organic carbon"
+    - "Total carbon"
+    - "Hydrophilic fraction of organic carbon"
+    - "Non-purgeable Organic Carbon (NPOC)"
+    
+  sdd:
+    - "Depth, Secchi disk depth"
+    - "Depth, Secchi disk depth (choice list)"
+    - "Secchi Reading Condition (choice list)"
+    - "Secchi depth"
+    - "Water transparency, Secchi disc"
+    
+  tss:
+    - "Total suspended solids"
+    - "Total Particulate Matter"
+    - "Total Suspended Particulate Matter"

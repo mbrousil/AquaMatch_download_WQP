@@ -22,6 +22,26 @@ p1_targets_list <- list(
            export_single_file(target = p1_wqp_params,
                               folder_pattern = "1_inventory/out/")),
   
+  # An alternative to the link generated in the step above. This option provides
+  # quick way to access previously-generated yaml parameter data if a long-term stable
+  # version is needed.
+  tar_file(p1_wqp_params_link_stable,
+           {
+             # Where the Drive link csv is going
+             out_path <- "1_inventory/out/p1_wqp_params_out_link_stable.csv"
+             
+             stable_drive_links <- tribble(
+               ~dataset, ~local_path, ~drive_link,
+               "p1_wqp_params", "1_inventory/out/p1_wqp_params.rds", "https://drive.google.com/file/d/1mOJpB7jUFQ9PPzbVI902rmYQ7awFWnIv/view?usp=drive_link"
+             )
+             
+             # Export the csv
+             write_csv(x = stable_drive_links, file = out_path)
+             
+             # Return path to pipeline
+             out_path
+           }),
+  
   # Format a table that indicates how various WQP characteristic names map onto 
   # more commonly-used parameter names
   tar_target(
@@ -35,6 +55,26 @@ p1_targets_list <- list(
   tar_file(p1_char_names_crosswalk_link,
            export_single_file(target = p1_char_names_crosswalk,
                               folder_pattern = "1_inventory/out/")),
+  
+  # An alternative to the link generated in the step above. This option provides
+  # quick way to access previously-created CharacteristicName to parameter name
+  # crosswalk if a long-term stable version is needed.
+  tar_file(p1_char_names_crosswalk_link_stable,
+           {
+             # Where the Drive link csv is going
+             out_path <- "1_inventory/out/p1_char_names_crosswalk_out_link_stable.csv"
+             
+             stable_drive_links <- tribble(
+               ~dataset, ~local_path, ~drive_link,
+               "p1_char_names_crosswalk", "1_inventory/out/p1_char_names_crosswalk.rds", "https://drive.google.com/file/d/1YYk3r7-SnRxxhdh5qWZgd57ytbR0q1Ze/view?usp=drive_link"
+             )
+             
+             # Export the csv
+             write_csv(x = stable_drive_links, file = out_path)
+             
+             # Return path to pipeline
+             out_path
+           }),
   
   # Get a vector of WQP characteristic names to match parameter groups of interest
   tar_target(
@@ -74,6 +114,26 @@ p1_targets_list <- list(
            export_single_file(target = p1_global_grid,
                               folder_pattern = "1_inventory/out/")),
   
+  # An alternative to the link generated in the step above. This option provides
+  # quick way to access previously-generated spatial grid if a long-term stable
+  # version is needed.
+  tar_file(p1_global_grid_link_stable,
+           {
+             # Where the Drive link csv is going
+             out_path <- "1_inventory/out/p1_global_grid_out_link_stable.csv"
+             
+             stable_drive_links <- tribble(
+               ~dataset, ~local_path, ~drive_link,
+               "p1_global_grid", "1_inventory/out/p1_global_grid.rds", "https://drive.google.com/file/d/15KmSrcia9Alw5Q637UNsq7TuTXJGCS4D/view?usp=drive_link"
+             )
+             
+             # Export the csv
+             write_csv(x = stable_drive_links, file = out_path)
+             
+             # Return path to pipeline
+             out_path
+           }),
+  
   # Use spatial subsetting to find boxes that overlap the area of interest
   # These boxes will be used to query the WQP.
   tar_target(
@@ -110,12 +170,31 @@ p1_targets_list <- list(
     subset_inventory(p1_wqp_inventory, p1_AOI_sf)
   ),
   
-  # Use {googledrive} to upload the crosswalk data, which will be needed in
+  # Use {googledrive} to upload the inventory data, which will be needed in
   # the second pipeline. Then return a file containing the link as text to be 
   # used outside of this pipeline
   tar_file(p1_wqp_inventory_aoi_link,
            export_single_file(target = p1_wqp_inventory_aoi,
                               folder_pattern = "1_inventory/out/")),
+  # An alternative to the link generated in the step above. This option provides
+  # quick way to access previously-downloaded inventory data if a long-term stable
+  # version is needed.
+  tar_file(p1_wqp_inventory_aoi_link_stable,
+           {
+             # Where the Drive link csv is going
+             out_path <- "1_inventory/out/p1_wqp_inventory_aoi_out_link_stable.csv"
+             
+             stable_drive_links <- tribble(
+               ~dataset, ~local_path, ~drive_link,
+               "p1_wqp_inventory_aoi", "1_inventory/out/p1_wqp_inventory_aoi.rds", "https://drive.google.com/file/d/18D3zpsxyb-SAmlywLRwHHfNsxpecf9JU/view?usp=drive_link"
+             )
+             
+             # Export the csv
+             write_csv(x = stable_drive_links, file = out_path)
+             
+             # Return path to pipeline
+             out_path
+           }),
   
   # Summarize the data that would come back from the WQP
   tar_file(

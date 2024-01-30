@@ -36,7 +36,7 @@ config_targets <- list(
   # omit characteristic names or include others, to change top-level parameter names,
   # or to customize parameter groupings. 
   tar_target(p0_param_groups_select,
-             c("chlorophyll")),
+             c("chlorophyll", "doc", "sdd")),
   
   
   # WQP inventory -----------------------------------------------------------

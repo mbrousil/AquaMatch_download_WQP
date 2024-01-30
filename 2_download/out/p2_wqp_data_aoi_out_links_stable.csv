@@ -1,0 +1,5 @@
+parameter,local_path,drive_link
+chlorophyll,2_download/out/p2_wqp_data_aoi_chlorophyll.feather,https://drive.google.com/file/d/1-HCNwOk5Wf2RM5ipUByaUgF-pmLVb5Ug/view?usp=drive_link
+doc,2_download/out/p2_wqp_data_aoi_doc.feather,https://drive.google.com/file/d/1QQIy-eNhNWyOKL2FgtPlajb4tJQtEuj5/view?usp=drive_link
+tss,2_download/out/p2_wqp_data_aoi_tss.feather,https://drive.google.com/file/d/1gt8_VsLnTfNna1rZBNN5IIxNRBZwuhR8/view?usp=drive_link
+sdd,2_download/out/p2_wqp_data_aoi_sdd.feather,https://drive.google.com/file/d/1NnQz6SDX3cOS6C12KGl02_iHB0DMuXcw/view?usp=drive_link

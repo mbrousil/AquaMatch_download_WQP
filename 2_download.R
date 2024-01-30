@@ -37,6 +37,28 @@ p2_targets_list <- list(
            export_single_file(target = p2_site_counts,
                               folder_pattern = "2_download/out/")),
   
+  # An alternative to the link generated in the step above. This option provides
+  # quick way to access a previously-created site inventory if a long-term stable
+  # version is needed.
+  tar_file(p2_site_counts_link_stable,
+           {
+             # Where the Drive link csv is going
+             out_path <- "2_download/out/p2_site_counts_out_link_stable.csv"
+             
+             stable_drive_links <- tribble(
+               ~dataset, ~local_path, ~drive_link,
+               "p2_site_counts", "2_download/out/p2_site_counts.rds", "https://drive.google.com/file/d/1t_upEfOam1AioUPGRnEBEqdvyIUH0Q-L/view?usp=drive_link"
+             )
+             
+             # Export the csv
+             write_csv(x = stable_drive_links, file = out_path)
+             
+             # Return path to pipeline
+             out_path
+           }),
+  
+  # Group the site counts separately for each parameter in the pipeline:
+  # Chlorophyll
   tar_target(
     p2_site_counts_grouped_chl,
     add_download_groups(p2_site_counts$chlorophyll, 
@@ -47,6 +69,43 @@ p2_targets_list <- list(
     iteration = "group",
     packages = c("tidyverse", "MESS")
   ),
+  
+  # DOC
+  tar_target(
+    p2_site_counts_grouped_doc,
+    add_download_groups(p2_site_counts$doc, 
+                        max_sites = 100,
+                        max_results = 250000) %>%
+      group_by(download_grp) %>%
+      tar_group(),
+    iteration = "group",
+    packages = c("tidyverse", "MESS")
+  ),
+  
+  # Secchi disk depth
+  tar_target(
+    p2_site_counts_grouped_sdd,
+    add_download_groups(p2_site_counts$sdd, 
+                        max_sites = 100,
+                        max_results = 250000) %>%
+      group_by(download_grp) %>%
+      tar_group(),
+    iteration = "group",
+    packages = c("tidyverse", "MESS")
+  ),
+  
+  # Now map over groups of sites to download data
+  # Note that because error = 'continue', {targets} will attempt to build all 
+  # of the "branches" represented by each unique combination of characteristic 
+  # name and download group, even if one branch returns an error. This way, 
+  # we will not need to re-build branches that have already run successfully. 
+  # However, if a branch fails, {targets} will throw an error reading `could
+  # not load dependencies of [immediate downstream target]. invalid 'description'
+  # argument` because it cannot merge the individual branches and so did not  
+  # complete the branching target. The error(s) associated with the failed branch 
+  # will therefore need to be resolved before the full target can be successfully 
+  # built. A common reason a branch may fail is due to WQP timeout errors. Timeout 
+  # errors can sometimes be resolved by waiting a few hours and retrying tar_make().
   
   tar_target(
     p2_wqp_data_aoi_chl,
@@ -59,10 +118,34 @@ p2_targets_list <- list(
     packages = c("dataRetrieval", "tidyverse", "sf", "retry")
   ),
   
+  tar_target(
+    p2_wqp_data_aoi_doc,
+    fetch_wqp_data(p2_site_counts_grouped_doc,
+                   char_names = unique(p2_site_counts_grouped_doc$CharacteristicName),
+                   wqp_args = p0_wqp_args),
+    pattern = map(p2_site_counts_grouped_doc),
+    error = "continue",
+    format = "feather",
+    packages = c("dataRetrieval", "tidyverse", "sf", "retry")
+  ),
+  
+  tar_target(
+    p2_wqp_data_aoi_sdd,
+    fetch_wqp_data(p2_site_counts_grouped_sdd,
+                   char_names = unique(p2_site_counts_grouped_sdd$CharacteristicName),
+                   wqp_args = p0_wqp_args),
+    pattern = map(p2_site_counts_grouped_sdd),
+    error = "continue",
+    format = "feather",
+    packages = c("dataRetrieval", "tidyverse", "sf", "retry")
+  ),
+  
   # A named list of the datasets to facilitate exporting them to Google Drive
   tar_target(p2_wqp_data_aoi_list,
              list(
-               "chlorophyll" = p2_wqp_data_aoi_chl
+               "chlorophyll" = p2_wqp_data_aoi_chl,
+               "doc" = p2_wqp_data_aoi_doc,
+               "sdd" = p2_wqp_data_aoi_sdd
              )),
   
   # Use {googledrive} to upload the final outputs of this pipeline, then return
@@ -111,6 +194,29 @@ p2_targets_list <- list(
              
            },
            packages = c("tidyverse", "googledrive", "feather")),
+  
+  # An alternative to the links generated in the step above. This option provides
+  # quick way to access previously-downloaded WQP datasets if a long-term stable
+  # version is needed.
+  tar_file(p2_wqp_data_aoi_out_links_stable,
+           {
+             # Where the csv of Drive links is going
+             out_path <- "2_download/out/p2_wqp_data_aoi_out_links_stable.csv"
+             
+             stable_drive_links <- tribble(
+               ~parameter, ~local_path, ~drive_link,
+               "chlorophyll", "2_download/out/p2_wqp_data_aoi_chlorophyll.feather", "https://drive.google.com/file/d/1-HCNwOk5Wf2RM5ipUByaUgF-pmLVb5Ug/view?usp=drive_link",
+               "doc", "2_download/out/p2_wqp_data_aoi_doc.feather", "https://drive.google.com/file/d/1QQIy-eNhNWyOKL2FgtPlajb4tJQtEuj5/view?usp=drive_link",
+               "tss", "2_download/out/p2_wqp_data_aoi_tss.feather", "https://drive.google.com/file/d/1gt8_VsLnTfNna1rZBNN5IIxNRBZwuhR8/view?usp=drive_link",
+               "sdd", "2_download/out/p2_wqp_data_aoi_sdd.feather", "https://drive.google.com/file/d/1NnQz6SDX3cOS6C12KGl02_iHB0DMuXcw/view?usp=drive_link"
+             )
+             
+             # Export the csv
+             write_csv(x = stable_drive_links, file = out_path)
+             
+             # Return path to pipeline
+             out_path
+           }),
   
   # Summarize the data downloaded from the WQP
   tar_target(
