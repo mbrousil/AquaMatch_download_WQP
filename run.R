@@ -1,8 +1,6 @@
 #!/usr/bin/env Rscript
 
-# Package handling --------------------------------------------------------
-
-# List of packages required for this pipeline
+# list of packages required for this pipeline
 required_pkgs <- c(
   "dataRetrieval",
   "feather",
@@ -31,39 +29,12 @@ package_installer <- function(x) {
 # map function using base lapply
 lapply(required_pkgs, package_installer)
 
-# Load packages for use below
-library(tidyverse)
-library(googledrive)
-library(targets)
-
-
-# Directory handling ------------------------------------------------------
-
-# List of directories to check for and create if they don't exist
-dir_list <- c(
-  "out",
-  "1_inventory/log/",
-  "1_inventory/out/",
-  "2_download/log/",
-  "2_download/out/"
-)
-
-# Check for the directories above and create if they don't exist
-walk(.x = dir_list,
-     .f = ~ {
-       if (!dir.exists(.x)) {dir.create(.x, recursive = TRUE)}
-     })
-
-
-# Google Drive auth -------------------------------------------------------
-
-# Confirm Google Drive is authorized locally
-drive_auth()
+googledrive::drive_auth()
 # Select existing account (change if starting from scratch)
 2
 
-
-# Run pipeline ------------------------------------------------------------
+# load targets library
+library(targets)
 
 # This is a helper script to run the pipeline.
 {
