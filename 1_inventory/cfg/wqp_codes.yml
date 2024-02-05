@@ -13,8 +13,6 @@
   doc:
     - "Organic carbon"
     - "Total carbon"
-    - "Hydrophilic fraction of organic carbon"
-    - "Non-purgeable Organic Carbon (NPOC)"
     
   sdd:
     - "Depth, Secchi disk depth"
