@@ -1,6 +1,8 @@
 #!/usr/bin/env Rscript
 
-# list of packages required for this pipeline
+# Package handling --------------------------------------------------------
+
+# List of packages required for this pipeline
 required_pkgs <- c(
   "dataRetrieval",
   "feather",
@@ -29,10 +31,20 @@ package_installer <- function(x) {
 # map function using base lapply
 lapply(required_pkgs, package_installer)
 
-googledrive::drive_auth()
-
-# load targets library
+# Load packages for use below
+library(googledrive)
 library(targets)
+
+
+# Google Drive auth -------------------------------------------------------
+
+# Confirm Google Drive is authorized locally
+drive_auth()
+# Select existing account (change if starting from scratch)
+2
+
+
+# Run pipeline ------------------------------------------------------------
 
 # This is a helper script to run the pipeline.
 {
