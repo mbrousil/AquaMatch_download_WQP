@@ -4,9 +4,11 @@ tar_source("2_download/src/")
 p2_targets_list <- list(
   
   # Pull site IDs and total number of records for each site from the WQP inventory
+  
+  # Chlorophyll
   tar_target(
-    name = p2_site_counts,
-    command = p1_wqp_inventory_aoi %>%
+    name = p2_site_counts_chl,
+    command = p1_wqp_inventory_aoi_chl %>%
       # Hold onto location info, grid_id, characteristic, and provider data
       # and use them for grouping
       group_by(MonitoringLocationIdentifier, lon, lat, datum, grid_id,
@@ -16,56 +18,132 @@ p2_targets_list <- list(
                 .groups = "drop") %>%
       # Add the overarching parameter names to the dataset
       left_join(x = .,
-                y = p1_wqp_params %>%
+                y = p1_wqp_params_chl %>%
                   map2_df(.x,
                           .y = names(.),
                           .f = ~{
                             tibble(CharacteristicName = .x,
                                    parameter = .y)
                           }),
-                by = "CharacteristicName") %>%
-      group_by(parameter) %>%
-      # In case of testing:
-      # Split dataset into a list for iterating downloads by parameter
-      split(f = .$parameter)
+                by = "CharacteristicName")
   ),
+  
+  # DOC
+  tar_target(
+    name = p2_site_counts_doc,
+    command = p1_wqp_inventory_aoi_doc %>%
+      # Hold onto location info, grid_id, characteristic, and provider data
+      # and use them for grouping
+      group_by(MonitoringLocationIdentifier, lon, lat, datum, grid_id,
+               CharacteristicName, ProviderName) %>%
+      # Count the number of rows per group
+      summarize(results_count = sum(resultCount, na.rm = TRUE),
+                .groups = "drop") %>%
+      # Add the overarching parameter names to the dataset
+      left_join(x = .,
+                y = p1_wqp_params_doc %>%
+                  map2_df(.x,
+                          .y = names(.),
+                          .f = ~{
+                            tibble(CharacteristicName = .x,
+                                   parameter = .y)
+                          }),
+                by = "CharacteristicName")
+  ),
+  
+  # SDD
+  tar_target(
+    name = p2_site_counts_sdd,
+    command = p1_wqp_inventory_aoi_sdd %>%
+      # Hold onto location info, grid_id, characteristic, and provider data
+      # and use them for grouping
+      group_by(MonitoringLocationIdentifier, lon, lat, datum, grid_id,
+               CharacteristicName, ProviderName) %>%
+      # Count the number of rows per group
+      summarize(results_count = sum(resultCount, na.rm = TRUE),
+                .groups = "drop") %>%
+      # Add the overarching parameter names to the dataset
+      left_join(x = .,
+                y = p1_wqp_params_sdd %>%
+                  map2_df(.x,
+                          .y = names(.),
+                          .f = ~{
+                            tibble(CharacteristicName = .x,
+                                   parameter = .y)
+                          }),
+                by = "CharacteristicName")
+  ),
+  
   
   # Use {googledrive} to upload the site counts data, which will be needed in
   # the second pipeline. Then return a file containing the link as text to be 
   # used outside of this pipeline
+  
+  # Chlorophyll
   tar_file(
-    name = p2_site_counts_link,
-    command = export_single_file(target = p2_site_counts,
+    name = p2_site_counts_chl_link,
+    command = export_single_file(target = p2_site_counts_chl,
                                  folder_pattern = "2_download/out/")
   ),
   
-  # An alternative to the link generated in the step above. This option provides
-  # quick way to access a previously-created site inventory if a long-term stable
-  # version is needed.
+  # DOC
   tar_file(
-    name = p2_site_counts_link_stable,
-    command = {
-      # Where the Drive link csv is going
-      out_path <- "2_download/out/p2_site_counts_out_link_stable.csv"
-      
-      stable_drive_links <- tribble(
-        ~dataset, ~local_path, ~drive_link,
-        "p2_site_counts", "2_download/out/p2_site_counts.rds", "https://drive.google.com/file/d/1gB4CkTuvCYQaaaVJYwIx7jMt7uxOcNpq/view?usp=drive_link"
-      )
-      
-      # Export the csv
-      write_csv(x = stable_drive_links, file = out_path)
-      
-      # Return path to pipeline
-      out_path
-    }
+    name = p2_site_counts_doc_link,
+    command = export_single_file(target = p2_site_counts_doc,
+                                 folder_pattern = "2_download/out/")
   ),
+  
+  # SDD
+  tar_file(
+    name = p2_site_counts_sdd_link,
+    command = export_single_file(target = p2_site_counts_sdd,
+                                 folder_pattern = "2_download/out/")
+  ),
+  
+  
+  # An alternative to the link generated in the step above. This option provides
+  # quick way to access a previously-created site inventories if a long-term stable
+  # version is needed.
+  
+  # Chlorophyll
+  tar_file(
+    name = p2_site_counts_chl_link_stable,
+    command = export_stable_link(
+      out_path = "2_download/out/p2_site_counts_chl_out_link_stable.csv",
+      dataset_string = "p2_site_counts_chl",
+      local_path = "2_download/out/p2_site_counts_chl.rds",
+      drive_link = ""
+    )
+  ),
+  
+  # DOC
+  tar_file(
+    name = p2_site_counts_doc_link_stable,
+    command = export_stable_link(
+      out_path = "2_download/out/p2_site_counts_doc_out_link_stable.csv",
+      dataset_string = "p2_site_counts_doc",
+      local_path = "2_download/out/p2_site_counts_doc.rds",
+      drive_link = ""
+    )
+  ),
+  
+  # SDD
+  tar_file(
+    name = p2_site_counts_sdd_link_stable,
+    command = export_stable_link(
+      out_path = "2_download/out/p2_site_counts_sdd_out_link_stable.csv",
+      dataset_string = "p2_site_counts_sdd",
+      local_path = "2_download/out/p2_site_counts_sdd.rds",
+      drive_link = ""
+    )
+  ),
+  
   
   # Group the site counts separately for each parameter in the pipeline:
   # Chlorophyll
   tar_target(
     name = p2_site_counts_grouped_chl,
-    command = add_download_groups(p2_site_counts$chlorophyll, 
+    command = add_download_groups(p2_site_counts_chl, 
                                   max_sites = 100,
                                   max_results = 250000) %>%
       group_by(download_grp) %>%
@@ -77,7 +155,7 @@ p2_targets_list <- list(
   # DOC
   tar_target(
     name = p2_site_counts_grouped_doc,
-    command = add_download_groups(p2_site_counts$doc, 
+    command = add_download_groups(p2_site_counts_doc, 
                                   max_sites = 100,
                                   max_results = 250000) %>%
       group_by(download_grp) %>%
@@ -86,10 +164,10 @@ p2_targets_list <- list(
     packages = c("tidyverse", "MESS")
   ),
   
-  # Secchi disk depth
+  # SDD
   tar_target(
     name = p2_site_counts_grouped_sdd,
-    command = add_download_groups(p2_site_counts$sdd, 
+    command = add_download_groups(p2_site_counts_sdd, 
                                   max_sites = 100,
                                   max_results = 250000) %>%
       group_by(download_grp) %>%
@@ -229,11 +307,29 @@ p2_targets_list <- list(
   ),
   
   # Summarize the data downloaded from the WQP
+  
+  # Chlorophyll
   tar_target(
-    name = p2_wqp_data_summary_csv,
-    command = summarize_wqp_download(wqp_inventory_summary_csv = p1_wqp_inventory_summary_csv,
-                                     wqp_data = bind_rows(p2_wqp_data_aoi_list),
-                                     "2_download/log/summary_wqp_data.csv"),
+    name = p2_wqp_data_chl_summary_csv,
+    command = summarize_wqp_download(wqp_inventory_summary_csv = p1_wqp_inventory_chl_summary_csv,
+                                     wqp_data = p2_wqp_data_aoi_chl,
+                                     "2_download/log/chl_summary_wqp_data.csv"),
+    format = "file"
+  ),
+  
+  tar_target(
+    name = p2_wqp_data_doc_summary_csv,
+    command = summarize_wqp_download(wqp_inventory_summary_csv = p1_wqp_inventory_doc_summary_csv,
+                                     wqp_data = p2_wqp_data_aoi_doc,
+                                     "2_download/log/doc_summary_wqp_data.csv"),
+    format = "file"
+  ),
+  
+  tar_target(
+    name = p2_wqp_data_sdd_summary_csv,
+    command = summarize_wqp_download(wqp_inventory_summary_csv = p1_wqp_inventory_sdd_summary_csv,
+                                     wqp_data = p2_wqp_data_aoi_sdd,
+                                     "2_download/log/sdd_summary_wqp_data.csv"),
     format = "file"
   )
   
