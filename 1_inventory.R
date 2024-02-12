@@ -207,7 +207,9 @@ p1_targets_list <- list(
   
   
   # Save output file(s) containing WQP characteristic names that are similar to the
-  # parameter groups of interest.
+  # parameter groups of interest. This allows users to examine the list to see if there are other
+  # parameters that they may wish to add to the yaml file for each parameter, stored in
+  # p1_wqp_params.
   tar_file(
     name = p1_similar_char_names_chl_txt,
     command = find_similar_characteristics(p1_char_names_chl,
