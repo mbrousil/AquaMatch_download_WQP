@@ -1,0 +1,78 @@
+default:
+  google_email: "therossyndicate@gmail.com"
+  # Use a stable version of the chlorophyll data?
+  chl_stable: TRUE
+  # Create a stable version of chlorophyll data from this run?
+  chl_create_stable: FALSE
+  doc_stable: TRUE
+  doc_create_stable: FALSE
+  sdd_stable: TRUE
+  sdd_create_stable: FALSE
+  tss_stable: TRUE
+  tss_create_stable: FALSE
+# Create/use dynamic versions for all parameters & DON'T update stable datasets
+create_new_version:
+  google_email: ""
+  chl_stable: FALSE
+  chl_create_stable: FALSE
+  doc_stable: FALSE
+  doc_create_stable: FALSE
+  sdd_stable: FALSE
+  sdd_create_stable: FALSE
+  tss_stable: FALSE
+  tss_create_stable: FALSE
+# Update the stable dataset version for all parameters
+update_all:
+  google_email: "therossyndicate@gmail.com"
+  chl_stable: FALSE
+  chl_create_stable: TRUE
+  doc_stable: FALSE
+  doc_create_stable: TRUE
+  sdd_stable: FALSE
+  sdd_create_stable: TRUE
+  tss_stable: FALSE
+  tss_create_stable: TRUE
+# Update the stable dataset for ONLY chlorophyll a
+update_chl:
+  google_email: "therossyndicate@gmail.com"
+  chl_stable: FALSE
+  chl_create_stable: TRUE
+  doc_stable: FALSE
+  doc_create_stable: FALSE
+  sdd_stable: FALSE
+  sdd_create_stable: FALSE
+  tss_stable: FALSE
+  tss_create_stable: FALSE
+# Update the stable dataset for ONLY DOC
+update_doc:
+  google_email: "therossyndicate@gmail.com"
+  chl_stable: FALSE
+  chl_create_stable: FALSE
+  doc_stable: FALSE
+  doc_create_stable: TRUE
+  sdd_stable: FALSE
+  sdd_create_stable: FALSE
+  tss_stable: FALSE
+  tss_create_stable: FALSE
+# Update the stable dataset for ONLY secchi
+update_sdd:
+  google_email: "therossyndicate@gmail.com"
+  chl_stable: FALSE
+  chl_create_stable: FALSE
+  doc_stable: FALSE
+  doc_create_stable: FALSE
+  sdd_stable: FALSE
+  sdd_create_stable: TRUE
+  tss_stable: FALSE
+  tss_create_stable: FALSE
+# Update the stable dataset for ONLY TSS
+update_tss:
+  google_email: "therossyndicate@gmail.com"
+  chl_stable: FALSE
+  chl_create_stable: FALSE
+  doc_stable: FALSE
+  doc_create_stable: FALSE
+  sdd_stable: FALSE
+  sdd_create_stable: FALSE
+  tss_stable: FALSE
+  tss_create_stable: TRUE

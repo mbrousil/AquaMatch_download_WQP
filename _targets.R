@@ -19,6 +19,16 @@ tar_source(files = c(
 # The list of targets/steps
 config_targets <- list(
   
+  # General config ----------------------------------------------------------
+  
+  # Grab configuration information for the workflow run (config.yml)
+  tar_target(
+    name = workflow_config,
+    # The config package does not like to be used with library()
+    command = config::get(config = "update_chl")
+  ),
+  
+  
   # WQP config --------------------------------------------------------------
   
   # Things that often used to be YAMLs, and which probably should be again in 
