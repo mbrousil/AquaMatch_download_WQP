@@ -1,14 +1,15 @@
-# Default: Update the stable dataset version for one or more parameters
+# Default: Non-ROSS users: provide email and update dynamic local versions,
+# but not stable
 default:
-  google_email: "therossyndicate@gmail.com"
-  chl_create_stable: FALSE
-  doc_create_stable: TRUE
-  sdd_create_stable: FALSE
-  tss_create_stable: FALSE
-# Non-ROSS users: provide email and update dynamic local versions, but not stable
-create_new_version:
   google_email: ""
   chl_create_stable: FALSE
   doc_create_stable: FALSE
+  sdd_create_stable: FALSE
+  tss_create_stable: FALSE
+# Update the stable dataset version for one or more parameters
+admin_update:
+  google_email: "therossyndicate@gmail.com"
+  chl_create_stable: FALSE
+  doc_create_stable: TRUE
   sdd_create_stable: FALSE
   tss_create_stable: FALSE
