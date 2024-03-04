@@ -20,8 +20,3 @@
     - "Secchi Reading Condition (choice list)"
     - "Secchi depth"
     - "Water transparency, Secchi disc"
-    
-  tss:
-    - "Total suspended solids"
-    - "Total Particulate Matter"
-    - "Total Suspended Particulate Matter"

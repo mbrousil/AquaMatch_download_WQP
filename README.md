@@ -26,4 +26,4 @@ In general, `src/` folders in this repository contain source code for customized
 
 Documentation of the entire AquaMatch process from download to harmonization is available in the form of a {bookdown} document in the second repository, [AquaMatch_harmonize_WQP](https://github.com/ROSSyndicate/AquaMatch_harmonize_WQP).
 
-If the `run.R` script has been used to generate the current pipeline version, you can find an html file with the current network diagram for the pipeline in `docs/current_visnetwork.html`.
+If the `run.R` script has been used to generate the current pipeline version, you can find an html file with the current network diagram for the pipeline in `out/current_visnetwork.html`.

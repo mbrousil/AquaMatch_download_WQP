@@ -13,7 +13,8 @@ tar_option_set(
 # Run the R scripts with custom functions:
 tar_source(files = c(
   "1_inventory.R",
-  "2_download.R"))
+  "2_download.R")
+)
 
 # The list of targets/steps
 config_targets <- list(

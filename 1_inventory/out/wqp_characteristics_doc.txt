@@ -196,6 +196,7 @@ Afidopyropen
 Aldicarb
 Aldicarb sulfone
 Aldicarb sulfoxide
+Algae-Phycocyanin
 Algae, substrate rock/bank cover (choice list)
 Allophycocyanin
 Alluaudomyia

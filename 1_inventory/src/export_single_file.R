@@ -40,3 +40,26 @@ export_single_file <- function(target, folder_pattern){
   out_path
   
 }
+
+# A function that creates a local file containing a link to a stable version
+# of one of the datasets in the pipeline. NOTE that it does not export a dataset
+# to Google Drive, only provides a link to an existing dataset in Google Drive.
+
+# out_path: Where the csv containing the link to Google Drive will be saved locally
+# dataset_string: A character string containing the name of the target that is being referenced
+# local_path: The location of the target's dataset locally. NOTE that this field is not used to access any file. It is present for use when specifying a download path in the second pipeline.
+# drive_link: A link to the Google Drive file containing the stable version of the dataset
+export_stable_link <- function(out_path, dataset_string, local_path, drive_link){
+  
+  stable_drive_links <- tribble(
+    ~dataset, ~local_path, ~drive_link,
+    dataset_string, local_path, drive_link
+  )
+  
+  # Export the csv
+  write_csv(x = stable_drive_links, file = out_path)
+  
+  # Return path to pipeline
+  out_path
+  
+}
