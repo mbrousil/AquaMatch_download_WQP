@@ -1,15 +1,22 @@
 # Default: Non-ROSS users: provide email and update dynamic local versions,
 # but not stable
 default:
+  # gmail account to associate with {googledrive}
   google_email: ""
+  # Create a new stable version of the chlorophyll dataset?
   chl_create_stable: FALSE
   doc_create_stable: FALSE
   sdd_create_stable: FALSE
-  tss_create_stable: FALSE
+  # Create a new stable version of files not related to specific parameters?
+  general_create_stable: FALSE
+# What's the name of the folder on Google Drive where files should be stored?
+  drive_project_folder: ""
 # Update the stable dataset version for one or more parameters
 admin_update:
   google_email: "therossyndicate@gmail.com"
-  chl_create_stable: FALSE
+  chl_create_stable: TRUE
   doc_create_stable: TRUE
-  sdd_create_stable: FALSE
-  tss_create_stable: FALSE
+  sdd_create_stable: TRUE
+  general_create_stable: TRUE
+  drive_project_folder: "~/aquamatch_download_wqp/"
+  

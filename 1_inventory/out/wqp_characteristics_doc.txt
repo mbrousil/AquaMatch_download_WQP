@@ -188,6 +188,7 @@ Acetochlor-d11
 Acetochlor ESA
 Acetochlor OA
 Acetochlor sulfinylacetic acid
+Acetochlor sulfynilacetic acid
 Activities - Fish Stocking (choice list)
 Activities - Livestock Use (choice list)
 Activities - Odors (choice list)
