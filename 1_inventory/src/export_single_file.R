@@ -61,7 +61,7 @@ export_single_file <- function(target, drive_path, stable, google_email){
                                                ".rds"))
     
     # Make the Google Drive link shareable: anyone can view
-    drive_share(out_file_stable, role = "reader", type = "anyone")
+    drive_share_anyone(out_file_stable)
   }
   
   # Now remove the local file after upload is complete
