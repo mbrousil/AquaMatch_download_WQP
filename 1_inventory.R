@@ -4,6 +4,8 @@ tar_source("1_inventory/src/")
 
 p1_targets_list <- list(
   
+  # Get parameter definitions -----------------------------------------------
+  
   # Track yml file containing common parameter groups and WQP characteristic names
   # If {targets} detects a change in the yml file, it will re-build all downstream
   # targets that depend on p1_wqp_params_yml assuming that p0_param_groups_select
@@ -33,68 +35,45 @@ p1_targets_list <- list(
     command = p1_wqp_params["sdd"]
   ),
   
+  
+  # Export parameter yaml info ----------------------------------------------
+  
   # Use {googledrive} to upload each parameter's yaml data. It will be needed in
   # the second pipeline. Then return a file containing the link as text to be 
   # accessed outside of this pipeline
   
   # Chlorophyll
-  tar_file(
-    name = p1_wqp_params_link_chl,
+  tar_target(
+    name = p1_wqp_params_file_chl,
     command = export_single_file(target = p1_wqp_params_chl,
-                                 folder_pattern = "1_inventory/out/")
+                                 drive_path = p0_chl_output_path,
+                                 stable = p0_workflow_config$chl_create_stable,
+                                 google_email = p0_workflow_config$google_email),
+    packages = c("tidyverse", "googledrive")
   ),
   
   # DOC
-  tar_file(
-    name = p1_wqp_params_link_doc,
+  tar_target(
+    name = p1_wqp_params_file_doc,
     command = export_single_file(target = p1_wqp_params_doc,
-                                 folder_pattern = "1_inventory/out/")
+                                 drive_path = p0_doc_output_path,
+                                 stable = p0_workflow_config$chl_create_stable,
+                                 google_email = p0_workflow_config$google_email),
+    packages = c("tidyverse", "googledrive")
   ),
   
   # SDD
-  tar_file(
-    name = p1_wqp_params_link_sdd,
+  tar_target(
+    name = p1_wqp_params_file_sdd,
     command = export_single_file(target = p1_wqp_params_sdd,
-                                 folder_pattern = "1_inventory/out/")
+                                 drive_path = p0_sdd_output_path,
+                                 stable = p0_workflow_config$chl_create_stable,
+                                 google_email = p0_workflow_config$google_email),
+    packages = c("tidyverse", "googledrive")
   ),
   
-  # An alternative to the links generated in the step above. This option provides
-  # quick way to access previously-generated yaml parameter data if a long-term stable
-  # version is needed.
   
-  # Chlorophyll
-  tar_file(
-    name = p1_wqp_params_chl_link_stable,
-    command = export_stable_link(
-      out_path = "1_inventory/out/p1_wqp_params_chl_out_link_stable.csv",
-      dataset_string = "p1_wqp_params_chl",
-      local_path = "1_inventory/out/p1_wqp_params_chl.rds",
-      drive_link = "https://drive.google.com/file/d/1ntVfkSbpubYAdVGqQIrClm0F-61ZZrJ-/view?usp=drive_link"
-    )
-  ),
-  
-  # DOC
-  tar_file(
-    name = p1_wqp_params_doc_link_stable,
-    command = export_stable_link(
-      out_path = "1_inventory/out/p1_wqp_params_doc_out_link_stable.csv",
-      dataset_string = "p1_wqp_params_doc",
-      local_path = "1_inventory/out/p1_wqp_params_doc.rds",
-      drive_link = "https://drive.google.com/file/d/1usukc6QG0gV0wTKq-yi1qZ02FXIIFP1A/view?usp=drive_link"
-    )
-  ),
-  
-  # SDD
-  tar_file(
-    name = p1_wqp_params_sdd_link_stable,
-    command = export_stable_link(
-      out_path = "1_inventory/out/p1_wqp_params_sdd_out_link_stable.csv",
-      dataset_string = "p1_wqp_params_sdd",
-      local_path = "1_inventory/out/p1_wqp_params_sdd.rds",
-      drive_link = "https://drive.google.com/file/d/1l1Kt-fAEsTKaZjIdGXYp3gYypqmC5aPf/view?usp=sharing"
-    )
-  ),
-  
+  # Parameter-characteristic crosswalks -------------------------------------
   
   # Format tables that indicate how various WQP characteristic names map onto 
   # each parameter name
@@ -123,62 +102,33 @@ p1_targets_list <- list(
   # used outside of this pipeline
   
   # Chlorophyll
-  tar_file(
-    name = p1_char_names_crosswalk_chl_link,
+  tar_target(
+    name = p1_char_names_crosswalk_chl_file,
     command = export_single_file(target = p1_char_names_crosswalk_chl,
-                                 folder_pattern = "1_inventory/out/")
+                                 drive_path = p0_chl_output_path,
+                                 stable = p0_workflow_config$chl_create_stable,
+                                 google_email = p0_workflow_config$google_email),
+    packages = c("tidyverse", "googledrive")
   ),
   
   # DOC
-  tar_file(
-    name = p1_char_names_crosswalk_doc_link,
+  tar_target(
+    name = p1_char_names_crosswalk_doc_file,
     command = export_single_file(target = p1_char_names_crosswalk_doc,
-                                 folder_pattern = "1_inventory/out/")
-  ), 
+                                 drive_path = p0_doc_output_path,
+                                 stable = p0_workflow_config$doc_create_stable,
+                                 google_email = p0_workflow_config$google_email),
+    packages = c("tidyverse", "googledrive")
+  ),
   
   # SDD
-  tar_file(
-    name = p1_char_names_crosswalk_sdd_link,
+  tar_target(
+    name = p1_char_names_crosswalk_sdd_file,
     command = export_single_file(target = p1_char_names_crosswalk_sdd,
-                                 folder_pattern = "1_inventory/out/")
-  ),
-  
-  
-  # An alternative to the link generated in the step above. This option provides
-  # quick way to access previously-created CharacteristicName to parameter name
-  # crosswalk if a long-term stable version is needed.
-  
-  # Chlorophyll
-  tar_file(
-    name = p1_char_names_crosswalk_chl_link_stable,
-    command = export_stable_link(
-      out_path = "1_inventory/out/p1_char_names_crosswalk_out_chl_link_stable.csv",
-      dataset_string = "p1_char_names_crosswalk_chl",
-      local_path = "1_inventory/out/p1_char_names_crosswalk_chl.rds",
-      drive_link = ""
-    )
-  ),
-  
-  # DOC
-  tar_file(
-    name = p1_char_names_crosswalk_doc_link_stable,
-    command = export_stable_link(
-      out_path = "1_inventory/out/p1_char_names_crosswalk_out_doc_link_stable.csv",
-      dataset_string = "p1_char_names_crosswalk_doc",
-      local_path = "1_inventory/out/p1_char_names_crosswalk_doc.rds",
-      drive_link = ""
-    )
-  ),
-  
-  # SDD
-  tar_file(
-    name = p1_char_names_crosswalk_sdd_link_stable,
-    command = export_stable_link(
-      out_path = "1_inventory/out/p1_char_names_crosswalk_out_sdd_link_stable.csv",
-      dataset_string = "p1_char_names_crosswalk_sdd",
-      local_path = "1_inventory/out/p1_char_names_crosswalk_sdd.rds",
-      drive_link = ""
-    )
+                                 drive_path = p0_sdd_output_path,
+                                 stable = p0_workflow_config$sdd_create_stable,
+                                 google_email = p0_workflow_config$google_email),
+    packages = c("tidyverse", "googledrive")
   ),
   
   
@@ -206,10 +156,10 @@ p1_targets_list <- list(
   ),
   
   
-  # Save output file(s) containing WQP characteristic names that are similar to the
-  # parameter groups of interest. This allows users to examine the list to see if there are other
-  # parameters that they may wish to add to the yaml file for each parameter, stored in
-  # p1_wqp_params.
+  # Save output file(s) containing WQP characteristic names that are similar to
+  # the parameter groups of interest. This allows users to examine the list to
+  # see if there are other parameters that they may wish to add to the yaml file
+  # for each parameter, stored in p1_wqp_params.
   tar_file(
     name = p1_similar_char_names_chl_txt,
     command = find_similar_characteristics(p1_char_names_chl,
@@ -252,25 +202,14 @@ p1_targets_list <- list(
   # Use {googledrive} to upload the global grid data, which will be needed in
   # the second pipeline. Then return a file containing the link as text to be 
   # used outside of this pipeline
-  tar_file(
-    name = p1_global_grid_link,
+  tar_target(
+    name = p1_global_grid_file,
     command = export_single_file(target = p1_global_grid,
-                                 folder_pattern = "1_inventory/out/")
+                                 drive_path = p0_general_output_path,
+                                 stable = p0_workflow_config$general_create_stable,
+                                 google_email = p0_workflow_config$google_email),
+    packages = c("tidyverse", "googledrive")
   ),
-  
-  # An alternative to the link generated in the step above. This option provides
-  # quick way to access previously-generated spatial grid if a long-term stable
-  # version is needed.
-  tar_file(
-    name = p1_global_grid_link_stable,
-    command = export_stable_link(
-      out_path = "1_inventory/out/p1_global_grid_out_link_stable.csv",
-      dataset_string = "p1_global_grid",
-      local_path = "1_inventory/out/p1_global_grid.rds",
-      drive_link = "https://drive.google.com/file/d/1zKgAzXpWwMiVvJT2IMHW6kou5ijDsqgO/view?usp=drive_link"
-    )
-  ),
-  
   
   # Use spatial subsetting to find boxes that overlap the area of interest
   # These boxes will be used to query the WQP.
@@ -356,62 +295,35 @@ p1_targets_list <- list(
   # used outside of this pipeline
   
   # Chlorophyll
-  tar_file(
-    name = p1_wqp_inventory_aoi_chl_link,
+  tar_target(
+    name = p1_wqp_inventory_aoi_chl_file,
     command = export_single_file(target = p1_wqp_inventory_aoi_chl,
-                                 folder_pattern = "1_inventory/out/")
+                                 drive_path = p0_chl_output_path,
+                                 stable = p0_workflow_config$chl_create_stable,
+                                 google_email = p0_workflow_config$google_email),
+    packages = c("tidyverse", "googledrive")
   ),
   
   # DOC
-  tar_file(
-    name = p1_wqp_inventory_aoi_doc_link,
+  tar_target(
+    name = p1_wqp_inventory_aoi_doc_file,
     command = export_single_file(target = p1_wqp_inventory_aoi_doc,
-                                 folder_pattern = "1_inventory/out/")
+                                 drive_path = p0_doc_output_path,
+                                 stable = p0_workflow_config$doc_create_stable,
+                                 google_email = p0_workflow_config$google_email),
+    packages = c("tidyverse", "googledrive")
   ),
   
   # SDD
-  tar_file(
-    name = p1_wqp_inventory_aoi_sdd_link,
+  tar_target(
+    name = p1_wqp_inventory_aoi_sdd_file,
     command = export_single_file(target = p1_wqp_inventory_aoi_sdd,
-                                 folder_pattern = "1_inventory/out/")
+                                 drive_path = p0_sdd_output_path,
+                                 stable = p0_workflow_config$sdd_create_stable,
+                                 google_email = p0_workflow_config$google_email),
+    packages = c("tidyverse", "googledrive")
   ),
   
-  # An alternative to the link generated in the step above. This option provides
-  # quick way to access previously-downloaded inventory data if a long-term stable
-  # version is needed.
-  
-  # Chlorophyll
-  tar_file(
-    name = p1_wqp_inventory_aoi_chl_link_stable,
-    command = export_stable_link(
-      out_path = "1_inventory/out/p1_wqp_inventory_aoi_out_chl_link_stable.csv",
-      dataset_string = "p1_wqp_inventory_aoi",
-      local_path = "1_inventory/out/p1_wqp_inventory_aoi_chl.rds",
-      drive_link = ""
-    )
-  ),
-  
-  # DOC
-  tar_file(
-    name = p1_wqp_inventory_aoi_doc_link_stable,
-    command = export_stable_link(
-      out_path = "1_inventory/out/p1_wqp_inventory_aoi_out_doc_link_stable.csv",
-      dataset_string = "p1_wqp_inventory_aoi",
-      local_path = "1_inventory/out/p1_wqp_inventory_aoi_doc.rds",
-      drive_link = ""
-    )
-  ),
-  
-  # SDD
-  tar_file(
-    name = p1_wqp_inventory_aoi_sdd_link_stable,
-    command = export_stable_link(
-      out_path = "1_inventory/out/p1_wqp_inventory_aoi_out_sdd_link_stable.csv",
-      dataset_string = "p1_wqp_inventory_aoi",
-      local_path = "1_inventory/out/p1_wqp_inventory_aoi_sdd.rds",
-      drive_link = ""
-    )
-  ),
   
   # Summarize the data that would come back from the WQP
   

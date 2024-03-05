@@ -19,6 +19,16 @@ tar_source(files = c(
 # The list of targets/steps
 config_targets <- list(
   
+  # General config ----------------------------------------------------------
+  
+  # Grab configuration information for the workflow run (config.yml)
+  tar_target(
+    name = p0_workflow_config,
+    # The config package does not like to be used with library()
+    command = config::get(config = "admin_update")
+  ),
+  
+  
   # WQP config --------------------------------------------------------------
   
   # Things that often used to be YAMLs, and which probably should be again in 
@@ -57,7 +67,35 @@ config_targets <- list(
                    # Return sites with at least one data record
                    minresults = 1, 
                    startDateLo = p0_wq_dates$start_date,
-                   startDateHi = p0_wq_dates$end_date))
+                   startDateHi = p0_wq_dates$end_date)),
+  
+  
+  # Google Drive path setup -------------------------------------------------
+  
+  # Google Drive paths for outputs in this pipeline
+  tar_target(
+    name = p0_general_output_path,
+    command = paste0(p0_workflow_config$drive_project_folder,
+                     "general/")
+  ),
+  
+  tar_target(
+    name = p0_chl_output_path,
+    command = paste0(p0_workflow_config$drive_project_folder,
+                     "chlorophyll/")
+  ),
+  
+  tar_target(
+    name = p0_doc_output_path,
+    command = paste0(p0_workflow_config$drive_project_folder,
+                     "doc/")
+  ), 
+  
+  tar_target(
+    name = p0_sdd_output_path,
+    command = paste0(p0_workflow_config$drive_project_folder,
+                     "sdd/")
+  )
 )
 
 
