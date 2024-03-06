@@ -137,21 +137,24 @@ p1_targets_list <- list(
   # Chlorophyll
   tar_target(
     name = p1_char_names_chl,
-    command = filter_characteristics(p1_char_names_crosswalk_chl, p0_param_groups_select),
+    command = filter_characteristics(p1_char_names_crosswalk_chl,
+                                     p0_param_groups_select),
     packages = c("tidyverse", "xml2")
   ),
   
   # DOC
   tar_target(
     name = p1_char_names_doc,
-    command = filter_characteristics(p1_char_names_crosswalk_doc, p0_param_groups_select),
+    command = filter_characteristics(p1_char_names_crosswalk_doc,
+                                     p0_param_groups_select),
     packages = c("tidyverse", "xml2")
   ),
   
   # SDD
   tar_target(
     name = p1_char_names_sdd,
-    command = filter_characteristics(p1_char_names_crosswalk_sdd, p0_param_groups_select),
+    command = filter_characteristics(p1_char_names_crosswalk_sdd,
+                                     p0_param_groups_select),
     packages = c("tidyverse", "xml2")
   ),
   
@@ -183,6 +186,9 @@ p1_targets_list <- list(
                                            "1_inventory/out"),
     packages = c("tidyverse", "xml2")
   ),
+  
+  
+  # Define spatial AOI and grid ---------------------------------------------
   
   tar_target(
     name = p1_AOI_sf,
@@ -218,6 +224,9 @@ p1_targets_list <- list(
     command = subset_grids_to_aoi(p1_global_grid, p1_AOI_sf),
     packages = c("tidyverse", "units")
   ),
+  
+  
+  # Create WQP inventory ----------------------------------------------------
   
   # Inventory data available from the WQP within each of the boxes that overlap
   # the area of interest. To prevent timeout issues that result from large data 
@@ -290,9 +299,11 @@ p1_targets_list <- list(
     command = subset_inventory(p1_wqp_inventory_sdd, p1_AOI_sf)
   ),
   
+  
+  # Export inventory --------------------------------------------------------
+  
   # Use {googledrive} to upload the inventory data, which will be needed in
-  # the second pipeline. Then return a file containing the link as text to be 
-  # used outside of this pipeline
+  # the second pipeline
   
   # Chlorophyll
   tar_target(
@@ -346,7 +357,73 @@ p1_targets_list <- list(
     name = p1_wqp_inventory_sdd_summary_csv,
     command = summarize_wqp_inventory(p1_wqp_inventory_aoi_sdd,
                                       "1_inventory/log/sdd_summary_wqp_inventory.csv")
-  )
+  ),
   
+  
+  # Get stable file IDs -----------------------------------------------------
+  
+  # In order to access "stable" versions of the dataset created by the pipeline,
+  # we get their Google Drive file IDs and store those in the repo so that
+  # the harmonization pipeline can retrieve them more easily.
+  
+  # Retrieve the IDs for the most recent stable versions of the chl dataset
+  tar_file_read(
+    name = p1_chl_stable_drive_ids,
+    command = get_file_ids(google_email = p0_workflow_config$google_email,
+                           drive_folder = paste0(p0_chl_output_path, "stable/"),
+                           file_path = "1_inventory/out/chl_stable_drive_ids.csv",
+                           recent = TRUE,
+                           stable_date = "20240305",
+                           # Optional, indicates that this step depends on another
+                           # target finishing first
+                           depend = c(
+                             p1_wqp_inventory_aoi_chl_file,
+                             p1_char_names_crosswalk_chl,
+                             p1_wqp_params_chl
+                           )
+    ),
+    read = read_csv(file = !!.x),
+    packages = c("tidyverse", "googledrive")
+  ), 
+  
+  # DOC
+  tar_file_read(
+    name = p1_doc_stable_drive_ids,
+    command = get_file_ids(google_email = p0_workflow_config$google_email,
+                           drive_folder = paste0(p0_doc_output_path, "stable/"),
+                           file_path = "1_inventory/out/doc_stable_drive_ids.csv",
+                           recent = TRUE,
+                           stable_date = "20240305",
+                           # Optional, indicates that this step depends on another
+                           # target finishing first
+                           depend = c(
+                             p1_wqp_inventory_aoi_doc_file,
+                             p1_char_names_crosswalk_doc,
+                             p1_wqp_params_doc
+                           )
+    ),
+    read = read_csv(file = !!.x),
+    packages = c("tidyverse", "googledrive")
+  ), 
+  
+  # SDD
+  tar_file_read(
+    name = p1_sdd_stable_drive_ids,
+    command = get_file_ids(google_email = p0_workflow_config$google_email,
+                           drive_folder = paste0(p0_sdd_output_path, "stable/"),
+                           file_path = "1_inventory/out/sdd_stable_drive_ids.csv",
+                           recent = TRUE,
+                           stable_date = "20240305",
+                           # Optional, indicates that this step depends on another
+                           # target finishing first
+                           depend = c(
+                             p1_wqp_inventory_aoi_sdd_file,
+                             p1_char_names_crosswalk_sdd,
+                             p1_wqp_params_sdd
+                           )
+    ),
+    read = read_csv(file = !!.x),
+    packages = c("tidyverse", "googledrive")
+  )
   
 )
