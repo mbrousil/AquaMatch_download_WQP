@@ -15,11 +15,18 @@
 #' @param google_email A string containing the gmail address to use for
 #' Google Drive authentication.
 #' 
+#' @param feather Logical value. If TRUE, export the file as a feather file. If
+#' FALSE, then ".rds". Defaults to FALSE.
+#' 
 #' @returns 
 #' Returns a local path to a csv file containing a text link to the uploaded
 #' file in Google Drive.
 #' 
-export_single_file <- function(target, drive_path, stable, google_email){
+export_single_file <- function(target, drive_path, stable, google_email,
+                               feather = FALSE){
+  
+  # Feather or RDS?
+  if(feather){extension <- ".feather"} else {extension <- ".rds"}
   
   # Authorize using the google email provided
   drive_auth(google_email)
@@ -29,17 +36,23 @@ export_single_file <- function(target, drive_path, stable, google_email){
   
   # Create a temporary file exported locally, which can then be used to upload
   # to Google Drive
-  file_local_path <- tempfile(fileext = ".rds")
+  file_local_path <- tempfile(fileext = extension)
   
-  write_rds(x = target,
-            file = file_local_path)
+  # If feather == TRUE then .feather; else .rds
+  if(feather){
+    write_feather(x = target,
+                  path = file_local_path)
+  } else {
+    write_rds(x = target,
+              file = file_local_path)
+  }
   
   # Once locally exported, send to Google Drive
   out_file <- drive_put(media = file_local_path,
                         # The folder on Google Drive
                         path = drive_path,
                         # The filename on Google Drive
-                        name = paste0(target_string, ".rds"))
+                        name = paste0(target_string, extension))
   
   # Make the Google Drive link shareable: anyone can view
   drive_share_anyone(out_file)
@@ -58,7 +71,7 @@ export_single_file <- function(target, drive_path, stable, google_email){
                                                gsub(pattern = "-",
                                                     replacement = "",
                                                     x = Sys.Date()),
-                                               ".rds"))
+                                               extension))
     
     # Make the Google Drive link shareable: anyone can view
     drive_share_anyone(out_file_stable)

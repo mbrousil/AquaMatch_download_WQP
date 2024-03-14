@@ -3,6 +3,8 @@ tar_source("2_download/src/")
 
 p2_targets_list <- list(
   
+  # Count number of records per site ----------------------------------------
+  
   # Pull site IDs and total number of records for each site from the WQP inventory
   
   # Chlorophyll
@@ -75,69 +77,40 @@ p2_targets_list <- list(
   ),
   
   
+  # Export site counts ------------------------------------------------------
+  
   # Use {googledrive} to upload the site counts data, which will be needed in
-  # the second pipeline. Then return a file containing the link as text to be 
-  # used outside of this pipeline
+  # the second pipeline.
   
   # Chlorophyll
-  tar_file(
-    name = p2_site_counts_chl_link,
+  tar_target(
+    name = p2_site_counts_chl_file,
     command = export_single_file(target = p2_site_counts_chl,
-                                 folder_pattern = "2_download/out/")
+                                 drive_path = p0_chl_output_path,
+                                 stable = p0_workflow_config$chl_create_stable,
+                                 google_email = p0_workflow_config$google_email)
   ),
   
   # DOC
-  tar_file(
-    name = p2_site_counts_doc_link,
+  tar_target(
+    name = p2_site_counts_doc_file,
     command = export_single_file(target = p2_site_counts_doc,
-                                 folder_pattern = "2_download/out/")
+                                 drive_path = p0_doc_output_path,
+                                 stable = p0_workflow_config$doc_create_stable,
+                                 google_email = p0_workflow_config$google_email)
   ),
   
   # SDD
-  tar_file(
-    name = p2_site_counts_sdd_link,
+  tar_target(
+    name = p2_site_counts_sdd_file,
     command = export_single_file(target = p2_site_counts_sdd,
-                                 folder_pattern = "2_download/out/")
+                                 drive_path = p0_sdd_output_path,
+                                 stable = p0_workflow_config$sdd_create_stable,
+                                 google_email = p0_workflow_config$google_email)
   ),
   
   
-  # An alternative to the link generated in the step above. This option provides
-  # quick way to access a previously-created site inventories if a long-term stable
-  # version is needed.
-  
-  # Chlorophyll
-  tar_file(
-    name = p2_site_counts_chl_link_stable,
-    command = export_stable_link(
-      out_path = "2_download/out/p2_site_counts_chl_out_link_stable.csv",
-      dataset_string = "p2_site_counts_chl",
-      local_path = "2_download/out/p2_site_counts_chl.rds",
-      drive_link = ""
-    )
-  ),
-  
-  # DOC
-  tar_file(
-    name = p2_site_counts_doc_link_stable,
-    command = export_stable_link(
-      out_path = "2_download/out/p2_site_counts_doc_out_link_stable.csv",
-      dataset_string = "p2_site_counts_doc",
-      local_path = "2_download/out/p2_site_counts_doc.rds",
-      drive_link = ""
-    )
-  ),
-  
-  # SDD
-  tar_file(
-    name = p2_site_counts_sdd_link_stable,
-    command = export_stable_link(
-      out_path = "2_download/out/p2_site_counts_sdd_out_link_stable.csv",
-      dataset_string = "p2_site_counts_sdd",
-      local_path = "2_download/out/p2_site_counts_sdd.rds",
-      drive_link = ""
-    )
-  ),
-  
+  # Create download groups --------------------------------------------------
   
   # Group the site counts separately for each parameter in the pipeline:
   # Chlorophyll
@@ -175,6 +148,9 @@ p2_targets_list <- list(
     iteration = "group",
     packages = c("tidyverse", "MESS")
   ),
+  
+  
+  # Fetch WQP data ----------------------------------------------------------
   
   # Now map over groups of sites to download data
   # Note that because error = 'continue', {targets} will attempt to build all 
@@ -222,115 +198,127 @@ p2_targets_list <- list(
     packages = c("dataRetrieval", "tidyverse", "sf", "retry")
   ),
   
-  # A named list of the datasets to facilitate exporting them to Google Drive
-  tar_target(
-    name = p2_wqp_data_aoi_list,
-    command = list(
-      "chlorophyll" = p2_wqp_data_aoi_chl,
-      "doc" = p2_wqp_data_aoi_doc,
-      "sdd" = p2_wqp_data_aoi_sdd
-    )
-  ),
   
-  # Use {googledrive} to upload the final outputs of this pipeline, then return
-  # a file containing the links as text to be used outside of this pipeline
-  tar_file(
-    name = p2_wqp_data_aoi_out_links,
-    command = {
-      # The result of this will be a data frame with one col for the
-      # parameter being exported and another col with a link to the
-      # exported data set in Google Drive
-      drive_links <- p2_wqp_data_aoi_list %>%
-        map2_df(.x = .,
-                # Names of the sub-data sets above
-                .y = names(.),
-                .f = ~ {
-                  
-                  # We'll export each parameter's data set locally
-                  file_local_path <- paste0("2_download/out/p2_wqp_data_aoi_",
-                                            .y,
-                                            ".feather")
-                  write_feather(x = .x,
-                                path = file_local_path)
-                  
-                  # Once locally exported, send to Google Drive
-                  out_file <- drive_put(media = file_local_path,
-                                        path = "~/aquamatch_download_wqp/")
-                  
-                  # Make the Google Drive link shareable: anyone can view
-                  out_file_share <- out_file %>%
-                    drive_share(role = "reader", type = "anyone")
-                  
-                  # Return labeled link to stack in a df and export
-                  tibble(parameter = .y,
-                         local_path = file_local_path,
-                         drive_link = drive_link(as_id(out_file_share$id)))
-                  
-                })
-      
-      # Where the csv of Drive links is going
-      out_path <- "2_download/out/p2_wqp_data_aoi_out_links.csv"
-      
-      # Export the csv
-      write_csv(x = drive_links, file = out_path)
-      
-      # Return path to pipeline
-      out_path
-      
-    },
+  # Export WQP data ---------------------------------------------------------
+  
+  # Chlorophyll
+  tar_target(
+    name = p2_wqp_data_aoi_chl_file,
+    command = export_single_file(target = p2_wqp_data_aoi_chl,
+                                 drive_path = p0_chl_output_path,
+                                 stable = p0_workflow_config$chl_create_stable,
+                                 google_email = p0_workflow_config$google_email,
+                                 feather = TRUE),
     packages = c("tidyverse", "googledrive", "feather")
   ),
   
-  # An alternative to the links generated in the step above. This option provides
-  # quick way to access previously-downloaded WQP datasets if a long-term stable
-  # version is needed.
-  tar_file(
-    name = p2_wqp_data_aoi_out_links_stable,
-    command = {
-      # Where the csv of Drive links is going
-      out_path <- "2_download/out/p2_wqp_data_aoi_out_links_stable.csv"
-      
-      stable_drive_links <- tribble(
-        ~parameter, ~local_path, ~drive_link,
-        "chlorophyll", "2_download/out/p2_wqp_data_aoi_chlorophyll.feather", "https://drive.google.com/file/d/1LIxxp7Gb5oyTDyusAN0yvmUT4wbY0ZOX/view?usp=drive_link",
-        "doc", "2_download/out/p2_wqp_data_aoi_doc.feather", "https://drive.google.com/file/d/1RG9FAxoZAhjD71G3XPJJqDqsdWpikhln/view?usp=drive_link",
-        "tss", "2_download/out/p2_wqp_data_aoi_tss.feather", "https://drive.google.com/file/d/1gt8_VsLnTfNna1rZBNN5IIxNRBZwuhR8/view?usp=drive_link",
-        "sdd", "2_download/out/p2_wqp_data_aoi_sdd.feather", "https://drive.google.com/file/d/1Kw57jN0O-Vz94OrgYKL5WuISvjGH4Mxl/view?usp=drive_link"
-      )
-      
-      # Export the csv
-      write_csv(x = stable_drive_links, file = out_path)
-      
-      # Return path to pipeline
-      out_path
-    }
+  # DOC
+  tar_target(
+    name = p2_wqp_data_aoi_doc_file,
+    command = export_single_file(target = p2_wqp_data_aoi_doc,
+                                 drive_path = p0_doc_output_path,
+                                 stable = p0_workflow_config$doc_create_stable,
+                                 google_email = p0_workflow_config$google_email,
+                                 feather = TRUE),
+    packages = c("tidyverse", "googledrive", "feather")
   ),
+  
+  # SDD
+  tar_target(
+    name = p2_wqp_data_aoi_sdd_file,
+    command = export_single_file(target = p2_wqp_data_aoi_sdd,
+                                 drive_path = p0_sdd_output_path,
+                                 stable = p0_workflow_config$sdd_create_stable,
+                                 google_email = p0_workflow_config$google_email,
+                                 feather = TRUE),
+    packages = c("tidyverse", "googledrive", "feather")
+  ),
+  
+  
+  # Summarize WQP pull ------------------------------------------------------
   
   # Summarize the data downloaded from the WQP
   
   # Chlorophyll
-  tar_target(
+  tar_file(
     name = p2_wqp_data_chl_summary_csv,
     command = summarize_wqp_download(wqp_inventory_summary_csv = p1_wqp_inventory_chl_summary_csv,
                                      wqp_data = p2_wqp_data_aoi_chl,
-                                     "2_download/log/chl_summary_wqp_data.csv"),
-    format = "file"
+                                     "2_download/log/chl_summary_wqp_data.csv")
   ),
   
-  tar_target(
+  tar_file(
     name = p2_wqp_data_doc_summary_csv,
     command = summarize_wqp_download(wqp_inventory_summary_csv = p1_wqp_inventory_doc_summary_csv,
                                      wqp_data = p2_wqp_data_aoi_doc,
-                                     "2_download/log/doc_summary_wqp_data.csv"),
-    format = "file"
+                                     "2_download/log/doc_summary_wqp_data.csv")
   ),
   
-  tar_target(
+  tar_file(
     name = p2_wqp_data_sdd_summary_csv,
     command = summarize_wqp_download(wqp_inventory_summary_csv = p1_wqp_inventory_sdd_summary_csv,
                                      wqp_data = p2_wqp_data_aoi_sdd,
-                                     "2_download/log/sdd_summary_wqp_data.csv"),
-    format = "file"
+                                     "2_download/log/sdd_summary_wqp_data.csv")
+  ),
+  
+  
+  # Get stable file IDs -----------------------------------------------------
+  
+  # In order to access "stable" versions of the dataset created by the pipeline,
+  # we get their Google Drive file IDs and store those in the repo so that
+  # the harmonization pipeline can retrieve them more easily.
+  
+  # Retrieve the IDs for the most recent stable versions of the chl dataset
+  tar_file_read(
+    name = p2_chl_drive_ids,
+    command = get_file_ids(google_email = p0_workflow_config$google_email,
+                           drive_folder = p0_chl_output_path,
+                           file_path = "2_download/out/chl_drive_ids.csv",
+                           # Optional, indicates that this step depends on another
+                           # target finishing first
+                           depend = p2_wqp_data_aoi_chl_file
+    ),
+    read = read_csv(file = !!.x),
+    packages = c("tidyverse", "googledrive")
+  ), 
+  
+  # DOC
+  tar_file_read(
+    name = p2_doc_drive_ids,
+    command = get_file_ids(google_email = p0_workflow_config$google_email,
+                           drive_folder = p0_doc_output_path,
+                           file_path = "2_download/out/doc_drive_ids.csv",
+                           # Optional: What target(s) should this target wait on
+                           # before running?
+                           depend = p2_wqp_data_aoi_doc_file
+    ),
+    read = read_csv(file = !!.x),
+    packages = c("tidyverse", "googledrive")
+  ), 
+  
+  # SDD
+  tar_file_read(
+    name = p2_sdd_drive_ids,
+    command = get_file_ids(google_email = p0_workflow_config$google_email,
+                           drive_folder = p0_sdd_output_path,
+                           file_path = "2_download/out/sdd_drive_ids.csv",
+                           depend = p2_wqp_data_aoi_sdd_file
+    ),
+    read = read_csv(file = !!.x),
+    packages = c("tidyverse", "googledrive")
+  ),
+  
+  # General purpose
+  tar_file_read(
+    name = p2_general_drive_ids,
+    command = get_file_ids(google_email = p0_workflow_config$google_email,
+                           drive_folder = p0_general_output_path,
+                           file_path = "2_download/out/general_drive_ids.csv",
+                           depend = p1_global_grid_file
+    ),
+    read = read_csv(file = !!.x),
+    packages = c("tidyverse", "googledrive")
   )
+  
   
 )
