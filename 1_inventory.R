@@ -48,7 +48,8 @@ p1_targets_list <- list(
     command = export_single_file(target = p1_wqp_params_chl,
                                  drive_path = p0_chl_output_path,
                                  stable = p0_workflow_config$chl_create_stable,
-                                 google_email = p0_workflow_config$google_email),
+                                 google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive")
   ),
   
@@ -58,7 +59,8 @@ p1_targets_list <- list(
     command = export_single_file(target = p1_wqp_params_doc,
                                  drive_path = p0_doc_output_path,
                                  stable = p0_workflow_config$chl_create_stable,
-                                 google_email = p0_workflow_config$google_email),
+                                 google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive")
   ),
   
@@ -68,7 +70,8 @@ p1_targets_list <- list(
     command = export_single_file(target = p1_wqp_params_sdd,
                                  drive_path = p0_sdd_output_path,
                                  stable = p0_workflow_config$chl_create_stable,
-                                 google_email = p0_workflow_config$google_email),
+                                 google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive")
   ),
   
@@ -107,7 +110,8 @@ p1_targets_list <- list(
     command = export_single_file(target = p1_char_names_crosswalk_chl,
                                  drive_path = p0_chl_output_path,
                                  stable = p0_workflow_config$chl_create_stable,
-                                 google_email = p0_workflow_config$google_email),
+                                 google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive")
   ),
   
@@ -117,7 +121,8 @@ p1_targets_list <- list(
     command = export_single_file(target = p1_char_names_crosswalk_doc,
                                  drive_path = p0_doc_output_path,
                                  stable = p0_workflow_config$doc_create_stable,
-                                 google_email = p0_workflow_config$google_email),
+                                 google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive")
   ),
   
@@ -127,7 +132,8 @@ p1_targets_list <- list(
     command = export_single_file(target = p1_char_names_crosswalk_sdd,
                                  drive_path = p0_sdd_output_path,
                                  stable = p0_workflow_config$sdd_create_stable,
-                                 google_email = p0_workflow_config$google_email),
+                                 google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive")
   ),
   
@@ -213,7 +219,8 @@ p1_targets_list <- list(
     command = export_single_file(target = p1_global_grid,
                                  drive_path = p0_general_output_path,
                                  stable = p0_workflow_config$general_create_stable,
-                                 google_email = p0_workflow_config$google_email),
+                                 google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive")
   ),
   
@@ -311,7 +318,8 @@ p1_targets_list <- list(
     command = export_single_file(target = p1_wqp_inventory_aoi_chl,
                                  drive_path = p0_chl_output_path,
                                  stable = p0_workflow_config$chl_create_stable,
-                                 google_email = p0_workflow_config$google_email),
+                                 google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive")
   ),
   
@@ -321,7 +329,8 @@ p1_targets_list <- list(
     command = export_single_file(target = p1_wqp_inventory_aoi_doc,
                                  drive_path = p0_doc_output_path,
                                  stable = p0_workflow_config$doc_create_stable,
-                                 google_email = p0_workflow_config$google_email),
+                                 google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive")
   ),
   
@@ -331,7 +340,8 @@ p1_targets_list <- list(
     command = export_single_file(target = p1_wqp_inventory_aoi_sdd,
                                  drive_path = p0_sdd_output_path,
                                  stable = p0_workflow_config$sdd_create_stable,
-                                 google_email = p0_workflow_config$google_email),
+                                 google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive")
   ),
   

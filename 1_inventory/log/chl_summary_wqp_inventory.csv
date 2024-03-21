@@ -1,8 +1,8 @@
 CharacteristicName,n_sites,n_records
-Chlorophyll a,67946,1575005
-Chlorophyll a (probe relative fluorescence),4581,1248793
-Chlorophyll a (probe),2091,242417
+Chlorophyll a,67984,1577891
+Chlorophyll a (probe relative fluorescence),4582,1248805
+Chlorophyll a (probe),2177,244909
 Chlorophyll a - Phytoplankton (suspended),1114,4024
-"Chlorophyll a, corrected for pheophytin",71428,861896
-"Chlorophyll a, free of pheophytin",3394,89562
-"Chlorophyll a, uncorrected for pheophytin",41516,524475
+"Chlorophyll a, corrected for pheophytin",71623,873843
+"Chlorophyll a, free of pheophytin",3434,93067
+"Chlorophyll a, uncorrected for pheophytin",41641,534464

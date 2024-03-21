@@ -88,7 +88,8 @@ p2_targets_list <- list(
     command = export_single_file(target = p2_site_counts_chl,
                                  drive_path = p0_chl_output_path,
                                  stable = p0_workflow_config$chl_create_stable,
-                                 google_email = p0_workflow_config$google_email)
+                                 google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp)
   ),
   
   # DOC
@@ -97,7 +98,8 @@ p2_targets_list <- list(
     command = export_single_file(target = p2_site_counts_doc,
                                  drive_path = p0_doc_output_path,
                                  stable = p0_workflow_config$doc_create_stable,
-                                 google_email = p0_workflow_config$google_email)
+                                 google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp)
   ),
   
   # SDD
@@ -106,7 +108,8 @@ p2_targets_list <- list(
     command = export_single_file(target = p2_site_counts_sdd,
                                  drive_path = p0_sdd_output_path,
                                  stable = p0_workflow_config$sdd_create_stable,
-                                 google_email = p0_workflow_config$google_email)
+                                 google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp)
   ),
   
   
@@ -208,6 +211,7 @@ p2_targets_list <- list(
                                  drive_path = p0_chl_output_path,
                                  stable = p0_workflow_config$chl_create_stable,
                                  google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp,
                                  feather = TRUE),
     packages = c("tidyverse", "googledrive", "feather")
   ),
@@ -219,6 +223,7 @@ p2_targets_list <- list(
                                  drive_path = p0_doc_output_path,
                                  stable = p0_workflow_config$doc_create_stable,
                                  google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp,
                                  feather = TRUE),
     packages = c("tidyverse", "googledrive", "feather")
   ),
@@ -230,6 +235,7 @@ p2_targets_list <- list(
                                  drive_path = p0_sdd_output_path,
                                  stable = p0_workflow_config$sdd_create_stable,
                                  google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp,
                                  feather = TRUE),
     packages = c("tidyverse", "googledrive", "feather")
   ),
@@ -262,13 +268,14 @@ p2_targets_list <- list(
   ),
   
   
-  # Get stable file IDs -----------------------------------------------------
+  # Get file IDs ------------------------------------------------------------
   
   # In order to access "stable" versions of the dataset created by the pipeline,
   # we get their Google Drive file IDs and store those in the repo so that
-  # the harmonization pipeline can retrieve them more easily.
+  # the harmonization pipeline can retrieve them more easily. The targets below
+  # will include all file IDs in the Drive location, not just stable ones
   
-  # Retrieve the IDs for the most recent stable versions of the chl dataset
+  # Retrieve the IDs for the chl dataset
   tar_file_read(
     name = p2_chl_drive_ids,
     command = get_file_ids(google_email = p0_workflow_config$google_email,

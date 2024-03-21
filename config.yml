@@ -19,4 +19,3 @@ admin_update:
   sdd_create_stable: TRUE
   general_create_stable: TRUE
   drive_project_folder: "~/aquamatch_download_wqp/"
-  

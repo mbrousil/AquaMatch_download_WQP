@@ -23,7 +23,7 @@
 #' file in Google Drive.
 #' 
 export_single_file <- function(target, drive_path, stable, google_email,
-                               feather = FALSE){
+                               date_stamp, feather = FALSE){
   
   # Feather or RDS?
   if(feather){extension <- ".feather"} else {extension <- ".rds"}
@@ -70,7 +70,7 @@ export_single_file <- function(target, drive_path, stable, google_email,
                                                "_",
                                                gsub(pattern = "-",
                                                     replacement = "",
-                                                    x = Sys.Date()),
+                                                    x = date_stamp),
                                                extension))
     
     # Make the Google Drive link shareable: anyone can view
