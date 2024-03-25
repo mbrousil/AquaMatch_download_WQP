@@ -23,7 +23,7 @@
 #' file in Google Drive.
 #' 
 export_single_file <- function(target, drive_path, stable, google_email,
-                               feather = FALSE){
+                               date_stamp, feather = FALSE){
   
   # Feather or RDS?
   if(feather){extension <- ".feather"} else {extension <- ".rds"}
@@ -62,16 +62,21 @@ export_single_file <- function(target, drive_path, stable, google_email,
     drive_path_stable <- paste0(drive_path, "stable/")
     
     # Once locally exported, send to Google Drive
-    out_file_stable <- drive_put(media = file_local_path,
-                                 # The folder on Google Drive
-                                 path = drive_path_stable,
-                                 # The filename on Google Drive
-                                 name = paste0(target_string,
-                                               "_",
-                                               gsub(pattern = "-",
-                                                    replacement = "",
-                                                    x = Sys.Date()),
-                                               extension))
+    out_file_stable <- drive_upload(media = file_local_path,
+                                    # The folder on Google Drive
+                                    path = drive_path_stable,
+                                    # The filename on Google Drive
+                                    name = paste0(target_string,
+                                                  "_",
+                                                  gsub(pattern = "-",
+                                                       replacement = "",
+                                                       x = date_stamp),
+                                                  extension),
+                                    # Error if file exists with same date
+                                    # Note that we don't do this before this
+                                    # instance because files will always have the
+                                    # same name: no dates attached unless "stable"
+                                    overwrite = FALSE)
     
     # Make the Google Drive link shareable: anyone can view
     drive_share_anyone(out_file_stable)

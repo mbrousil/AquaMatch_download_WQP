@@ -28,6 +28,14 @@ config_targets <- list(
     command = config::get(config = "admin_update")
   ),
   
+  # A standardized system date from the start of the workflow to ensure that
+  # no steps accidentally use different dates based on when a specific target
+  # is reached during computation
+  tar_target(
+    name = p0_date_stamp,
+    command = Sys.Date()
+  ),
+  
   
   # WQP config --------------------------------------------------------------
   
@@ -39,7 +47,7 @@ config_targets <- list(
     name = p0_wq_dates,
     command = list(
       start_date = "1970-01-01",
-      end_date = Sys.Date()
+      end_date = p0_date_stamp
     )
   ),
   
