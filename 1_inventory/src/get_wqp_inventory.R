@@ -24,9 +24,6 @@
 #' inventory_wqp(aoi, "Conductivity", wqp_args = list(siteType = "Stream"))
 #' inventory_wqp(aoi, "Temperature, water", 
 #'               wqp_args = list(siteType = "Lake, Reservoir, Impoundment"))
-#'
-# explicitly load and attach sf package to handle geometry data in `grid`
-library(sf)
 
 inventory_wqp <- function(grid, char_names, wqp_args = NULL, max_tries = 3){
   
@@ -54,8 +51,8 @@ inventory_wqp <- function(grid, char_names, wqp_args = NULL, max_tries = 3){
                                      characteristicName = x))
     # query WQP
     retry(whatWQPdata(wqp_args_all),
-                 when = "Error:", 
-                 max_tries = max_tries) %>%
+          when = "Error:", 
+          max_tries = max_tries) %>%
       mutate(CharacteristicName = x, grid_id = grid$id)
   }) %>%
     bind_rows()
@@ -82,7 +79,66 @@ inventory_wqp <- function(grid, char_names, wqp_args = NULL, max_tries = 3){
   
 }
 
-
+#' @title Retrieve site metadata from the Water Quality Portal (WQP)
+#' 
+#' @description 
+#' Function to retrieve metadata for WQP sites within grid cells that overlap
+#' the area of interest.
+#'  
+#' @param grid sf object representing the area over which to query the WQP.
+#' 
+#' @returns 
+#' Returns a data frame with a row for each site within the Water Quality 
+#' Portal. Columns contain site information.
+retrieve_site_metadata <- function(grid){
+  
+  # First, check dataRetrieval package version and inform user if outdated
+  if(packageVersion('dataRetrieval') < "2.7.6.9003"){
+    stop(sprintf(paste0("dataRetrieval version %s is installed but this pipeline ",
+                        "requires package 2.7.6.9003. Please update dataRetrieval."),
+                 packageVersion('dataRetrieval')))
+  }
+  
+  print(grid$id)
+  
+  # Get bounding box for the grid polygon
+  bbox <- st_bbox(grid)
+  
+  # Fetch missing CRS information from WQP. Note that an empty query will not
+  # contain CRS information. In the event that the lines below throw an error, 
+  # "Column `HorizontalCoordinateReferenceSystemDatumName` doesn't exist", return
+  # an empty data frame for the site location metadata. 
+  site_location_metadata <- tryCatch(
+    whatWQPsites(bBox = c(bbox$xmin, bbox$ymin, bbox$xmax, bbox$ymax)) %>%
+      dplyr::filter(MonitoringLocationIdentifier %in% wqp_inventory$MonitoringLocationIdentifier),
+    error = function(e){
+      # Necessary column names in empty df:
+      column_names <- c(
+        "OrganizationIdentifier", "OrganizationFormalName", "MonitoringLocationIdentifier",        
+        "MonitoringLocationName", "MonitoringLocationTypeName", "MonitoringLocationDescriptionText", 
+        "HUCEightDigitCode", "DrainageAreaMeasure.MeasureValue", "DrainageAreaMeasure.MeasureUnitCode", 
+        "ContributingDrainageAreaMeasure.MeasureValue", "ContributingDrainageAreaMeasure.MeasureUnitCode", 
+        "LatitudeMeasure", "LongitudeMeasure", "SourceMapScaleNumeric", 
+        "HorizontalAccuracyMeasure.MeasureValue", "HorizontalAccuracyMeasure.MeasureUnitCode", 
+        "HorizontalCollectionMethodName", "HorizontalCoordinateReferenceSystemDatumName", 
+        "VerticalMeasure.MeasureValue", "VerticalMeasure.MeasureUnitCode", 
+        "VerticalAccuracyMeasure.MeasureValue", "VerticalAccuracyMeasure.MeasureUnitCode", 
+        "VerticalCollectionMethodName", "VerticalCoordinateReferenceSystemDatumName", 
+        "CountryCode", "StateCode", "CountyCode", "AquiferName", "LocalAqfrName", 
+        "FormationTypeText", "AquiferTypeName", "ConstructionDateText", 
+        "WellDepthMeasure.MeasureValue", "WellDepthMeasure.MeasureUnitCode", 
+        "WellHoleDepthMeasure.MeasureValue", "WellHoleDepthMeasure.MeasureUnitCode", 
+        "ProviderName"
+      )
+      out_df <- lapply(column_names, function(x) character()) %>%
+        data.frame()
+      names(out_df) <- column_names
+      out_df
+    }
+  )
+  
+  site_location_metadata
+}
 
 #' @title Transform site coordinates
 #' 
@@ -184,7 +240,7 @@ subset_inventory <- function(wqp_inventory, aoi_sf, buffer_dist_m = 0){
   # Harmonize different coordinate reference systems used across sites
   queried_sites_transformed <- transform_site_locations(wqp_inventory, crs_out = "WGS84") 
   queried_sites_transformed_sf <- st_as_sf(queried_sites_transformed, 
-                                               coords = c("lon","lat"), crs = 4326) 
+                                           coords = c("lon","lat"), crs = 4326) 
   
   # Filter wqp inventory to only include sites within area of interest + some user-specified 
   # buffer distance to ensure we retain all sites within the AOI. 
@@ -195,8 +251,8 @@ subset_inventory <- function(wqp_inventory, aoi_sf, buffer_dist_m = 0){
   # post by the sf maintainers: https://r-spatial.github.io/sf/articles/sf7.html#buffers-1
   queried_sites_aoi <- queried_sites_transformed_sf %>%
     st_filter(y = st_transform(aoi_sf, st_crs(.)),
-                  .predicate = st_is_within_distance,
-                  dist = set_units(buffer_dist_m, m)) %>%
+              .predicate = st_is_within_distance,
+              dist = set_units(buffer_dist_m, m)) %>%
     mutate(lon = as.numeric(st_coordinates(.)[,1]),
            lat = as.numeric(st_coordinates(.)[,2])) %>%
     st_drop_geometry() %>%

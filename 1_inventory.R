@@ -306,6 +306,17 @@ p1_targets_list <- list(
     command = subset_inventory(p1_wqp_inventory_sdd, p1_AOI_sf)
   ),
   
+  # Get WQP site metadata
+  tar_target(
+    name = p1_wqp_site_info,
+    command = {
+      retrieve_site_metadata(grid = p1_global_grid_aoi)
+    },
+    pattern = map(p1_global_grid_aoi),
+    error = "continue",
+    packages = c("tidyverse", "retry", "sf", "dataRetrieval")
+  ),
+  
   
   # Export inventory --------------------------------------------------------
   
@@ -345,6 +356,16 @@ p1_targets_list <- list(
     packages = c("tidyverse", "googledrive")
   ),
   
+  # Site info
+  tar_target(
+    name = p1_wqp_site_info_file,
+    command = export_single_file(target = p1_wqp_site_info,
+                                 drive_path = p0_general_output_path,
+                                 stable = p0_workflow_config$general_create_stable,
+                                 google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp),
+    packages = c("tidyverse", "googledrive")
+  ),
   
   # Summarize the data that would come back from the WQP
   
