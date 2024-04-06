@@ -79,66 +79,6 @@ inventory_wqp <- function(grid, char_names, wqp_args = NULL, max_tries = 3){
   
 }
 
-#' @title Retrieve site metadata from the Water Quality Portal (WQP)
-#' 
-#' @description 
-#' Function to retrieve metadata for WQP sites within grid cells that overlap
-#' the area of interest.
-#'  
-#' @param grid sf object representing the area over which to query the WQP.
-#' 
-#' @returns 
-#' Returns a data frame with a row for each site within the Water Quality 
-#' Portal. Columns contain site information.
-retrieve_site_metadata <- function(grid){
-  
-  # First, check dataRetrieval package version and inform user if outdated
-  if(packageVersion('dataRetrieval') < "2.7.6.9003"){
-    stop(sprintf(paste0("dataRetrieval version %s is installed but this pipeline ",
-                        "requires package 2.7.6.9003. Please update dataRetrieval."),
-                 packageVersion('dataRetrieval')))
-  }
-  
-  print(grid$id)
-  
-  # Get bounding box for the grid polygon
-  bbox <- st_bbox(grid)
-  
-  # Fetch missing CRS information from WQP. Note that an empty query will not
-  # contain CRS information. In the event that the lines below throw an error, 
-  # "Column `HorizontalCoordinateReferenceSystemDatumName` doesn't exist", return
-  # an empty data frame for the site location metadata. 
-  site_location_metadata <- tryCatch(
-    whatWQPsites(bBox = c(bbox$xmin, bbox$ymin, bbox$xmax, bbox$ymax)) %>%
-      dplyr::filter(MonitoringLocationIdentifier %in% wqp_inventory$MonitoringLocationIdentifier),
-    error = function(e){
-      # Necessary column names in empty df:
-      column_names <- c(
-        "OrganizationIdentifier", "OrganizationFormalName", "MonitoringLocationIdentifier",        
-        "MonitoringLocationName", "MonitoringLocationTypeName", "MonitoringLocationDescriptionText", 
-        "HUCEightDigitCode", "DrainageAreaMeasure.MeasureValue", "DrainageAreaMeasure.MeasureUnitCode", 
-        "ContributingDrainageAreaMeasure.MeasureValue", "ContributingDrainageAreaMeasure.MeasureUnitCode", 
-        "LatitudeMeasure", "LongitudeMeasure", "SourceMapScaleNumeric", 
-        "HorizontalAccuracyMeasure.MeasureValue", "HorizontalAccuracyMeasure.MeasureUnitCode", 
-        "HorizontalCollectionMethodName", "HorizontalCoordinateReferenceSystemDatumName", 
-        "VerticalMeasure.MeasureValue", "VerticalMeasure.MeasureUnitCode", 
-        "VerticalAccuracyMeasure.MeasureValue", "VerticalAccuracyMeasure.MeasureUnitCode", 
-        "VerticalCollectionMethodName", "VerticalCoordinateReferenceSystemDatumName", 
-        "CountryCode", "StateCode", "CountyCode", "AquiferName", "LocalAqfrName", 
-        "FormationTypeText", "AquiferTypeName", "ConstructionDateText", 
-        "WellDepthMeasure.MeasureValue", "WellDepthMeasure.MeasureUnitCode", 
-        "WellHoleDepthMeasure.MeasureValue", "WellHoleDepthMeasure.MeasureUnitCode", 
-        "ProviderName"
-      )
-      out_df <- lapply(column_names, function(x) character()) %>%
-        data.frame()
-      names(out_df) <- column_names
-      out_df
-    }
-  )
-  
-  site_location_metadata
-}
 
 #' @title Transform site coordinates
 #' 

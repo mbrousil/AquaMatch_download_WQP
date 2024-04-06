@@ -486,6 +486,9 @@ Head Capsule Width
 Heptadecane
 Heterotrissocladius
 Hexabromocyclododecane
+Hexabromocyclododecane, alpha-
+Hexabromocyclododecane, beta-
+Hexabromocyclododecane, gamma-
 Hexachlorocyclohexane
 Hexachlorocyclopentadiene
 Hexadecane
@@ -533,6 +536,18 @@ Labeled 1,2,3,4,5,6,7,8-Octachloronaphthalene
 Labeled Decabromodiphenyl Ether
 L-Alanine-7-amido-4-methylcoumarin
 Land Cover (choice list)
+Large Woody Debris Pieces All/Part in Wetted Channel (Dia:0.3-<0.6m; Len:15-30m)
+Large Woody Debris Pieces All/Part in Wetted Channel (Dia:0.3-<0.6m; Len:>30m)
+Large Woody Debris Pieces All/Part in Wetted Channel (Dia:0.3-<0.6m; Len:5-15m)
+Large Woody Debris Pieces All/Part in Wetted Channel (Dia:0.6-<0.8m; Len:15-30m)
+Large Woody Debris Pieces All/Part in Wetted Channel (Dia:0.6-<0.8m; Len:>30m)
+Large Woody Debris Pieces All/Part in Wetted Channel (Dia:0.6-<0.8m; Len:5-15m)
+Large Woody Debris Pieces All/Part in Wetted Channel (Dia:0.8-<1.0m; Len:15-30m)
+Large Woody Debris Pieces All/Part in Wetted Channel (Dia:0.8-<1.0m; Len:>30m)
+Large Woody Debris Pieces All/Part in Wetted Channel (Dia:0.8-<1.0m; Len:5-15m)
+Large Woody Debris Pieces All/Part in Wetted Channel (Dia:>1.0m; Len:15-30m)
+Large Woody Debris Pieces All/Part in Wetted Channel (Dia:>1.0m; Len:>30m)
+Large Woody Debris Pieces All/Part in Wetted Channel (Dia:>1.0m; Len:5-15m)
 L-Arginine-7-amido-4-methylcoumarin
 Lasalocid
 Lepidoptera
@@ -543,7 +558,9 @@ Leptodora
 Lime (chemical), dolomitic
 Limnochironomus
 Littoral Substrate - Bottom Dominant
+Littoral Substrate - Shore Dominant
 L-Leucine 7-amido-4-methylcoumarin
+Location in cross section, distance from left bank looking downstream
 Macrohabitat Type - Constrained Channel
 Macrohabitat Type - Unconstrained Channel
 m-Dichlorobenzene
@@ -696,6 +713,7 @@ Perfluorohexadecanoic acid***retired***use Perfluoropalmitic acid
 Perfluorolauric acid***retired***use Perfluorododecanoic acid
 Perfluoromyristic acid***retired***use Perfluorotetradecanoic acid
 Perfluorooctanesulfonamide
+Perfluorooctane sulfonamide
 Perfluorooctanesulfonate
 Perfluorooctanesulfonate (PFOS)
 Perfluorooctane sulfonic acid
@@ -777,6 +795,7 @@ RBP Sediment Odors (choice list)
 RBP Stream Velocity
 RBP Substrate - Bedrock
 RBP Water Odors (choice list)
+Reach Length, Downstream
 Redoximorphic Features (%)
 Redoximorphic Features (choice list)
 Redoximorphic Features Color: Chroma
@@ -788,6 +807,9 @@ Riffle, Bedrock (%)
 Riparian - Docks or marinas (choice list)
 Riparian vegetation, dominant species present
 Rocky Substrate (choice list)
+Sample location, distance downstream
+Sample location, distance upstream
+Sample location, relative to right bank, looking downstream
 Saturation Index Chalcedony
 Saturation Index Dolomite
 Scale Focus Radius (Fish)
@@ -800,6 +822,7 @@ Similarity, gravid counts
 Similarity, no gravid counts
 Simocephalus
 Simultaneously extracted metals/acid volatile sulfides (Metals ESB based on Final Chron. Value for AVS (fOC))
+Site Verified By Local Contact
 Sludge, substrate rock/bank cover - severity (choice list)
 Sodium 1H,1H,2H,2H-perfluoro1-decanesulfonate
 Sodium dodecafluoro-3H-4,8-dioxanonanoate
@@ -842,6 +865,8 @@ Thiocyanate
 Thiocyanic acid
 Thiodicarb
 Toluene diisocyanate
+Torrent Scouring-Downstream of scoured reach are massive deposits of sediment and debris (Y/N) (choice list)
+Torrent Scouring-Stream channel is scoured down to bedrock for substantial portion of reach (Y/N) (choice list)
 Total Dichloro Biphenyls
 Total microcystins plus nodularins
 Total Monochloro Biphenyls

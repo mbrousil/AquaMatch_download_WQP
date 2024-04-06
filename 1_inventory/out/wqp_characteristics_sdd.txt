@@ -19,6 +19,7 @@ Activities - Residences (choice list)
 a-D-galactosidase (corrected for carbon content)
 a-D-glucosidase (corrected for carbon content)
 Athripsodes
+Bank Side Measured
 b-D-galactosidase (corrected for carbon content)
 b-D-glucosidase (corrected for carbon content)
 b-D-xylosidase (corrected for carbon content)
@@ -62,6 +63,7 @@ Gross alpha radioactivity, (nat-Uranium ref std)
 Gross alpha radioactivity, (Thorium-230 ref std)
 Gross beta radioactivity, (Cesium-137 ref std)
 Gross beta radioactivity, (Strontium-Yttrium-90 ref std)
+Incised Height
 Inundation Evidence: Sediment deposits (choice list)
 Isodrin
 Lloyd - Zar - Karr Species Diversity Index
@@ -125,6 +127,7 @@ Sediment Oxygen Demand
 Sediment percent organic
 Sediment/ Substrate Odors (choice list)
 Sida
+Side Channel (Y/N) (choice list)
 Siduron
 Simultaneously extracted metals/acid volatile sulfides (Metals ESB based on Final Chron. Value for AVS (fOC))
 Sodium
@@ -146,6 +149,7 @@ Sodium perfluorohexanesulfonate
 Sodium Perfluorononanesulfonate
 Sodium perfluoropentanesulfonate
 Sodium plus potassium
+Soft/Small Sediment Present (Y/N) (choice list)
 Soil Saturation Evidence: Fiddler crab burrows (choice list)
 Substrate Embeddedness
 Substrate - sediment thickness
@@ -157,6 +161,8 @@ Suspended Sediment Concentration (SSC)
 Suspended Sediment Discharge
 Temperature, sediment
 Teniposide
+Torrent Deposition-Massive deposits of sediment, logs, and debris in the reach (Y/N) (choice list)
+Torrent Scouring-Downstream of scoured reach are massive deposits of sediment and debris (Y/N) (choice list)
 Toxicity, sediment, Ampelisca abdita, significant (choice list)
 Toxicity, sediment, Ampelisca abdita, survival**retired**useBiologicalSample,SubjectTaxon,IntentToxicity
 Toxicity sediment control survival
