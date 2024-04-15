@@ -24,9 +24,6 @@
 #' inventory_wqp(aoi, "Conductivity", wqp_args = list(siteType = "Stream"))
 #' inventory_wqp(aoi, "Temperature, water", 
 #'               wqp_args = list(siteType = "Lake, Reservoir, Impoundment"))
-#'
-# explicitly load and attach sf package to handle geometry data in `grid`
-library(sf)
 
 inventory_wqp <- function(grid, char_names, wqp_args = NULL, max_tries = 3){
   
@@ -54,8 +51,8 @@ inventory_wqp <- function(grid, char_names, wqp_args = NULL, max_tries = 3){
                                      characteristicName = x))
     # query WQP
     retry(whatWQPdata(wqp_args_all),
-                 when = "Error:", 
-                 max_tries = max_tries) %>%
+          when = "Error:", 
+          max_tries = max_tries) %>%
       mutate(CharacteristicName = x, grid_id = grid$id)
   }) %>%
     bind_rows()
@@ -81,7 +78,6 @@ inventory_wqp <- function(grid, char_names, wqp_args = NULL, max_tries = 3){
   return(wqp_inventory_out)
   
 }
-
 
 
 #' @title Transform site coordinates
@@ -184,7 +180,7 @@ subset_inventory <- function(wqp_inventory, aoi_sf, buffer_dist_m = 0){
   # Harmonize different coordinate reference systems used across sites
   queried_sites_transformed <- transform_site_locations(wqp_inventory, crs_out = "WGS84") 
   queried_sites_transformed_sf <- st_as_sf(queried_sites_transformed, 
-                                               coords = c("lon","lat"), crs = 4326) 
+                                           coords = c("lon","lat"), crs = 4326) 
   
   # Filter wqp inventory to only include sites within area of interest + some user-specified 
   # buffer distance to ensure we retain all sites within the AOI. 
@@ -195,8 +191,8 @@ subset_inventory <- function(wqp_inventory, aoi_sf, buffer_dist_m = 0){
   # post by the sf maintainers: https://r-spatial.github.io/sf/articles/sf7.html#buffers-1
   queried_sites_aoi <- queried_sites_transformed_sf %>%
     st_filter(y = st_transform(aoi_sf, st_crs(.)),
-                  .predicate = st_is_within_distance,
-                  dist = set_units(buffer_dist_m, m)) %>%
+              .predicate = st_is_within_distance,
+              dist = set_units(buffer_dist_m, m)) %>%
     mutate(lon = as.numeric(st_coordinates(.)[,1]),
            lat = as.numeric(st_coordinates(.)[,2])) %>%
     st_drop_geometry() %>%

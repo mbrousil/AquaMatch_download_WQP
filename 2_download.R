@@ -89,7 +89,8 @@ p2_targets_list <- list(
                                  drive_path = p0_chl_output_path,
                                  stable = p0_workflow_config$chl_create_stable,
                                  google_email = p0_workflow_config$google_email,
-                                 date_stamp = p0_date_stamp)
+                                 date_stamp = p0_date_stamp),
+    error = "stop"
   ),
   
   # DOC
@@ -99,7 +100,8 @@ p2_targets_list <- list(
                                  drive_path = p0_doc_output_path,
                                  stable = p0_workflow_config$doc_create_stable,
                                  google_email = p0_workflow_config$google_email,
-                                 date_stamp = p0_date_stamp)
+                                 date_stamp = p0_date_stamp),
+    error = "stop"
   ),
   
   # SDD
@@ -109,7 +111,8 @@ p2_targets_list <- list(
                                  drive_path = p0_sdd_output_path,
                                  stable = p0_workflow_config$sdd_create_stable,
                                  google_email = p0_workflow_config$google_email,
-                                 date_stamp = p0_date_stamp)
+                                 date_stamp = p0_date_stamp),
+    error = "stop"
   ),
   
   
@@ -213,7 +216,8 @@ p2_targets_list <- list(
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp,
                                  feather = TRUE),
-    packages = c("tidyverse", "googledrive", "feather")
+    packages = c("tidyverse", "googledrive", "feather"),
+    error = "stop"
   ),
   
   # DOC
@@ -225,7 +229,8 @@ p2_targets_list <- list(
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp,
                                  feather = TRUE),
-    packages = c("tidyverse", "googledrive", "feather")
+    packages = c("tidyverse", "googledrive", "feather"),
+    error = "stop"
   ),
   
   # SDD
@@ -237,7 +242,8 @@ p2_targets_list <- list(
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp,
                                  feather = TRUE),
-    packages = c("tidyverse", "googledrive", "feather")
+    packages = c("tidyverse", "googledrive", "feather"),
+    error = "stop"
   ),
   
   

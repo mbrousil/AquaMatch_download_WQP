@@ -50,7 +50,8 @@ p1_targets_list <- list(
                                  stable = p0_workflow_config$chl_create_stable,
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
-    packages = c("tidyverse", "googledrive")
+    packages = c("tidyverse", "googledrive"),
+    error = "stop"
   ),
   
   # DOC
@@ -61,7 +62,8 @@ p1_targets_list <- list(
                                  stable = p0_workflow_config$chl_create_stable,
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
-    packages = c("tidyverse", "googledrive")
+    packages = c("tidyverse", "googledrive"),
+    error = "stop"
   ),
   
   # SDD
@@ -72,7 +74,8 @@ p1_targets_list <- list(
                                  stable = p0_workflow_config$chl_create_stable,
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
-    packages = c("tidyverse", "googledrive")
+    packages = c("tidyverse", "googledrive"),
+    error = "stop"
   ),
   
   
@@ -112,7 +115,8 @@ p1_targets_list <- list(
                                  stable = p0_workflow_config$chl_create_stable,
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
-    packages = c("tidyverse", "googledrive")
+    packages = c("tidyverse", "googledrive"),
+    error = "stop"
   ),
   
   # DOC
@@ -123,7 +127,8 @@ p1_targets_list <- list(
                                  stable = p0_workflow_config$doc_create_stable,
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
-    packages = c("tidyverse", "googledrive")
+    packages = c("tidyverse", "googledrive"),
+    error = "stop"
   ),
   
   # SDD
@@ -134,7 +139,8 @@ p1_targets_list <- list(
                                  stable = p0_workflow_config$sdd_create_stable,
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
-    packages = c("tidyverse", "googledrive")
+    packages = c("tidyverse", "googledrive"),
+    error = "stop"
   ),
   
   
@@ -221,7 +227,8 @@ p1_targets_list <- list(
                                  stable = p0_workflow_config$general_create_stable,
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
-    packages = c("tidyverse", "googledrive")
+    packages = c("tidyverse", "googledrive"),
+    error = "stop"
   ),
   
   # Use spatial subsetting to find boxes that overlap the area of interest
@@ -320,7 +327,8 @@ p1_targets_list <- list(
                                  stable = p0_workflow_config$chl_create_stable,
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
-    packages = c("tidyverse", "googledrive")
+    packages = c("tidyverse", "googledrive"),
+    error = "stop"
   ),
   
   # DOC
@@ -331,7 +339,8 @@ p1_targets_list <- list(
                                  stable = p0_workflow_config$doc_create_stable,
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
-    packages = c("tidyverse", "googledrive")
+    packages = c("tidyverse", "googledrive"),
+    error = "stop"
   ),
   
   # SDD
@@ -342,9 +351,9 @@ p1_targets_list <- list(
                                  stable = p0_workflow_config$sdd_create_stable,
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
-    packages = c("tidyverse", "googledrive")
+    packages = c("tidyverse", "googledrive"),
+    error = "stop"
   ),
-  
   
   # Summarize the data that would come back from the WQP
   
