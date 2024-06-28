@@ -1,7 +1,16 @@
-# Default: Non-ROSS users: provide email and update dynamic local versions,
-# but not stable
+# This config file allows for three types of pipeline operation:
+#
+# 1) default: download a new set of files from WQP. This is most useful if you 
+# are customizing the download.
+#
+# 2) admin_update: for use by the ROSS group to update stable versions of the 
+# harmonization pipeline. This config option requires write access to the ROSS
+# Google email.
+#
+# Default: provide email and drive folder and use dynamic, user-created local versions
+# of the WQP download.
 default:
-  # gmail account to associate with {googledrive}
+  # gmail account to associate with {googledrive} package
   google_email: ""
   # Create a new stable version of the chlorophyll dataset?
   chl_create_stable: FALSE
@@ -9,8 +18,10 @@ default:
   sdd_create_stable: FALSE
   # Create a new stable version of files not related to specific parameters?
   general_create_stable: FALSE
-# What's the name of the folder on Google Drive where files should be stored?
-  drive_project_folder: ""
+  # What's the name of the folder on Google Drive where files should be stored?
+  drive_project_folder: "" # folder name must end with "/", if you use a nested
+  # folder location, you will need to create that folder structure before using 
+  # this pipeline
 # Update the stable dataset version for one or more parameters
 admin_update:
   google_email: "therossyndicate@gmail.com"

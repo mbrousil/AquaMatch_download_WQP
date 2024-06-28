@@ -1,5 +1,8 @@
 #!/usr/bin/env Rscript
 
+# Please review README.md prior to running the pipeline! It provides important
+# instructions for proper configuration.
+
 # Package handling --------------------------------------------------------
 
 # List of packages required for this pipeline
@@ -8,6 +11,7 @@ required_pkgs <- c(
   "dataRetrieval",
   "feather",
   "googledrive",
+  "lutz",
   "MESS",
   "retry",
   "sf",
@@ -36,13 +40,13 @@ lapply(required_pkgs, package_installer)
 library(googledrive)
 library(targets)
 
+# Prior to running the pipeline, confirm that the config.yml settings are correct
+# and that you have set line 28 in `_targets.R` to the appropriate config setting.
 
 # Google Drive auth -------------------------------------------------------
 
 # Confirm Google Drive is authorized locally
 drive_auth()
-# Select existing account (change if starting from scratch)
-2
 
 
 # Run pipeline ------------------------------------------------------------
