@@ -171,6 +171,7 @@ p2_targets_list <- list(
   # built. A common reason a branch may fail is due to WQP timeout errors. Timeout 
   # errors can sometimes be resolved by waiting a few hours and retrying tar_make().
   
+  # Chlorophyll
   tar_target(
     name = p2_wqp_data_aoi_chl,
     command = fetch_wqp_data(p2_site_counts_grouped_chl,
@@ -182,6 +183,7 @@ p2_targets_list <- list(
     packages = c("dataRetrieval", "tidyverse", "sf", "retry")
   ),
   
+  # DOC
   tar_target(
     name = p2_wqp_data_aoi_doc,
     command = fetch_wqp_data(p2_site_counts_grouped_doc,
@@ -193,6 +195,7 @@ p2_targets_list <- list(
     packages = c("dataRetrieval", "tidyverse", "sf", "retry")
   ),
   
+  # SDD
   tar_target(
     name = p2_wqp_data_aoi_sdd,
     command = fetch_wqp_data(p2_site_counts_grouped_sdd,
@@ -204,13 +207,42 @@ p2_targets_list <- list(
     packages = c("dataRetrieval", "tidyverse", "sf", "retry")
   ),
   
+  # Remove Personal Information from WQP data text columns ------------------
+  # There are a few instances where organizations have submitted columns containing
+  # personal information (emails or phone numbers) in comment text fields. We
+  # want to make sure we do not pass that information on in our data products,
+  # so this set of targets anonymizes emails and phone numbers for each parameter.
+  
+  # Chlorophyll
+  tar_target(
+    name = p2_wqp_data_aoi_chl_anon,
+    command = anonymize_text(p2_wqp_data_aoi_chl),
+    packages = "tidyverse",
+    error = "stop"
+  ),
+  
+  # DOC
+  tar_target(
+    name = p2_wqp_data_aoi_doc_anon,
+    command = anonymize_text(p2_wqp_data_aoi_doc),
+    packages = "tidyverse",
+    error = "stop"
+  ),
+  
+  # SDD
+  tar_target(
+    name = p2_wqp_data_aoi_sdd_anon,
+    command = anonymize_text(p2_wqp_data_aoi_sdd),
+    packages = "tidyverse",
+    error = "stop"
+  ),
   
   # Export WQP data ---------------------------------------------------------
   
   # Chlorophyll
   tar_target(
     name = p2_wqp_data_aoi_chl_file,
-    command = export_single_file(target = p2_wqp_data_aoi_chl,
+    command = export_single_file(target = p2_wqp_data_aoi_chl_anon,
                                  drive_path = p0_chl_output_path,
                                  stable = p0_workflow_config$chl_create_stable,
                                  google_email = p0_workflow_config$google_email,
@@ -223,7 +255,7 @@ p2_targets_list <- list(
   # DOC
   tar_target(
     name = p2_wqp_data_aoi_doc_file,
-    command = export_single_file(target = p2_wqp_data_aoi_doc,
+    command = export_single_file(target = p2_wqp_data_aoi_doc_anon,
                                  drive_path = p0_doc_output_path,
                                  stable = p0_workflow_config$doc_create_stable,
                                  google_email = p0_workflow_config$google_email,
@@ -236,7 +268,7 @@ p2_targets_list <- list(
   # SDD
   tar_target(
     name = p2_wqp_data_aoi_sdd_file,
-    command = export_single_file(target = p2_wqp_data_aoi_sdd,
+    command = export_single_file(target = p2_wqp_data_aoi_sdd_anon,
                                  drive_path = p0_sdd_output_path,
                                  stable = p0_workflow_config$sdd_create_stable,
                                  google_email = p0_workflow_config$google_email,
@@ -255,21 +287,23 @@ p2_targets_list <- list(
   tar_file(
     name = p2_wqp_data_chl_summary_csv,
     command = summarize_wqp_download(wqp_inventory_summary_csv = p1_wqp_inventory_chl_summary_csv,
-                                     wqp_data = p2_wqp_data_aoi_chl,
+                                     wqp_data = p2_wqp_data_aoi_chl_anon,
                                      "2_download/log/chl_summary_wqp_data.csv")
   ),
   
+  # DOC
   tar_file(
     name = p2_wqp_data_doc_summary_csv,
     command = summarize_wqp_download(wqp_inventory_summary_csv = p1_wqp_inventory_doc_summary_csv,
-                                     wqp_data = p2_wqp_data_aoi_doc,
+                                     wqp_data = p2_wqp_data_aoi_doc_anon,
                                      "2_download/log/doc_summary_wqp_data.csv")
   ),
   
+  # SDD
   tar_file(
     name = p2_wqp_data_sdd_summary_csv,
     command = summarize_wqp_download(wqp_inventory_summary_csv = p1_wqp_inventory_sdd_summary_csv,
-                                     wqp_data = p2_wqp_data_aoi_sdd,
+                                     wqp_data = p2_wqp_data_aoi_sdd_anon,
                                      "2_download/log/sdd_summary_wqp_data.csv")
   ),
   
@@ -281,7 +315,7 @@ p2_targets_list <- list(
   # the harmonization pipeline can retrieve them more easily. The targets below
   # will include all file IDs in the Drive location, not just stable ones
   
-  # Retrieve the IDs for the chl dataset
+  # Retrieve the IDs for the chlorophyll dataset
   tar_file_read(
     name = p2_chl_drive_ids,
     command = get_file_ids(google_email = p0_workflow_config$google_email,
