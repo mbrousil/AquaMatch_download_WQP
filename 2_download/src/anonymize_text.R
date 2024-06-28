@@ -19,8 +19,6 @@
 #' @example anonymize_text(p2_wqp_data_aoi_sdd)
 #' 
 
-tar_load(p2_wqp_data_aoi_sdd)
-
 anonymize_text <- function(data, 
                            columns = c("ActivityCommentText", 
                                       "ResultLaboratoryCommentText", 
