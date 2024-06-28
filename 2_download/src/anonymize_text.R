@@ -14,7 +14,7 @@
 #' @returns This function returns the same shape of dataframe (rows x columns)
 #' but with strings that match common email and phone formats anonymized. For 
 #' email addresses, all characters prior to the `@` symbol are replace with `xxxx`
-#' and for phone numbers the last four digits are replaced with `xxxx`.
+#' and for phone numbers all digits are replaced by `xxxxxxxxxx`.
 #' 
 #' @example anonymize_text(p2_wqp_data_aoi_sdd)
 #' 
@@ -27,8 +27,8 @@ anonymize_text <- function(data,
                                       "ResultCommentText")) {
   
   # define the full phone and email patterns using regex
-  phone_pat <- "\\(\\d{3}\\)\\s+\\d{3}-\\d{4}|\\d{3}-\\d{3}-\\d{4}|\\d{3}\\s+\\d{3}\\s+\\d{4}|\\s+\\d{10}"
-  email_pat <- "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"
+  phone_pat <- "(?:^|\\D)((?:\\+?1[-.]?)?\\s*\\(?[2-9]\\d{2}\\)?[-.]?\\s*\\d{3}[-.]?\\s*\\d{4})(?:$|\\D)"
+  email_pat <- "[a-zA-Z0-9._%+-]+\\s*@\\s*[a-zA-Z0-9.-]+[\\.,][a-zA-Z]{2,}"
   
   # add a rowid column to arrange and properly join the data
   df <- data %>% 
@@ -46,14 +46,14 @@ anonymize_text <- function(data,
                        # and where there are not
                        no_emails <- replace_df %>% 
                          filter(!rowid %in% emails$rowid) 
-                       # substitute `xxxx` for the characters before the `@` sign, retaining all 
+                       # substitute ` xxxx` for the characters before the `@` sign, retaining all 
                        # other text
                        emails <- emails %>% 
                          rowwise() %>% 
                          mutate(select_col = gsub(pattern = email_pat, 
-                                                  replacement = paste0("xxxx",
+                                                  replacement = paste0(" xxxx",
                                                                        str_extract(string = select_col, 
-                                                                                   pattern = "@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")), 
+                                                                                   pattern = "\\s*[a-zA-Z0-9.-]+[\\.,][a-zA-Z]{2,}")), 
                                                   x = select_col)) %>% 
                          ungroup()
                        # format and join back to the no email subset
@@ -70,9 +70,7 @@ anonymize_text <- function(data,
                        phones <- phones %>% 
                          rowwise() %>% 
                          mutate(select_col = gsub(pattern = phone_pat, 
-                                                  replacement = paste0(str_extract(string = select_col, 
-                                                                                   pattern = "\\(\\d{3}\\)\\s+\\d{3}-|\\d{3}-\\d{3}-|\\d{3}\\s+\\d{3}\\s+|\\s+\\d{6}"),
-                                                                       "xxxx"), 
+                                                  replacement = "xxxxxxxxxx", 
                                                   x = select_col)) %>% 
                          ungroup()
                        # format and join back to the no phone number subset
