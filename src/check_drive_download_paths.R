@@ -24,7 +24,7 @@
 check_drive_download_paths <- function(folder, google_email, project_folder) {
   tryCatch({
     drive_auth(google_email)
-    drive_ls(folder)
+    drive_ls(path = paste0(project_folder, folder))
   }, error = function(e) {
     # if the outpath doesn't exist, create it along with a "stable" subfolder
     drive_mkdir(name = folder,

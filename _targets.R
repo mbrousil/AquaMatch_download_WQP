@@ -104,7 +104,7 @@ config_targets <- list(
   # list Drive folder paths required in parent folder
   tar_target(
     name = p0_drive_folders,
-    command = c(p0_param_groups_select, 'general')
+    command = c(p0_param_groups_select, "general")
   ),
   
   # check for each of the Drive folder paths
@@ -113,7 +113,7 @@ config_targets <- list(
     command = check_drive_download_paths(folder = p0_drive_folders,
                                          google_email = p0_workflow_config$google_email,
                                          project_folder = p0_workflow_config$drive_project_folder),
-    pattern = p0_drive_folders,
+    pattern = map(p0_drive_folders),
     packages = "googledrive",
     cue = tar_cue("always"),
     error = "stop"
