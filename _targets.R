@@ -16,6 +16,9 @@ tar_source(files = c(
   "2_download.R")
 )
 
+# Source the functions that will be used to build the targets in config_targets
+tar_source("src/")
+
 # The list of targets/steps
 config_targets <- list(
   
@@ -25,7 +28,7 @@ config_targets <- list(
   tar_target(
     name = p0_workflow_config,
     # The config package does not like to be used with library()
-    command = config::get(config = "admin_update")
+    command = config::get()
   ),
   
   # A standardized system date from the start of the workflow to ensure that
@@ -80,29 +83,78 @@ config_targets <- list(
   
   # Google Drive path setup -------------------------------------------------
   
-  # Google Drive paths for outputs in this pipeline
+  ## Check for Drive folder paths and create if necessary 
+  
+  # check for Drive parent folder
+  tar_target(
+    name = p0_check_drive_parent_folder,
+    command = {
+      tryCatch({
+        drive_auth(p0_workflow_config$google_email)
+        drive_ls(p0_workflow_config$drive_project_folder)
+      }, error = function(e) {
+        drive_mkdir(str_sub(p0_workflow_config$drive_project_folder, 1, -2))  
+      })
+    },
+    packages = "googledrive",
+    cue = tar_cue("always"),
+    error = "stop"
+  ),
+  
+  # list Drive folder paths required in parent folder
+  tar_target(
+    name = p0_drive_folders,
+    command = c(p0_param_groups_select, 'general')
+  ),
+  
+  # check for each of the Drive folder paths
+  tar_target(
+    name = p0_check_drive_paths,
+    command = check_drive_download_paths(folder = p0_drive_folders,
+                                         google_email = p0_workflow_config$google_email,
+                                         project_folder = p0_workflow_config$drive_project_folder),
+    pattern = p0_drive_folders,
+    packages = "googledrive",
+    cue = tar_cue("always"),
+    error = "stop"
+  ),
+  
+  ## store Google Drive paths as targets in this pipeline
   tar_target(
     name = p0_general_output_path,
-    command = paste0(p0_workflow_config$drive_project_folder,
-                     "general/")
+    command = {
+      p0_check_drive_paths
+      paste0(p0_workflow_config$drive_project_folder,
+             "general/")
+    }
   ),
   
   tar_target(
     name = p0_chl_output_path,
-    command = paste0(p0_workflow_config$drive_project_folder,
-                     "chlorophyll/")
+    command = {
+      p0_check_drive_paths
+      paste0(p0_workflow_config$drive_project_folder,
+             "chlorophyll/")
+      
+    }
   ),
   
   tar_target(
     name = p0_doc_output_path,
-    command = paste0(p0_workflow_config$drive_project_folder,
-                     "doc/")
+    command = {
+      p0_check_drive_paths
+      paste0(p0_workflow_config$drive_project_folder,
+             "doc/")
+    }
   ), 
   
   tar_target(
     name = p0_sdd_output_path,
-    command = paste0(p0_workflow_config$drive_project_folder,
-                     "sdd/")
+    command = {
+      p0_check_drive_paths
+      paste0(p0_workflow_config$drive_project_folder,
+             "sdd/")
+    }
   )
 )
 
