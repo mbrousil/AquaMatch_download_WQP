@@ -82,7 +82,8 @@ subset_grids_to_aoi <- function(grid, aoi_sf, buffer_dist_m = 0){
                   .predicate = st_is_within_distance,
                   dist = set_units(buffer_dist_m, m))   
   
-  return(grid_subset_aoi)
+  return(grid_subset_aoi %>% 
+           st_sf())
   
 }
 
