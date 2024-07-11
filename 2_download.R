@@ -326,6 +326,7 @@ p2_targets_list <- list(
                            depend = p2_wqp_data_aoi_chl_file
     ),
     read = read_csv(file = !!.x),
+    cue = tar_cue("always"),
     packages = c("tidyverse", "googledrive")
   ), 
   
@@ -340,6 +341,7 @@ p2_targets_list <- list(
                            depend = p2_wqp_data_aoi_doc_file
     ),
     read = read_csv(file = !!.x),
+    cue = tar_cue("always"),
     packages = c("tidyverse", "googledrive")
   ), 
   
@@ -352,6 +354,7 @@ p2_targets_list <- list(
                            depend = p2_wqp_data_aoi_sdd_file
     ),
     read = read_csv(file = !!.x),
+    cue = tar_cue("always"),
     packages = c("tidyverse", "googledrive")
   ),
   
@@ -364,6 +367,7 @@ p2_targets_list <- list(
                            depend = p1_global_grid_file
     ),
     read = read_csv(file = !!.x),
+    cue = tar_cue("always"),
     packages = c("tidyverse", "googledrive")
   )
   

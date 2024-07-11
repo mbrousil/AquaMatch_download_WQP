@@ -48,6 +48,7 @@ library(targets)
 # Confirm Google Drive is authorized locally
 drive_auth()
 
+2
 
 # Run pipeline ------------------------------------------------------------
 

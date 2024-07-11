@@ -51,6 +51,7 @@ p1_targets_list <- list(
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive"),
+    cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -63,6 +64,7 @@ p1_targets_list <- list(
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive"),
+    cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -75,6 +77,7 @@ p1_targets_list <- list(
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive"),
+    cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -116,6 +119,7 @@ p1_targets_list <- list(
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive"),
+    cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -128,6 +132,7 @@ p1_targets_list <- list(
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive"),
+    cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -140,6 +145,7 @@ p1_targets_list <- list(
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive"),
+    cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -270,6 +276,7 @@ p1_targets_list <- list(
   tar_target(
     name = p1_wqp_inventory_doc,
     command = {
+      # library(sf)
       inventory_wqp(grid = p1_global_grid_aoi,
                     char_names = p1_char_names_doc,
                     wqp_args = p0_wqp_args)
