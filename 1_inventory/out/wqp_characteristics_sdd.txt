@@ -6,6 +6,7 @@ The following characteristics might be relevant to the selected parameter and ar
 1-Heptanesulfonic acid, 1,1,2,2,3,3,4,4,5,5,6,6,7,7,7-pentadecafluoro-,sodium salt (1:1)
 1-Octanesulfonic acid, 1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,8-heptadecafluoro-, sodium salt (1:1)
 2,3,3-Trichloro-2-propene-1-sulfonic acid (sodium salt)
+3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,12,12,12-Heneicosafluoro-1-dodecanesulfonic acid, sodium salt (1:1)
 37Cl4-2,3,7,8-TCDD
 4,4'-DDE-13C12
 4,4'-DDE-D8
