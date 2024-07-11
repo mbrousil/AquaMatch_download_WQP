@@ -21,8 +21,8 @@
 
 anonymize_text <- function(data, 
                            columns = c("ActivityCommentText", 
-                                      "ResultLaboratoryCommentText", 
-                                      "ResultCommentText")) {
+                                       "ResultLaboratoryCommentText", 
+                                       "ResultCommentText")) {
   
   # define the full phone and email patterns using regex
   phone_pat <- "(?:^|\\D)((?:\\+?1[-.]?)?\\s*\\(?[2-9]\\d{2}\\)?[-.]?\\s*\\d{3}[-.]?\\s*\\d{4})(?:$|\\D)"
@@ -48,11 +48,15 @@ anonymize_text <- function(data,
                        # other text
                        emails <- emails %>% 
                          rowwise() %>% 
-                         mutate(select_col = gsub(pattern = email_pat, 
-                                                  replacement = paste0(" xxxx",
-                                                                       str_extract(string = select_col, 
-                                                                                   pattern = "\\s*[a-zA-Z0-9.-]+[\\.,][a-zA-Z]{2,}")), 
-                                                  x = select_col)) %>% 
+                         mutate(select_col = gsub(
+                           pattern = email_pat, 
+                           replacement = paste0(
+                             " xxxx",
+                             str_extract(
+                               string = select_col, 
+                               pattern = "\\s*[a-zA-Z0-9.-]+[\\.,][a-zA-Z]{2,}")
+                           ), 
+                           x = select_col)) %>% 
                          ungroup()
                        # format and join back to the no email subset
                        replace_df <- full_join(emails, no_emails) 
