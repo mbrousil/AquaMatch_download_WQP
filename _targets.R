@@ -28,7 +28,7 @@ config_targets <- list(
   tar_target(
     name = p0_workflow_config,
     # The config package does not like to be used with library()
-    command = config::get()
+    command = config::get(config = "admin_update")
   ),
   
   # A standardized system date from the start of the workflow to ensure that
