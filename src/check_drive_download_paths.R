@@ -1,7 +1,7 @@
 #' @title Function to check Drive paths and create them if they do not exist
 #' 
 #' @description
-#' This function checks the Google Drive of the config file's listed Google email
+#' This function checks the Google Drive of the config files listed Google email
 #' address to assure that the necessary folder architecture is present and creates
 #' the folder architecture if it does not exist.
 #' 
