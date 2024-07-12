@@ -249,6 +249,7 @@ p2_targets_list <- list(
                                  date_stamp = p0_date_stamp,
                                  feather = TRUE),
     packages = c("tidyverse", "googledrive", "feather"),
+    cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -262,6 +263,7 @@ p2_targets_list <- list(
                                  date_stamp = p0_date_stamp,
                                  feather = TRUE),
     packages = c("tidyverse", "googledrive", "feather"),
+    cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -275,6 +277,7 @@ p2_targets_list <- list(
                                  date_stamp = p0_date_stamp,
                                  feather = TRUE),
     packages = c("tidyverse", "googledrive", "feather"),
+    cue = tar_cue("always"),
     error = "stop"
   ),
   
