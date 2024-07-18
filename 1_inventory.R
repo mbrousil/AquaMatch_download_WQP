@@ -276,7 +276,6 @@ p1_targets_list <- list(
   tar_target(
     name = p1_wqp_inventory_doc,
     command = {
-      # library(sf)
       inventory_wqp(grid = p1_global_grid_aoi,
                     char_names = p1_char_names_doc,
                     wqp_args = p0_wqp_args)
