@@ -90,6 +90,7 @@ p2_targets_list <- list(
                                  stable = p0_workflow_config$chl_create_stable,
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
+    cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -101,6 +102,7 @@ p2_targets_list <- list(
                                  stable = p0_workflow_config$doc_create_stable,
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
+    cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -112,6 +114,7 @@ p2_targets_list <- list(
                                  stable = p0_workflow_config$sdd_create_stable,
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
+    cue = tar_cue("always"),
     error = "stop"
   ),
   
