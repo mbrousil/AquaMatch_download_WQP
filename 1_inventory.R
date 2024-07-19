@@ -51,6 +51,7 @@ p1_targets_list <- list(
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive"),
+    cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -63,6 +64,7 @@ p1_targets_list <- list(
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive"),
+    cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -75,6 +77,7 @@ p1_targets_list <- list(
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive"),
+    cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -116,6 +119,7 @@ p1_targets_list <- list(
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive"),
+    cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -128,6 +132,7 @@ p1_targets_list <- list(
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive"),
+    cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -140,6 +145,7 @@ p1_targets_list <- list(
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive"),
+    cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -328,6 +334,7 @@ p1_targets_list <- list(
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive"),
+    cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -340,6 +347,7 @@ p1_targets_list <- list(
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive"),
+    cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -352,6 +360,7 @@ p1_targets_list <- list(
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive"),
+    cue = tar_cue("always"),
     error = "stop"
   ),
   

@@ -43,7 +43,7 @@ identify_bad_ids <- function(sites){
 #' number of records available for each site. Must contain columns 
 #' `MonitoringLocationIdentifier` and `results_count`.
 #' @param max_sites integer indicating the maximum number of sites allowed in
-#' each download group. Defaults to 500.
+#' each download group. Defaults to 300.
 #' @param max_results integer indicating the maximum number of records allowed
 #' in each download group. Defaults to 250,000.
 #' 

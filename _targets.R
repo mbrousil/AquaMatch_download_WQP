@@ -6,7 +6,7 @@ library(tarchetypes)
 
 # Set target options:
 tar_option_set(
-  packages = c("tidyverse"),
+  packages = c("tidyverse", "sf"),
   error = "continue"
 )
 

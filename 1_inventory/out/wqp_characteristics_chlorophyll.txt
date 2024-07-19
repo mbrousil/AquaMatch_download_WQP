@@ -14,6 +14,7 @@ Biomass/chlorophyll ratio
 Chlorophyll
 Chlorophyll A
 Chlorophyll a, collected/analyzed (YES/NO) (choice list)
+Chlorophyll a, non-photochemical
 Chlorophyll a - Periphyton (attached)
 Chlorophyll a (probe) concentration, Cyanobacteria (bluegreen)
 Chlorophyll b

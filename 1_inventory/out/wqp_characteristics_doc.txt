@@ -51,6 +51,7 @@ The following characteristics might be relevant to the selected parameter and ar
 1H-Pyrazole-3-carboxamide, 5-amino-1-[2,6-dichloro-4-(trifluoromethyl)phenyl]-4-[(trifluoromethyl)sulfinyl]-
 1-Nonadecene
 1-Nonanesulfonic acid, 1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,9-nonadecafluoro-
+1-Octanesulfonamide, 1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,8-heptadecafluoro-N-methyl-, reaction products with benzene-chlorine-sulfur chloride (S2Cl2) reaction products chlorides
 1-Octanesulfonic acid, 1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,8-heptadecafluoro-, sodium salt (1:1)
 1-Octanesulfonic acid, 3,3,4,4,5,5,6,6,7,7,8,8,8-tridecafluoro-
 1-Octanol
@@ -121,6 +122,7 @@ The following characteristics might be relevant to the selected parameter and ar
 2-Phenyltetradecane
 2-Phenyltridecane
 2-Phenylundecane
+3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,12,12,12-Heneicosafluoro-1-dodecanesulfonic acid, sodium salt (1:1)
 3,3'-Dichlorobenzidine
 3,3'-Dichlorobiphenyl
 3,4-Dichloroaniline
@@ -203,6 +205,7 @@ Allophycocyanin
 Alluaudomyia
 .alpha.-1,2,3,4,5,6-Hexachlorocyclohexane-D6 or alpha-HCH D6
 .alpha.-Endosulfan
+alpha-HCH (aLindane)***retired***use .alpha.-Hexachlorocyclohexane
 .alpha.-Hexachlorocyclohexane
 Aminocarb
 Aminocyclopyrachlor
@@ -241,10 +244,13 @@ Bacteria, iron reducing
 Bacteria, sulfate reducing
 Bacteria, Sulfate reducing
 Batrachochytrium dendrobatidis (Chytrid fungus)
+Bedrock
 Bendiocarb
 Bendiocarb phenol
 Benzene, 1,2(or 1,4)-dichloro-
 Benzene, (1-ethyldecyl)-
+Benzene Hexachloride, Beta (BHC)***retired***use .beta.-Hexachlorocyclohexane
+Benzene Hexachloride, Delta (BHC)***retired***use .delta.-Hexachlorocyclohexane
 Benzyldimethyldecylammonium chloride
 Benzyldimethyldodecyl ammonium
 Benzyldimethyldodecylammonium chloride
@@ -304,6 +310,7 @@ Chaetocladius
 Chlordecone
 Chlorine dose
 Chlorodiiodomethane
+Chlorophyll a, non-photochemical
 Chydoridae
 cis-1,2-Dichloroethylene
 cis-1,3-Dichloropropene
@@ -313,6 +320,7 @@ Cladopelma
 Cladophora, visual observation
 Cladotanytarsus
 Clinocera
+Clopidogrel
 Clopidogrel carboxylic acid
 Cloud cover
 Cloud cover (choice list)
@@ -342,14 +350,12 @@ DCPA mono-acid degradate
 Dead centric diatoms
 Decabromodiphenylethane
 Decabromodiphenyl ether
-Decabromodiphenyl ether***retired***use Decabromodiphenyl oxide
 Decabromodiphenyl oxide
 Decachlorobiphenyl
 Decafluorobiphenyl
 Decahydronaphthalene
 Decamethylcyclopentasiloxane
 Decane
-Decanoic acid, 2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,10-nonadecafluoro-
 Decanoic acid, 4,4,5,5,6,6,7,7,8,8,9,9,10,10,10-pentadecafluoro-
 Decapoda
 Dechlorane 602
@@ -394,7 +400,6 @@ Dichloronitromethane
 Dichlorophenol
 Dichloropropane
 Dichloropropene
-Dichloroprop***retired***use Dichlorprop
 Dichlorotoluene
 Dichlorotrifluoroethane
 Dichlorprop
@@ -447,7 +452,6 @@ Ecgonine methyl ester hydrochloride
 Eggs in Ovaries or Attached to Abdomen
 Endochironomus
 Endosulfan
-Endosulfan, alpha
 Endosulfan and Metabolites
 Endosulfan ether
 Endosulfan sulfate
@@ -473,7 +477,6 @@ Formetanate hydrochloride
 Gadolinium
 .gama.-Hexachlorocyclohexane
 gamma-Chlordane***retired***use 2,2,4,5,6,7,8,8-Octachloro-2,3,3a,4,7,7a-hexahydro-4,7-methano-1H-indene
-.gamma.-Hexachlorocyclohexane
 Glycine-7-amido-4-methylcoumarin
 Glycine, N-[(1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,8-heptadecafluorooctyl)sulfonyl]-
 Glycine, N-ethyl-N-[(1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,8-heptadecafluorooctyl)sulfonyl]-
@@ -566,6 +569,7 @@ Macrohabitat Type - Unconstrained Channel
 m-Dichlorobenzene
 Mesocyclops
 Methadone
+Methadone-D3
 Methadone-d9
 Methamidophos
 Methiocarb
@@ -621,6 +625,7 @@ N-Ethylperfluorooctane-1-sulfonamide
 N-ethyl Perfluorooctane sulfonamide
 N-Ethylperfluorooctanesulfonamidoacetate
 N-ethyl perfluorooctanesulfonamidoacetic acid
+N-Ethylperfluorooctanesulfonamidoacetic acid (N-EtFOSAA) (N-ethyl-D5, 98%)
 N-Ethyl perfluorooctane sulfonamido ethanol
 Nitrate-reducing bacteria
 Nitrocellulose
@@ -628,6 +633,7 @@ Nitrogenous biochemical oxygen demand
 N-Methyl-2-pyrrolidone
 N-methylperfluoro-1-octanesulfonamide
 N-Methyl perfluorooctane sulfonamide
+N-Methylperfluorooctanesulfonamide (N-MeFOSA) (D3, 98%)
 N-Methylperfluorooctanesulfonamidoacetate
 N-methyl perfluorooctanesulfonamidoacetic acid
 N-Methylperfluorooctane sulfonamido ethanol
@@ -702,6 +708,7 @@ Perfluoro[1,2-13C2]undecanoic acid
 Perfluoro[1,2,3,4-13C4]octanoic acid
 Perfluoro[1,2,3,4,5,6,7-13C7]undecanoic acid
 Perfluoro-1-dodecanesulfonate
+Perfluoro-1-octanesulfonamide
 Perfluorodecanesulfonate
 Perfluorodecanoate
 Perfluorodecanoic acid
@@ -717,7 +724,6 @@ Perfluorooctane sulfonamide
 Perfluorooctanesulfonate
 Perfluorooctanesulfonate (PFOS)
 Perfluorooctane sulfonic acid
-Perfluorooctanesulfonic acid***retired***use Perfluorooctane sulfonic acid
 Perfluorooctanoic acid
 Perfluorotetradecanoate
 Perfluorotetradecanoic acid
@@ -751,6 +757,7 @@ Potassium 11-chloroeicosafluoro-3-oxaundecane-1-sulfonate
 Potassium 9-chlorohexadecafluoro-3-oxanonane-1-sulfonate
 Primary productivity
 Primidone
+Primidone-d5
 Procambarus
 Prochloraz
 Procladius
@@ -806,6 +813,7 @@ Rheocricotopus
 Riffle, Bedrock (%)
 Riparian - Docks or marinas (choice list)
 Riparian vegetation, dominant species present
+Rock Cover (%)
 Rocky Substrate (choice list)
 Sample location, distance downstream
 Sample location, distance upstream
@@ -876,7 +884,6 @@ Total Petroleum Hydrocarbons (C10-C40)
 Total Petroleum Hydrocarbons (C6-C32 TPH)
 Toxicity, sediment, Leptocheirus plumulosus, survival**retired**useBiologicalSample,SubjectTaxon,IntentToxicity
 Tramadol
-trans-1,2-Dichloroethene***retired***use trans-1,2-Dichloroethylene
 trans-1,2-Dichloroethylene
 trans-1,2-Dichloropropene
 trans-1,3-Dichloropropene
@@ -892,6 +899,7 @@ Tridecane
 Tridecanoic acid, 2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,12,12,13,13,13-pentacosafluoro-
 Triiodomethane
 Tris(1,3-dichloro-2-propyl)phosphate
+Tris(1,3-dichloro-2-propyl) Phosphate-d15
 Trissocladius
 Tropocyclops
 Unconfined Compression
