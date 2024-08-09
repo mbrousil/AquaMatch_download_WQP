@@ -36,7 +36,7 @@ config_targets <- list(
   # is reached during computation
   tar_target(
     name = p0_date_stamp,
-    command = Sys.Date()
+    command = "2024-07-01" # Sys.Date()
   ),
   
   
@@ -61,7 +61,12 @@ config_targets <- list(
   # or to customize parameter groupings. 
   tar_target(
     name = p0_param_groups_select,
-    command = c("chlorophyll", "doc", "sdd")
+    command = c(
+      "chlorophyll",
+      "doc",
+      "sdd",
+      "true_color"
+    )
   ),
   
   
@@ -83,9 +88,9 @@ config_targets <- list(
   
   # Google Drive path setup -------------------------------------------------
   
-  ## Check for Drive folder paths and create if necessary 
+  # Check for Drive folder paths and create if necessary 
   
-  # check for Drive parent folder
+  # Check for Drive parent folder
   tar_target(
     name = p0_check_drive_parent_folder,
     command = {
@@ -101,13 +106,13 @@ config_targets <- list(
     error = "stop"
   ),
   
-  # list Drive folder paths required in parent folder
+  # List Drive folder paths required in parent folder
   tar_target(
     name = p0_drive_folders,
     command = c(p0_param_groups_select, "general")
   ),
   
-  # check for each of the Drive folder paths
+  # Check for each of the Drive folder paths
   tar_target(
     name = p0_check_drive_paths,
     command = check_drive_download_paths(folder = p0_drive_folders,
@@ -119,7 +124,7 @@ config_targets <- list(
     error = "stop"
   ),
   
-  ## store Google Drive paths as targets in this pipeline
+  # Store Google Drive paths as targets in this pipeline
   tar_target(
     name = p0_general_output_path,
     command = {
@@ -154,6 +159,15 @@ config_targets <- list(
       p0_check_drive_paths
       paste0(p0_workflow_config$drive_project_folder,
              "sdd/")
+    }
+  ),
+  
+  tar_target(
+    name = p0_tc_output_path,
+    command = {
+      p0_check_drive_paths
+      paste0(p0_workflow_config$drive_project_folder,
+             "true_color/")
     }
   )
 )

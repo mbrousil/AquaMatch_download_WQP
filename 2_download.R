@@ -76,6 +76,29 @@ p2_targets_list <- list(
                 by = "CharacteristicName")
   ),
   
+  # True Color
+  tar_target(
+    name = p2_site_counts_tc,
+    command = p1_wqp_inventory_aoi_tc %>%
+      # Hold onto location info, grid_id, characteristic, and provider data
+      # and use them for grouping
+      group_by(MonitoringLocationIdentifier, lon, lat, datum, grid_id,
+               CharacteristicName, ProviderName) %>%
+      # Count the number of rows per group
+      summarize(results_count = sum(resultCount, na.rm = TRUE),
+                .groups = "drop") %>%
+      # Add the overarching parameter names to the dataset
+      left_join(x = .,
+                y = p1_wqp_params_tc %>%
+                  map2_df(.x,
+                          .y = names(.),
+                          .f = ~{
+                            tibble(CharacteristicName = .x,
+                                   parameter = .y)
+                          }),
+                by = "CharacteristicName")
+  ),
+  
   
   # Export site counts ------------------------------------------------------
   
@@ -90,7 +113,7 @@ p2_targets_list <- list(
                                  stable = p0_workflow_config$chl_create_stable,
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
-    cue = tar_cue("always"),
+    # cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -102,7 +125,7 @@ p2_targets_list <- list(
                                  stable = p0_workflow_config$doc_create_stable,
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
-    cue = tar_cue("always"),
+    # cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -114,7 +137,19 @@ p2_targets_list <- list(
                                  stable = p0_workflow_config$sdd_create_stable,
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
-    cue = tar_cue("always"),
+    # cue = tar_cue("always"),
+    error = "stop"
+  ),
+  
+  # True Color
+  tar_target(
+    name = p2_site_counts_tc_file,
+    command = export_single_file(target = p2_site_counts_tc,
+                                 drive_path = p0_tc_output_path,
+                                 stable = p0_workflow_config$tc_create_stable,
+                                 google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp),
+    # cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -150,6 +185,18 @@ p2_targets_list <- list(
   tar_target(
     name = p2_site_counts_grouped_sdd,
     command = add_download_groups(p2_site_counts_sdd, 
+                                  max_sites = 100,
+                                  max_results = 250000) %>%
+      group_by(download_grp) %>%
+      tar_group(),
+    iteration = "group",
+    packages = c("tidyverse", "MESS")
+  ),
+  
+  # True Color
+  tar_target(
+    name = p2_site_counts_grouped_tc,
+    command = add_download_groups(p2_site_counts_tc, 
                                   max_sites = 100,
                                   max_results = 250000) %>%
       group_by(download_grp) %>%
@@ -210,6 +257,19 @@ p2_targets_list <- list(
     packages = c("dataRetrieval", "tidyverse", "sf", "retry")
   ),
   
+  # True Color
+  tar_target(
+    name = p2_wqp_data_aoi_tc,
+    command = fetch_wqp_data(p2_site_counts_grouped_tc,
+                             char_names = unique(p2_site_counts_grouped_tc$CharacteristicName),
+                             wqp_args = p0_wqp_args),
+    pattern = map(p2_site_counts_grouped_tc),
+    error = "continue",
+    format = "feather",
+    packages = c("dataRetrieval", "tidyverse", "sf", "retry")
+  ),
+  
+  
   # Remove Personal Information from WQP data text columns ------------------
   # There are a few instances where organizations have submitted columns containing
   # personal information (emails or phone numbers) in comment text fields. We
@@ -240,6 +300,15 @@ p2_targets_list <- list(
     error = "stop"
   ),
   
+  # True Color
+  tar_target(
+    name = p2_wqp_data_aoi_tc_anon,
+    command = anonymize_text(p2_wqp_data_aoi_tc),
+    packages = "tidyverse",
+    error = "stop"
+  ),
+  
+  
   # Export WQP data ---------------------------------------------------------
   
   # Chlorophyll
@@ -252,7 +321,7 @@ p2_targets_list <- list(
                                  date_stamp = p0_date_stamp,
                                  feather = TRUE),
     packages = c("tidyverse", "googledrive", "feather"),
-    cue = tar_cue("always"),
+    # cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -266,7 +335,7 @@ p2_targets_list <- list(
                                  date_stamp = p0_date_stamp,
                                  feather = TRUE),
     packages = c("tidyverse", "googledrive", "feather"),
-    cue = tar_cue("always"),
+    # cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -280,7 +349,21 @@ p2_targets_list <- list(
                                  date_stamp = p0_date_stamp,
                                  feather = TRUE),
     packages = c("tidyverse", "googledrive", "feather"),
-    cue = tar_cue("always"),
+    # cue = tar_cue("always"),
+    error = "stop"
+  ),
+  
+  # True Color
+  tar_target(
+    name = p2_wqp_data_aoi_tc_file,
+    command = export_single_file(target = p2_wqp_data_aoi_tc_anon,
+                                 drive_path = p0_tc_output_path,
+                                 stable = p0_workflow_config$tc_create_stable,
+                                 google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp,
+                                 feather = TRUE),
+    packages = c("tidyverse", "googledrive", "feather"),
+    # cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -313,6 +396,14 @@ p2_targets_list <- list(
                                      "2_download/log/sdd_summary_wqp_data.csv")
   ),
   
+  # True Color
+  tar_file(
+    name = p2_wqp_data_tc_summary_csv,
+    command = summarize_wqp_download(wqp_inventory_summary_csv = p1_wqp_inventory_tc_summary_csv,
+                                     wqp_data = p2_wqp_data_aoi_tc_anon,
+                                     "2_download/log/tc_summary_wqp_data.csv")
+  ),
+  
   
   # Get file IDs ------------------------------------------------------------
   
@@ -332,7 +423,7 @@ p2_targets_list <- list(
                            depend = p2_wqp_data_aoi_chl_file
     ),
     read = read_csv(file = !!.x),
-    cue = tar_cue("always"),
+    # cue = tar_cue("always"),
     packages = c("tidyverse", "googledrive")
   ), 
   
@@ -347,7 +438,7 @@ p2_targets_list <- list(
                            depend = p2_wqp_data_aoi_doc_file
     ),
     read = read_csv(file = !!.x),
-    cue = tar_cue("always"),
+    # cue = tar_cue("always"),
     packages = c("tidyverse", "googledrive")
   ), 
   
@@ -360,7 +451,20 @@ p2_targets_list <- list(
                            depend = p2_wqp_data_aoi_sdd_file
     ),
     read = read_csv(file = !!.x),
-    cue = tar_cue("always"),
+    # cue = tar_cue("always"),
+    packages = c("tidyverse", "googledrive")
+  ),
+  
+  # True Color
+  tar_file_read(
+    name = p2_tc_drive_ids,
+    command = get_file_ids(google_email = p0_workflow_config$google_email,
+                           drive_folder = p0_tc_output_path,
+                           file_path = "2_download/out/tc_drive_ids.csv",
+                           depend = p2_wqp_data_aoi_tc_file
+    ),
+    read = read_csv(file = !!.x),
+    # cue = tar_cue("always"),
     packages = c("tidyverse", "googledrive")
   ),
   
@@ -373,7 +477,7 @@ p2_targets_list <- list(
                            depend = p1_global_grid_file
     ),
     read = read_csv(file = !!.x),
-    cue = tar_cue("always"),
+    # cue = tar_cue("always"),
     packages = c("tidyverse", "googledrive")
   )
   
