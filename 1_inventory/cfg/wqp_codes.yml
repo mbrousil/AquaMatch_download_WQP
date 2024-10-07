@@ -15,6 +15,10 @@
     - "Total carbon"
     - "Non-purgeable Organic Carbon (NPOC)"
     
+  dom:
+    - "Organic matter"
+    - "Colored dissolved organic matter"
+    
   sdd:
     - "Depth, Secchi disk depth"
     - "Depth, Secchi disk depth (choice list)"

@@ -29,6 +29,12 @@ p1_targets_list <- list(
     command = p1_wqp_params["doc"]
   ),
   
+  # Dissolved organic matter
+  tar_target(
+    name = p1_wqp_params_dom,
+    command = p1_wqp_params["dom"]
+  ),
+  
   # Secchi disk depth
   tar_target(
     name = p1_wqp_params_sdd,
@@ -68,6 +74,19 @@ p1_targets_list <- list(
     error = "stop"
   ),
   
+  # DOM
+  tar_target(
+    name = p1_wqp_params_file_dom,
+    command = export_single_file(target = p1_wqp_params_dom,
+                                 drive_path = p0_dom_output_path,
+                                 stable = p0_workflow_config$chl_create_stable,
+                                 google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp),
+    packages = c("tidyverse", "googledrive"),
+    cue = tar_cue("always"),
+    error = "stop"
+  ),
+  
   # SDD
   tar_target(
     name = p1_wqp_params_file_sdd,
@@ -97,6 +116,12 @@ p1_targets_list <- list(
   tar_target(
     name = p1_char_names_crosswalk_doc,
     command = crosswalk_characteristics(p1_wqp_params_doc)
+  ),
+  
+  # DOM
+  tar_target(
+    name = p1_char_names_crosswalk_dom,
+    command = crosswalk_characteristics(p1_wqp_params_dom)
   ),
   
   # SDD
@@ -136,6 +161,19 @@ p1_targets_list <- list(
     error = "stop"
   ),
   
+  # DOM
+  tar_target(
+    name = p1_char_names_crosswalk_dom_file,
+    command = export_single_file(target = p1_char_names_crosswalk_dom,
+                                 drive_path = p0_dom_output_path,
+                                 stable = p0_workflow_config$dom_create_stable,
+                                 google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp),
+    packages = c("tidyverse", "googledrive"),
+    cue = tar_cue("always"),
+    error = "stop"
+  ),
+  
   # SDD
   tar_target(
     name = p1_char_names_crosswalk_sdd_file,
@@ -168,6 +206,14 @@ p1_targets_list <- list(
     packages = c("tidyverse", "xml2")
   ),
   
+  # DOM
+  tar_target(
+    name = p1_char_names_dom,
+    command = filter_characteristics(p1_char_names_crosswalk_dom,
+                                     p0_param_groups_select),
+    packages = c("tidyverse", "xml2")
+  ),
+  
   # SDD
   tar_target(
     name = p1_char_names_sdd,
@@ -193,6 +239,14 @@ p1_targets_list <- list(
     name = p1_similar_char_names_doc_txt,
     command = find_similar_characteristics(p1_char_names_doc,
                                            "doc",
+                                           "1_inventory/out"),
+    packages = c("tidyverse", "xml2")
+  ),
+  
+  tar_file(
+    name = p1_similar_char_names_dom_txt,
+    command = find_similar_characteristics(p1_char_names_dom,
+                                           "dom",
                                            "1_inventory/out"),
     packages = c("tidyverse", "xml2")
   ),
@@ -285,6 +339,19 @@ p1_targets_list <- list(
     packages = c("tidyverse", "retry", "sf", "dataRetrieval", "units")
   ),
   
+  # DOM
+  tar_target(
+    name = p1_wqp_inventory_dom,
+    command = {
+      inventory_wqp(grid = p1_global_grid_aoi,
+                    char_names = p1_char_names_dom,
+                    wqp_args = p0_wqp_args)
+    },
+    pattern = cross(p1_global_grid_aoi, p1_char_names_dom),
+    error = "continue",
+    packages = c("tidyverse", "retry", "sf", "dataRetrieval", "units")
+  ),
+  
   # SDD
   tar_target(
     name = p1_wqp_inventory_sdd,
@@ -311,6 +378,12 @@ p1_targets_list <- list(
   tar_target(
     name = p1_wqp_inventory_aoi_doc,
     command = subset_inventory(p1_wqp_inventory_doc, p1_AOI_sf)
+  ),
+  
+  # DOM
+  tar_target(
+    name = p1_wqp_inventory_aoi_dom,
+    command = subset_inventory(p1_wqp_inventory_dom, p1_AOI_sf)
   ),
   
   # SDD
@@ -351,6 +424,19 @@ p1_targets_list <- list(
     error = "stop"
   ),
   
+  # DOM
+  tar_target(
+    name = p1_wqp_inventory_aoi_dom_file,
+    command = export_single_file(target = p1_wqp_inventory_aoi_dom,
+                                 drive_path = p0_dom_output_path,
+                                 stable = p0_workflow_config$dom_create_stable,
+                                 google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp),
+    packages = c("tidyverse", "googledrive"),
+    cue = tar_cue("always"),
+    error = "stop"
+  ),
+  
   # SDD
   tar_target(
     name = p1_wqp_inventory_aoi_sdd_file,
@@ -378,6 +464,13 @@ p1_targets_list <- list(
     name = p1_wqp_inventory_doc_summary_csv,
     command = summarize_wqp_inventory(p1_wqp_inventory_aoi_doc,
                                       "1_inventory/log/doc_summary_wqp_inventory.csv")
+  ),
+  
+  # DOM
+  tar_file(
+    name = p1_wqp_inventory_dom_summary_csv,
+    command = summarize_wqp_inventory(p1_wqp_inventory_aoi_dom,
+                                      "1_inventory/log/dom_summary_wqp_inventory.csv")
   ),
   
   # SDD

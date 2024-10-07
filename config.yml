@@ -15,6 +15,7 @@ default:
   # Create a new stable version of the chlorophyll dataset?
   chl_create_stable: FALSE
   doc_create_stable: FALSE
+  dom_create_stable: FALSE
   sdd_create_stable: FALSE
   # Create a new stable version of files not related to specific parameters?
   general_create_stable: FALSE
@@ -27,6 +28,7 @@ admin_update:
   google_email: "therossyndicate@gmail.com"
   chl_create_stable: TRUE
   doc_create_stable: TRUE
+  dom_create_stable: TRUE
   sdd_create_stable: TRUE
   general_create_stable: TRUE
   drive_project_folder: "~/aquamatch_download_wqp/"
