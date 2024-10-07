@@ -13,6 +13,7 @@
   doc:
     - "Organic carbon"
     - "Total carbon"
+    - "Non-purgeable Organic Carbon (NPOC)"
     
   sdd:
     - "Depth, Secchi disk depth"
