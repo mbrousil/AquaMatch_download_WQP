@@ -13,7 +13,6 @@
   doc:
     - "Organic carbon"
     - "Total carbon"
-    - "Non-purgeable Organic Carbon (NPOC)"
     
   sdd:
     - "Depth, Secchi disk depth"
@@ -21,8 +20,3 @@
     - "Secchi Reading Condition (choice list)"
     - "Secchi depth"
     - "Water transparency, Secchi disc"
-    
-  true_color: 
-    - "Color"
-    - "True color"
-    - "Apparent color"

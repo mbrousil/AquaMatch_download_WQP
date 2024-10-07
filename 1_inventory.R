@@ -35,11 +35,6 @@ p1_targets_list <- list(
     command = p1_wqp_params["sdd"]
   ),
   
-  # True color
-  tar_target(
-    name = p1_wqp_params_tc,
-    command = p1_wqp_params["true_color"]
-  ),
   
   # Export parameter yaml info ----------------------------------------------
   
@@ -56,7 +51,7 @@ p1_targets_list <- list(
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive"),
-    # cue = tar_cue("always"),
+    cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -65,11 +60,11 @@ p1_targets_list <- list(
     name = p1_wqp_params_file_doc,
     command = export_single_file(target = p1_wqp_params_doc,
                                  drive_path = p0_doc_output_path,
-                                 stable = p0_workflow_config$doc_create_stable,
+                                 stable = p0_workflow_config$chl_create_stable,
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive"),
-    # cue = tar_cue("always"),
+    cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -78,24 +73,11 @@ p1_targets_list <- list(
     name = p1_wqp_params_file_sdd,
     command = export_single_file(target = p1_wqp_params_sdd,
                                  drive_path = p0_sdd_output_path,
-                                 stable = p0_workflow_config$sdd_create_stable,
+                                 stable = p0_workflow_config$chl_create_stable,
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive"),
-    # cue = tar_cue("always"),
-    error = "stop"
-  ),
-  
-  # True Color
-  tar_target(
-    name = p1_wqp_params_file_tc,
-    command = export_single_file(target = p1_wqp_params_tc,
-                                 drive_path = p0_tc_output_path,
-                                 stable = p0_workflow_config$tc_create_stable,
-                                 google_email = p0_workflow_config$google_email,
-                                 date_stamp = p0_date_stamp),
-    packages = c("tidyverse", "googledrive"),
-    # cue = tar_cue("always"),
+    cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -123,11 +105,6 @@ p1_targets_list <- list(
     command = crosswalk_characteristics(p1_wqp_params_sdd)
   ),
   
-  # True Color
-  tar_target(
-    name = p1_char_names_crosswalk_tc,
-    command = crosswalk_characteristics(p1_wqp_params_tc)
-  ),
   
   # Use {googledrive} to upload the crosswalk data, which will be needed in
   # the second pipeline. Then return a file containing the link as text to be 
@@ -142,7 +119,7 @@ p1_targets_list <- list(
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive"),
-    # cue = tar_cue("always"),
+    cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -155,7 +132,7 @@ p1_targets_list <- list(
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive"),
-    # cue = tar_cue("always"),
+    cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -168,22 +145,10 @@ p1_targets_list <- list(
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive"),
-    # cue = tar_cue("always"),
+    cue = tar_cue("always"),
     error = "stop"
   ),
   
-  # True Color
-  tar_target(
-    name = p1_char_names_crosswalk_tc_file,
-    command = export_single_file(target = p1_char_names_crosswalk_tc,
-                                 drive_path = p0_tc_output_path,
-                                 stable = p0_workflow_config$tc_create_stable,
-                                 google_email = p0_workflow_config$google_email,
-                                 date_stamp = p0_date_stamp),
-    packages = c("tidyverse", "googledrive"),
-    # cue = tar_cue("always"),
-    error = "stop"
-  ),
   
   # Get a vector of WQP characteristic names to match parameter groups of interest
   
@@ -211,13 +176,6 @@ p1_targets_list <- list(
     packages = c("tidyverse", "xml2")
   ),
   
-  # True Color
-  tar_target(
-    name = p1_char_names_tc,
-    command = filter_characteristics(p1_char_names_crosswalk_tc,
-                                     p0_param_groups_select),
-    packages = c("tidyverse", "xml2")
-  ),
   
   # Save output file(s) containing WQP characteristic names that are similar to
   # the parameter groups of interest. This allows users to examine the list to
@@ -243,14 +201,6 @@ p1_targets_list <- list(
     name = p1_similar_char_names_sdd_txt,
     command = find_similar_characteristics(p1_char_names_sdd,
                                            "sdd",
-                                           "1_inventory/out"),
-    packages = c("tidyverse", "xml2")
-  ),
-  
-  tar_file(
-    name = p1_similar_char_names_tc_txt,
-    command = find_similar_characteristics(p1_char_names_tc,
-                                           "tc",
                                            "1_inventory/out"),
     packages = c("tidyverse", "xml2")
   ),
@@ -348,18 +298,6 @@ p1_targets_list <- list(
     packages = c("tidyverse", "retry", "sf", "dataRetrieval", "units")
   ),
   
-  # True Color
-  tar_target(
-    name = p1_wqp_inventory_tc,
-    command = {
-      inventory_wqp(grid = p1_global_grid_aoi,
-                    char_names = p1_char_names_tc,
-                    wqp_args = p0_wqp_args)
-    },
-    pattern = cross(p1_global_grid_aoi, p1_char_names_tc),
-    error = "continue",
-    packages = c("tidyverse", "retry", "sf", "dataRetrieval", "units")
-  ),
   
   # Subset the WQP inventory to only retain sites within the area of interest
   
@@ -381,12 +319,6 @@ p1_targets_list <- list(
     command = subset_inventory(p1_wqp_inventory_sdd, p1_AOI_sf)
   ),
   
-  # True Color
-  tar_target(
-    name = p1_wqp_inventory_aoi_tc,
-    command = subset_inventory(p1_wqp_inventory_tc, p1_AOI_sf)
-  ),
-  
   
   # Export inventory --------------------------------------------------------
   
@@ -402,7 +334,7 @@ p1_targets_list <- list(
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive"),
-    # cue = tar_cue("always"),
+    cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -415,7 +347,7 @@ p1_targets_list <- list(
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive"),
-    # cue = tar_cue("always"),
+    cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -428,20 +360,7 @@ p1_targets_list <- list(
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
     packages = c("tidyverse", "googledrive"),
-    # cue = tar_cue("always"),
-    error = "stop"
-  ),
-
-  # True Color
-  tar_target(
-    name = p1_wqp_inventory_aoi_tc_file,
-    command = export_single_file(target = p1_wqp_inventory_aoi_tc,
-                                 drive_path = p0_tc_output_path,
-                                 stable = p0_workflow_config$tc_create_stable,
-                                 google_email = p0_workflow_config$google_email,
-                                 date_stamp = p0_date_stamp),
-    packages = c("tidyverse", "googledrive"),
-    # cue = tar_cue("always"),
+    cue = tar_cue("always"),
     error = "stop"
   ),
   
@@ -466,13 +385,6 @@ p1_targets_list <- list(
     name = p1_wqp_inventory_sdd_summary_csv,
     command = summarize_wqp_inventory(p1_wqp_inventory_aoi_sdd,
                                       "1_inventory/log/sdd_summary_wqp_inventory.csv")
-  ),
-  
-  # True Color
-  tar_file(
-    name = p1_wqp_inventory_tc_summary_csv,
-    command = summarize_wqp_inventory(p1_wqp_inventory_aoi_tc,
-                                      "1_inventory/log/tc_summary_wqp_inventory.csv")
   )
   
 )

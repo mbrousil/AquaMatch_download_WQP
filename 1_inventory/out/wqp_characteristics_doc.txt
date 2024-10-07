@@ -1,4 +1,5 @@
 The following characteristics are already included in the WQP codes cfg file: 
+Non-purgeable Organic Carbon (NPOC)
 
 
 The following characteristics might be relevant to the selected parameter and are not included in the WQP codes cfg file: 
@@ -42,6 +43,8 @@ The following characteristics might be relevant to the selected parameter and ar
 1,5-Dichloronaphthalene
 1-Cyclopentyl-4-n-octyldodecane
 1-Decanesulfonic acid, 1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,10-heneicosafluoro-
+1H,1H, 2H, 2H-Perfluorodecane sulfonic acid
+1H,1H, 2H, 2H-Perfluorooctane sulfonic acid
 1-Heptanesulfonic acid, 1,1,2,2,3,3,4,4,5,5,6,6,7,7,7-pentadecafluoro-
 1-Heptanesulfonic acid, 1,1,2,2,3,3,4,4,5,5,6,6,7,7,7-pentadecafluoro-,sodium salt (1:1)
 1-Hexadecene
@@ -112,10 +115,13 @@ The following characteristics might be relevant to the selected parameter and ar
 2,7,8-trimethyl-2-(4,8,12-trimethyltridecyl)chroma
 2-(Dimethylamino)-N-hydroxy-2-oxoethanimidothioic acid methyl ester
 2H,2H,3H,3H-Perfluorooctanoate
+2H,2H,3H,3H-Perfluorooctanoic acid
 2-Methyldecane
 2-Methyltetradecane
 2-Naphthacenecarboxamide, 4-(dimethylamino)-1,4,4a,5,12,12a-hexahydro-3,10,11,12a-tetrahydroxy-6-methyl-1,12-dioxo-, hydrochloride (1:1), (4R,4aS,12aS)-
+2-(N-Ethyl-perfluorooctanesulfonamido)acetate
 2-(N-methylperfluoro-1-octanesulfonamido)-ethanol
+2-(N-Methylperfluorooctanesulfonamido)acetate
 2-Octanone
 2-Phenyldecane
 2-Phenyldodecane
@@ -642,7 +648,6 @@ N,N-Dimethyloctylamine
 Noctuidae
 Nonadecane
 Noncarcinogenic polycyclic aromatic hydrocarbons
-Non-purgeable Organic Carbon (NPOC)
 Non-viable seed count
 Nordoxepin
 Nostoc 16S RNA
@@ -724,6 +729,7 @@ Perfluorooctane sulfonamide
 Perfluorooctanesulfonate
 Perfluorooctanesulfonate (PFOS)
 Perfluorooctane sulfonic acid
+Perfluorooctanoate (anionic form)
 Perfluorooctanoic acid
 Perfluorotetradecanoate
 Perfluorotetradecanoic acid
