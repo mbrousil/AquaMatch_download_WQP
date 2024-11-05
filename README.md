@@ -1,5 +1,7 @@
 # AquaMatch_download_WQP
 
+Primary repository contact: Matthew Brousil (matthew.brousil AT colostate.edu)
+
 This repository is covered by the MIT use license. We request that all downstream uses of this work be available to the public when possible.
 
 ### Background
