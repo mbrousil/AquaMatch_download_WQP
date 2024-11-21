@@ -10,14 +10,13 @@
     - "Chlorophyll a, uncorrected for pheophytin"
     - "Chlorophyll a - Phytoplankton (suspended)"
     
+  cdom:
+    - "Colored dissolved organic matter (CDOM)"
+    
   doc:
     - "Organic carbon"
     - "Total carbon"
     - "Non-purgeable Organic Carbon (NPOC)"
-    
-  dom:
-    - "Organic matter"
-    - "Colored dissolved organic matter"
     
   sdd:
     - "Depth, Secchi disk depth"
@@ -25,3 +24,11 @@
     - "Secchi Reading Condition (choice list)"
     - "Secchi depth"
     - "Water transparency, Secchi disc"
+
+  tss:
+    - "Total suspended solids"
+    - "Total Particulate Matter"
+    - "Suspended Sediment Concentration (SSC)"
+
+  ssc:
+    - "Suspended Sediment Concentration (SSC)"

@@ -61,7 +61,7 @@ config_targets <- list(
   # or to customize parameter groupings. 
   tar_target(
     name = p0_param_groups_select,
-    command = c("chlorophyll", "doc", "sdd", "dom")
+    command = c("chlorophyll", "doc", "sdd", "tss", "cdom")
   ),
   
   
@@ -110,9 +110,11 @@ config_targets <- list(
   # Check for each of the Drive folder paths
   tar_target(
     name = p0_check_drive_paths,
-    command = check_drive_download_paths(folder = p0_drive_folders,
-                                         google_email = p0_workflow_config$google_email,
-                                         project_folder = p0_workflow_config$drive_project_folder),
+    command = check_drive_download_paths(
+      folder = p0_drive_folders,
+      google_email = p0_workflow_config$google_email,
+      project_folder = p0_workflow_config$drive_project_folder
+    ),
     pattern = map(p0_drive_folders),
     packages = "googledrive",
     cue = tar_cue("always"),
@@ -140,6 +142,16 @@ config_targets <- list(
   ),
   
   tar_target(
+    name = p0_cdom_output_path,
+    command = {
+      p0_check_drive_paths
+      paste0(p0_workflow_config$drive_project_folder,
+             "cdom/")
+      
+    }
+  ),
+  
+  tar_target(
     name = p0_doc_output_path,
     command = {
       p0_check_drive_paths
@@ -149,11 +161,11 @@ config_targets <- list(
   ), 
   
   tar_target(
-    name = p0_dom_output_path,
+    name = p0_tss_output_path,
     command = {
       p0_check_drive_paths
       paste0(p0_workflow_config$drive_project_folder,
-             "dom/")
+             "tss/")
     }
   ), 
   
