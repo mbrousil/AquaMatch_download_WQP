@@ -243,8 +243,7 @@ fetch_wqp_data <- function(site_counts_grouped, char_names, wqp_args = NULL,
   # Define function to pull data, retrying up to the number of times
   # indicated by `max_tries`
   pull_data <- function(x){
-    retry(readWQPdata(x,
-                      ignore_attributes = TRUE),
+    retry(readWQPdata(x),
           when = "Error:", 
           max_tries = max_tries)
   }
