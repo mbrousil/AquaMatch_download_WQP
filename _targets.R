@@ -61,7 +61,7 @@ config_targets <- list(
   # or to customize parameter groupings. 
   tar_target(
     name = p0_param_groups_select,
-    command = c("chlorophyll", "doc", "sdd")
+    command = c("chlorophyll", "doc", "sdd", "tmp")
   ),
   
   
@@ -154,6 +154,15 @@ config_targets <- list(
       p0_check_drive_paths
       paste0(p0_workflow_config$drive_project_folder,
              "sdd/")
+    }
+  ),
+  
+  tar_target(
+    name = p0_tmp_output_path,
+    command = {
+      p0_check_drive_paths
+      paste0(p0_workflow_config$drive_project_folder,
+             "tmp/")
     }
   )
 )

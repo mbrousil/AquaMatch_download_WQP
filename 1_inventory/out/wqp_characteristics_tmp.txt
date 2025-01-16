@@ -1,0 +1,232 @@
+The following characteristics are already included in the WQP codes cfg file: 
+Temperature
+Temperature, water
+
+
+The following characteristics might be relevant to the selected parameter and are not included in the WQP codes cfg file: 
+Acetophenone
+Activities - Chem. Treatment (choice list)
+Activities - Dumping (choice list)
+Activities - Parks, Campgrounds (choice list)
+Activities - Primitive Parks, Camping (choice list)
+Activities - Sewage Treatment (choice list)
+Alpha emitting radium isotopes
+AMPA-C13N15
+Amphetamine
+Amphetamine-d6
+Amphiboles
+Amphinemura
+Amphipoda
+Ampicillin
+Antipyrine
+Aquatic Vegetation, Type
+Arctopsyche
+Atmospheric deposition, bulk
+Atmospheric deposition, dry fall
+Atmospheric deposition, wet fall
+Bedload sediment particle size
+Bed sediment particle size
+Biomass, phytoplankton
+Bis(2-ethylhexyl) 3,4,5,6-tetrabromophthalate (BETBP)
+Camphor
+Camptocladius
+Campylobacter jejuni
+Carbon, isotope of mass 13
+Ceratopogonidae
+Channelization Type
+Channel type (choice list)
+Cheumatopsyche
+Chloramphenicol
+Chlorophyll a - Phytoplankton (suspended)
+Cloud type (choice list)
+Composite flow volume, mean
+Composite flow volume, total
+Compression Index
+Concentrated sample volume
+Conditions Preventing Sampling
+Constempellina
+Cricotopus
+Cricotopus bicinctus
+Depth, from below top of casing to water level
+Depth to bottom of sample interval
+Depth, total, from below top of casing
+Depth to top of sample interval
+Depth to top of water-bearing zone
+Dicrotophos
+DL-Amphetamine-D5
+Dominant Habitat Type
+Empididae
+Etoposide
+Etoposide-d3
+Famphur
+Fish Anomalies - Multiples
+Fish Status After Sampling (choice list)
+Flow, in conduit or treatment plant
+Grain size, clay (<0.001 MM) - Percent Passing
+Grain size, clay (<0.005 MM) - Percent Passing
+Habitat Cover Type
+Habitat Type (choice list)
+Hartmannella
+Hexavalent chromium compounds
+Hexazinone TP G
+High-temperature coal tar pitch
+Hornblende amphibole***retired***use 2,5,2',5'-Tetrachlorobiphenyl
+Human Influence - Wall/Dike/Revetment/Riprap/Dam (choice list)
+Hydatophylax
+Hydrologic Stressors: Animal Trampling (choice list)
+Impermeable Layer Present (Y/N) (choice list)
+Initial sample volume
+Ketoprofen
+Leptophos
+Littoral Fish Microhabitat: Cover Type
+Macrohabitat Type - Channel Crossover
+Macrohabitat Type - Constrained Channel
+Macrohabitat Type - Inside Bend
+Macrohabitat Type - Other Channel Type
+Macrohabitat Type - Outside Bend
+Macrohabitat Type - Tributary Mouth
+Macrohabitat Type - Unconstrained Channel
+m-Cresol compd. with p-cresol (2:1)
+Mesh Type (choice list)
+Methamphetamine
+Methamphetamine-D8
+Metoprolol
+Metoprolol-d7
+Microcricotopus
+Monocrotophos
+Motor oil range organic compounds
+Nectopsyche
+Number of females in sample
+Number of males in sample
+Number of pedicels per sample plant
+Number of sampling points
+Number of stalks per sample plant
+Nymphula
+Odor, atmospheric
+Odor type (choice list)
+Organic compounds
+Ormetoprim
+Other Hydrologic Evidence: Microtopographic relief (choice list)
+Paracricotopus
+Particle size (size/range in result Particle Size Basis)
+Peltoperla
+PFAS Total, Ionic Compounds
+Phaeophytin - Phytoplankton (suspended)
+Phytoplankton
+Phytoplankton biovolume
+Phytoplankton Density
+Phytoplankton productivity
+Phytoplankton Relative Density
+Phytoplankton, settling volume
+Population diversity, phytoplankton, # of species
+Precipitation (CA SWAMP) (choice list)
+Precipitation Last 24hrs (CA SWAMP) (choice list)
+Presumptive Aeromonas
+Propetamphos
+Protoptila
+Pumping rate
+Ractopamine
+Radium isotopes, alpha emitting
+RBP2, Aquatic Vegetation, Dominant Type & Species (choice list)
+RBP2, Habitat type, bedrock (%)
+RBP2, Habitat Type, bedrock (%)
+RBP2, Habitat type, canopy (%)
+RBP2, Habitat type, general comments
+RBP2, Habitat type, glide (%)
+RBP2, Habitat type, gravel-cobble (%)
+RBP2, Habitat type, large woody debris (%)
+RBP2, Habitat type, leaf packs (%)
+RBP2, Habitat type, other (%)
+RBP2, Habitat type, plants, roots (%)
+RBP2, Habitat type, pools (%)
+RBP2, Habitat type, riffle (%)
+RBP2, Habitat type, run (%)
+RBP2, Habitat type, sand (%)
+RBP2, Habitat type, sand-silt-mud-muck (%)
+RBP2, Habitat type, small woody debris (%)
+RBP2, Habitat type, snags (%)
+RBP2, Habitat type, submerged macrophytes (%)
+RBP2, Habitat type, vegetated banks (%)
+RBP2, Instream features, sampling reach area
+RBP2, Stream Character, Stream Type (choice list)
+RBP Stream Type (choice list)
+Recompression Index
+Relative Air Temperature (choice list)
+Rheocricotopus
+Riparian vegetation composition (choice list)
+Rosgen Stream Type
+(RS)-AMPA (Aminomethyl phosphonic acid)
+Sample collection general mode (choice list)
+Sample flow volume
+Sample location, distance downstream
+Sample location, distance upstream
+Sample location, relative to right bank, looking downstream
+Sample time, elapsed
+Sand/Substrate Habitat Type (%)
+Sediment compaction
+Sediment percent organic
+Shore Type - Aggrading Bank
+Shore Type - Eroding Bank
+Shore Type - Other
+Shore Type - Riprap
+Shore Type - Stable Bank
+Simpson Taxonomic Diversity Index
+Site Sampleability Status
+Site Verified By Topographic Map
+Sky Code (CA SWAMP) (choice list)
+Soft/Small Sediment Present (Y/N) (choice list)
+Soil Type
+Staphylococcus
+Staphylococcus aureus
+Stempellina
+Stempellinella
+Stream Bank Type, Left Bank
+Stream Bank Type, Right Bank
+Stream Unit Type (choice list)
+Submerged Vegetation Habitat Type (%)
+Subsample_A
+Subsample_B
+Substrate Type (choice list)
+Subsystem classification stream type (choice list)
+Sulfotep
+Symphitopsyche
+Sympotthastia
+Taphromysis
+Tebupirimphos oxon
+Tebuthiuron TP 104
+Tebuthiuron TP 106
+Tebuthiuron TP 109 (OH)
+Temperature, air
+Temperature difference
+Temperature, evaporation
+Temperature, sample
+Temperature, sediment
+Temperature, soil
+Temperature, tissue
+Temperature, wet bulb
+Tipula
+Tipulidae
+Topiramate
+Top of bank cross-sectional area
+Topramezone
+Topsoil Nitrogen Content
+Total Nitrogen/Total Phosphorus Ratio (TN:TP)
+Total Petroleum Hydrocarbons (C6-C32 TPH)
+Total sample area
+Total Sample Weight
+ToxapheneTMX1
+Toxicity, sediment, Ampelisca abdita, significant (choice list)
+Toxicity, sediment, Ampelisca abdita, survival**retired**useBiologicalSample,SubjectTaxon,IntentToxicity
+Toxicity, sediment, Leptocheirus plumulosus, survival**retired**useBiologicalSample,SubjectTaxon,IntentToxicity
+Toxicity, sediment, microtox, Vibrio fischeri, EC50**retired**useBiologicalSample,SubjectTaxon,IntentToxicity
+Transit Rate, sampler
+Treatment category
+Tryptophan
+Unconfined Compression
+Unconfined compressive strength
+Vahlkampfia
+Water Column Habitat Type (%)
+Water level in well during pumping, MSL
+Woody Canopy Type (choice list)
+Woody Ground Coverage Type (choice list)
+Woody Understory Type (choice list)

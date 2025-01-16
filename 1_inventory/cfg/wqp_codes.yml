@@ -21,3 +21,7 @@
     - "Secchi Reading Condition (choice list)"
     - "Secchi depth"
     - "Water transparency, Secchi disc"
+    
+  tmp:
+    - "Temperature"
+    - "Temperature, water"

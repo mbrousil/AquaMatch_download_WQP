@@ -28,6 +28,8 @@ anonymize_text <- function(data,
   phone_pat <- "(?:^|\\D)((?:\\+?1[-.]?)?\\s*\\(?[2-9]\\d{2}\\)?[-.]?\\s*\\d{3}[-.]?\\s*\\d{4})(?:$|\\D)"
   email_pat <- "[a-zA-Z0-9._%+-]+\\s*@\\s*[a-zA-Z0-9.-]+[\\.,][a-zA-Z]{2,}"
   
+  print(class(data))
+  
   # add a rowid column to arrange and properly join the data
   df <- data %>% 
     rowid_to_column()

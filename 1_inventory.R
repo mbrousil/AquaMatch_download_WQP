@@ -35,6 +35,11 @@ p1_targets_list <- list(
     command = p1_wqp_params["sdd"]
   ),
   
+  # Temperature
+  tar_target(
+    name = p1_wqp_params_tmp,
+    command = p1_wqp_params["tmp"]
+  ),
   
   # Export parameter yaml info ----------------------------------------------
   
@@ -81,6 +86,19 @@ p1_targets_list <- list(
     error = "stop"
   ),
   
+  # Temperature
+  tar_target(
+    name = p1_wqp_params_file_tmp,
+    command = export_single_file(target = p1_wqp_params_tmp,
+                                 drive_path = p0_tmp_output_path,
+                                 stable = p0_workflow_config$chl_create_stable,
+                                 google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp),
+    packages = c("tidyverse", "googledrive"),
+    cue = tar_cue("always"),
+    error = "stop"
+  ),
+  
   
   # Parameter-characteristic crosswalks -------------------------------------
   
@@ -105,6 +123,11 @@ p1_targets_list <- list(
     command = crosswalk_characteristics(p1_wqp_params_sdd)
   ),
   
+  # Temperature
+  tar_target(
+    name = p1_char_names_crosswalk_tmp,
+    command = crosswalk_characteristics(p1_wqp_params_tmp)
+  ),
   
   # Use {googledrive} to upload the crosswalk data, which will be needed in
   # the second pipeline. Then return a file containing the link as text to be 
@@ -149,6 +172,18 @@ p1_targets_list <- list(
     error = "stop"
   ),
   
+  # Temperature
+  tar_target(
+    name = p1_char_names_crosswalk_tmp_file,
+    command = export_single_file(target = p1_char_names_crosswalk_tmp,
+                                 drive_path = p0_tmp_output_path,
+                                 stable = p0_workflow_config$tmp_create_stable,
+                                 google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp),
+    packages = c("tidyverse", "googledrive"),
+    cue = tar_cue("always"),
+    error = "stop"
+  ),
   
   # Get a vector of WQP characteristic names to match parameter groups of interest
   
@@ -176,6 +211,13 @@ p1_targets_list <- list(
     packages = c("tidyverse", "xml2")
   ),
   
+  # Temperature
+  tar_target(
+    name = p1_char_names_tmp,
+    command = filter_characteristics(p1_char_names_crosswalk_tmp,
+                                     p0_param_groups_select),
+    packages = c("tidyverse", "xml2")
+  ),
   
   # Save output file(s) containing WQP characteristic names that are similar to
   # the parameter groups of interest. This allows users to examine the list to
@@ -201,6 +243,14 @@ p1_targets_list <- list(
     name = p1_similar_char_names_sdd_txt,
     command = find_similar_characteristics(p1_char_names_sdd,
                                            "sdd",
+                                           "1_inventory/out"),
+    packages = c("tidyverse", "xml2")
+  ),
+  
+  tar_file(
+    name = p1_similar_char_names_tmp_txt,
+    command = find_similar_characteristics(p1_char_names_tmp,
+                                           "tmp",
                                            "1_inventory/out"),
     packages = c("tidyverse", "xml2")
   ),
@@ -298,6 +348,18 @@ p1_targets_list <- list(
     packages = c("tidyverse", "retry", "sf", "dataRetrieval", "units")
   ),
   
+  # Temperature
+  tar_target(
+    name = p1_wqp_inventory_tmp,
+    command = {
+      inventory_wqp(grid = p1_global_grid_aoi,
+                    char_names = p1_char_names_tmp,
+                    wqp_args = p0_wqp_args)
+    },
+    pattern = cross(p1_global_grid_aoi, p1_char_names_tmp),
+    error = "continue",
+    packages = c("tidyverse", "retry", "sf", "dataRetrieval", "units")
+  ),
   
   # Subset the WQP inventory to only retain sites within the area of interest
   
@@ -317,6 +379,12 @@ p1_targets_list <- list(
   tar_target(
     name = p1_wqp_inventory_aoi_sdd,
     command = subset_inventory(p1_wqp_inventory_sdd, p1_AOI_sf)
+  ),
+  
+  # Temperature
+  tar_target(
+    name = p1_wqp_inventory_aoi_tmp,
+    command = subset_inventory(p1_wqp_inventory_tmp, p1_AOI_sf)
   ),
   
   
@@ -364,6 +432,19 @@ p1_targets_list <- list(
     error = "stop"
   ),
   
+  # Temperature
+  tar_target(
+    name = p1_wqp_inventory_aoi_tmp_file,
+    command = export_single_file(target = p1_wqp_inventory_aoi_tmp,
+                                 drive_path = p0_tmp_output_path,
+                                 stable = p0_workflow_config$tmp_create_stable,
+                                 google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp),
+    packages = c("tidyverse", "googledrive"),
+    cue = tar_cue("always"),
+    error = "stop"
+  ),
+  
   # Summarize the data that would come back from the WQP
   
   # Chlorophyll
@@ -385,6 +466,13 @@ p1_targets_list <- list(
     name = p1_wqp_inventory_sdd_summary_csv,
     command = summarize_wqp_inventory(p1_wqp_inventory_aoi_sdd,
                                       "1_inventory/log/sdd_summary_wqp_inventory.csv")
+  ),
+  
+  # Temperature
+  tar_file(
+    name = p1_wqp_inventory_tmp_summary_csv,
+    command = summarize_wqp_inventory(p1_wqp_inventory_aoi_tmp,
+                                      "1_inventory/log/tmp_summary_wqp_inventory.csv")
   )
   
 )

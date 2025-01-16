@@ -76,6 +76,29 @@ p2_targets_list <- list(
                 by = "CharacteristicName")
   ),
   
+  # Temperature
+  tar_target(
+    name = p2_site_counts_tmp,
+    command = p1_wqp_inventory_aoi_tmp %>%
+      # Hold onto location info, grid_id, characteristic, and provider data
+      # and use them for grouping
+      group_by(MonitoringLocationIdentifier, lon, lat, datum, grid_id,
+               CharacteristicName, ProviderName) %>%
+      # Count the number of rows per group
+      summarize(results_count = sum(resultCount, na.rm = TRUE),
+                .groups = "drop") %>%
+      # Add the overarching parameter names to the dataset
+      left_join(x = .,
+                y = p1_wqp_params_tmp %>%
+                  map2_df(.x,
+                          .y = names(.),
+                          .f = ~{
+                            tibble(CharacteristicName = .x,
+                                   parameter = .y)
+                          }),
+                by = "CharacteristicName")
+  ),
+  
   
   # Export site counts ------------------------------------------------------
   
@@ -118,6 +141,18 @@ p2_targets_list <- list(
     error = "stop"
   ),
   
+  # Temperature
+  tar_target(
+    name = p2_site_counts_tmp_file,
+    command = export_single_file(target = p2_site_counts_tmp,
+                                 drive_path = p0_tmp_output_path,
+                                 stable = p0_workflow_config$tmp_create_stable,
+                                 google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp),
+    cue = tar_cue("always"),
+    error = "stop"
+  ),
+  
   
   # Create download groups --------------------------------------------------
   
@@ -150,6 +185,18 @@ p2_targets_list <- list(
   tar_target(
     name = p2_site_counts_grouped_sdd,
     command = add_download_groups(p2_site_counts_sdd, 
+                                  max_sites = 100,
+                                  max_results = 250000) %>%
+      group_by(download_grp) %>%
+      tar_group(),
+    iteration = "group",
+    packages = c("tidyverse", "MESS")
+  ),
+  
+  # Temperature
+  tar_target(
+    name = p2_site_counts_grouped_tmp,
+    command = add_download_groups(p2_site_counts_tmp, 
                                   max_sites = 100,
                                   max_results = 250000) %>%
       group_by(download_grp) %>%
@@ -210,6 +257,29 @@ p2_targets_list <- list(
     packages = c("dataRetrieval", "tidyverse", "sf", "retry")
   ),
   
+  # Temperature
+  tar_target(
+    name = p2_wqp_data_aoi_tmp,
+    command = fetch_wqp_data(p2_site_counts_grouped_tmp,
+                             char_names = unique(p2_site_counts_grouped_tmp$CharacteristicName),
+                             wqp_args = p0_wqp_args),
+    pattern = map(p2_site_counts_grouped_tmp),
+    error = "continue",
+    format = "parquet",
+    packages = c("dataRetrieval", "tidyverse", "sf", "retry")
+  ),
+  
+  # Get years present in temperature dataset because we'll split by them later
+  tar_target(name = p2_wqp_data_aoi_tmp_years,
+             command = p2_wqp_data_aoi_tmp %>%
+               select(ActivityStartDate) %>%
+               mutate(start_year = year(ActivityStartDate)) %>%
+               pull(start_year) %>%
+               unique() %>%
+               sort()
+  ),
+  
+  
   # Remove Personal Information from WQP data text columns ------------------
   # There are a few instances where organizations have submitted columns containing
   # personal information (emails or phone numbers) in comment text fields. We
@@ -239,6 +309,48 @@ p2_targets_list <- list(
     packages = "tidyverse",
     error = "stop"
   ),
+  
+  # Temperature
+  # tar_target(
+  #   name = p2_wqp_data_aoi_tmp_anon,
+  #   command = anonymize_text(p2_wqp_data_aoi_tmp),
+  #   packages = "tidyverse",
+  #   format = "parquet",
+  #   error = "stop",
+  # ),
+  
+  # tar_target(p2_tmp_test_split,
+  #            p2_wqp_data_aoi_tmp %>%
+  #              mutate(year = year(ActivityStartDate)) %>%
+  #              split(f = .$year)
+  # ),
+  
+  # tar_target(name = p2_wqp_data_aoi_tmp_anon,
+  #            command = anonymize_text(p2_tmp_test_split),
+  #            pattern = map(p2_tmp_test_split),
+  #            # format = "parquet",
+  #            error = "stop",
+  #            iteration = "list",
+  #            packages = "tidyverse"),
+  
+  tar_target(
+    name = p2_tmp_test_list,
+    command = p2_wqp_data_aoi_tmp %>%
+      mutate(year = year(ActivityStartDate)) %>%
+      filter(year == p2_wqp_data_aoi_tmp_years) %>%
+      anonymize_text(),
+    pattern = map(p2_wqp_data_aoi_tmp_years),
+    iteration = "list",
+    error = "stop",
+    packages = "tidyverse"
+  ),
+
+  # Summary info for temperature meeting 2025-01-16
+  # tar_target(
+  #   name = p2_tmp_summary_info,
+  #   command = p2_wqp_data_aoi_tmp
+  # ),
+  
   
   # Export WQP data ---------------------------------------------------------
   
@@ -284,6 +396,20 @@ p2_targets_list <- list(
     error = "stop"
   ),
   
+  # Temperature
+  tar_target(
+    name = p2_wqp_data_aoi_tmp_file,
+    command = export_single_file(target = p2_wqp_data_aoi_tmp_anon,
+                                 drive_path = p0_tmp_output_path,
+                                 stable = p0_workflow_config$tmp_create_stable,
+                                 google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp,
+                                 feather = TRUE),
+    packages = c("tidyverse", "googledrive", "feather"),
+    cue = tar_cue("always"),
+    error = "stop"
+  ),
+  
   
   # Summarize WQP pull ------------------------------------------------------
   
@@ -313,6 +439,13 @@ p2_targets_list <- list(
                                      "2_download/log/sdd_summary_wqp_data.csv")
   ),
   
+  # Temperature
+  tar_file(
+    name = p2_wqp_data_tmp_summary_csv,
+    command = summarize_wqp_download(wqp_inventory_summary_csv = p1_wqp_inventory_tmp_summary_csv,
+                                     wqp_data = p2_wqp_data_aoi_tmp_anon,
+                                     "2_download/log/tmp_summary_wqp_data.csv")
+  ),
   
   # Get file IDs ------------------------------------------------------------
   
@@ -358,6 +491,19 @@ p2_targets_list <- list(
                            drive_folder = p0_sdd_output_path,
                            file_path = "2_download/out/sdd_drive_ids.csv",
                            depend = p2_wqp_data_aoi_sdd_file
+    ),
+    read = read_csv(file = !!.x),
+    cue = tar_cue("always"),
+    packages = c("tidyverse", "googledrive")
+  ),
+  
+  # Temperature
+  tar_file_read(
+    name = p2_tmp_drive_ids,
+    command = get_file_ids(google_email = p0_workflow_config$google_email,
+                           drive_folder = p0_tmp_output_path,
+                           file_path = "2_download/out/tmp_drive_ids.csv",
+                           depend = p2_wqp_data_aoi_tmp_file
     ),
     read = read_csv(file = !!.x),
     cue = tar_cue("always"),
