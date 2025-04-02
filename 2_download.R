@@ -76,6 +76,29 @@ p2_targets_list <- list(
                 by = "CharacteristicName")
   ),
   
+  # CDOM
+  tar_target(
+    name = p2_site_counts_cdom,
+    command = p1_wqp_inventory_aoi_cdom %>%
+      # Hold onto location info, grid_id, characteristic, and provider data
+      # and use them for grouping
+      group_by(MonitoringLocationIdentifier, lon, lat, datum, grid_id,
+               CharacteristicName, ProviderName) %>%
+      # Count the number of rows per group
+      summarize(results_count = sum(resultCount, na.rm = TRUE),
+                .groups = "drop") %>%
+      # Add the overarching parameter names to the dataset
+      left_join(x = .,
+                y = p1_wqp_params_cdom %>%
+                  map2_df(.x,
+                          .y = names(.),
+                          .f = ~{
+                            tibble(CharacteristicName = .x,
+                                   parameter = .y)
+                          }),
+                by = "CharacteristicName")
+  ),
+  
   
   # Export site counts ------------------------------------------------------
   
@@ -118,6 +141,18 @@ p2_targets_list <- list(
     error = "stop"
   ),
   
+  # CDOM
+  tar_target(
+    name = p2_site_counts_cdom_file,
+    command = export_single_file(target = p2_site_counts_cdom,
+                                 drive_path = p0_cdom_output_path,
+                                 stable = p0_workflow_config$cdom_create_stable,
+                                 google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp),
+    cue = tar_cue("always"),
+    error = "stop"
+  ),
+  
   
   # Create download groups --------------------------------------------------
   
@@ -150,6 +185,18 @@ p2_targets_list <- list(
   tar_target(
     name = p2_site_counts_grouped_sdd,
     command = add_download_groups(p2_site_counts_sdd, 
+                                  max_sites = 100,
+                                  max_results = 250000) %>%
+      group_by(download_grp) %>%
+      tar_group(),
+    iteration = "group",
+    packages = c("tidyverse", "MESS")
+  ),
+  
+  # CDOM
+  tar_target(
+    name = p2_site_counts_grouped_cdom,
+    command = add_download_groups(p2_site_counts_cdom, 
                                   max_sites = 100,
                                   max_results = 250000) %>%
       group_by(download_grp) %>%
@@ -210,6 +257,19 @@ p2_targets_list <- list(
     packages = c("dataRetrieval", "tidyverse", "sf", "retry")
   ),
   
+  # CDOM
+  tar_target(
+    name = p2_wqp_data_aoi_cdom,
+    command = fetch_wqp_data(p2_site_counts_grouped_cdom,
+                             char_names = unique(p2_site_counts_grouped_cdom$CharacteristicName),
+                             wqp_args = p0_wqp_args),
+    pattern = map(p2_site_counts_grouped_cdom),
+    error = "continue",
+    format = "feather",
+    packages = c("dataRetrieval", "tidyverse", "sf", "retry")
+  ),
+  
+  
   # Remove Personal Information from WQP data text columns ------------------
   # There are a few instances where organizations have submitted columns containing
   # personal information (emails or phone numbers) in comment text fields. We
@@ -239,6 +299,15 @@ p2_targets_list <- list(
     packages = "tidyverse",
     error = "stop"
   ),
+  
+  # CDOM
+  tar_target(
+    name = p2_wqp_data_aoi_cdom_anon,
+    command = anonymize_text(p2_wqp_data_aoi_cdom),
+    packages = "tidyverse",
+    error = "stop"
+  ),
+  
   
   # Export WQP data ---------------------------------------------------------
   
@@ -284,6 +353,20 @@ p2_targets_list <- list(
     error = "stop"
   ),
   
+  # CDOM
+  tar_target(
+    name = p2_wqp_data_aoi_cdom_file,
+    command = export_single_file(target = p2_wqp_data_aoi_cdom_anon,
+                                 drive_path = p0_cdom_output_path,
+                                 stable = p0_workflow_config$cdom_create_stable,
+                                 google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp,
+                                 feather = TRUE),
+    packages = c("tidyverse", "googledrive", "feather"),
+    cue = tar_cue("always"),
+    error = "stop"
+  ),
+  
   
   # Summarize WQP pull ------------------------------------------------------
   
@@ -311,6 +394,14 @@ p2_targets_list <- list(
     command = summarize_wqp_download(wqp_inventory_summary_csv = p1_wqp_inventory_sdd_summary_csv,
                                      wqp_data = p2_wqp_data_aoi_sdd_anon,
                                      "2_download/log/sdd_summary_wqp_data.csv")
+  ),
+  
+  # CDOM
+  tar_file(
+    name = p2_wqp_data_cdom_summary_csv,
+    command = summarize_wqp_download(wqp_inventory_summary_csv = p1_wqp_inventory_cdom_summary_csv,
+                                     wqp_data = p2_wqp_data_aoi_cdom_anon,
+                                     "2_download/log/cdom_summary_wqp_data.csv")
   ),
   
   
@@ -358,6 +449,19 @@ p2_targets_list <- list(
                            drive_folder = p0_sdd_output_path,
                            file_path = "2_download/out/sdd_drive_ids.csv",
                            depend = p2_wqp_data_aoi_sdd_file
+    ),
+    read = read_csv(file = !!.x),
+    cue = tar_cue("always"),
+    packages = c("tidyverse", "googledrive")
+  ),
+  
+  # CDOM
+  tar_file_read(
+    name = p2_cdom_drive_ids,
+    command = get_file_ids(google_email = p0_workflow_config$google_email,
+                           drive_folder = p0_cdom_output_path,
+                           file_path = "2_download/out/cdom_drive_ids.csv",
+                           depend = p2_wqp_data_aoi_cdom_file
     ),
     read = read_csv(file = !!.x),
     cue = tar_cue("always"),
