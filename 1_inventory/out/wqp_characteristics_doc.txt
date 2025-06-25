@@ -642,6 +642,7 @@ N-Methyl perfluorooctane sulfonamide
 N-Methylperfluorooctanesulfonamide (N-MeFOSA) (D3, 98%)
 N-Methylperfluorooctanesulfonamidoacetate
 N-methyl perfluorooctanesulfonamidoacetic acid
+N-Methylperfluorooctanesulfonamidoacetic acid (N-MeFOSAA) (N-methyl-D3, 98%)
 N-Methylperfluorooctane sulfonamido ethanol
 N,N-Dimethyloctadecylamine
 N,N-Dimethyloctylamine
@@ -697,6 +698,7 @@ Parachaetocladius
 Parachironomus monochromus
 Paracladopelma
 Parametriocnemus
+Paraquat dichloride
 Paratrichocladius
 Particulate microcystins/nodularin
 p-Dichlorobenzene
