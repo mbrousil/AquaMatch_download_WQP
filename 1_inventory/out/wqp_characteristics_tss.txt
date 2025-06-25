@@ -77,6 +77,7 @@ Chrysotile asbestos
 coefficient of conservatism
 Colored dissolved organic matter (CDOM)
 Compression Index
+Condition class, based on thresholds
 Condition class, chemical (acid neutralizing capacity)
 Condition class, chemical (Conductivity/Salinity)
 Condition class (Dissolved oxygen (DO))
@@ -84,6 +85,7 @@ Condition class, nutrient (Total Nitrogen)
 Condition class, nutrient (Total Phosphorus)
 Condition class, Riparian Disturbance
 Condition class, Riparian Vegetation
+Count, class
 Count, species 25-30 mm size class
 Count, species 30-35 mm size class
 Count, species 35-40 mm size class
@@ -102,6 +104,7 @@ Decamethylcyclopentasiloxane
 Detritus Jabs
 Dihydrotestosterone
 Dihydrotestosterone-1,2,4,5a-d4
+Disruptive Pressures
 Dissolved gases
 Dissolved gases - saturation
 Dissolved inorganic nitrogen/soluble reactive phosphorus ratio
@@ -127,6 +130,7 @@ Fecal Bacteroidetes
 Fish Cover - Live Trees or Roots (choice list)
 Fish Cover - Macrophytes (choice list)
 Fish Status After Sampling (choice list)
+Fish Tissue Collected (Y/N) (choice list)
 Fixed dissolved solids
 Floating Detergent/Soap - Severity (choice list)
 Flow, stream class (choice list)
@@ -196,6 +200,7 @@ Littoral Fish Microhabitat: Cover Class
 Location in cross section, distance from left bank looking downstream
 Macrohabitat Type - Channel Crossover
 Macrohabitat Type - Outside Bend
+Macroinvertebrate Habitat Substrate Type
 Macroinvertebrates
 Macrophytes covering streambed (emergent and submerged) (choice list)
 Macrophytes Extend Lakeward (choice list)
@@ -227,9 +232,11 @@ Palaemonetes
 Palaemonetes kadiakensis
 Partial Pressure CO2
 Partial Pressure O2
+Partial Pressure of Carbon Dioxide
 Partial pressure of dissolved gases
 Percent Solids
 Petroleum spirits
+Pheopigments of Chlorophyll
 phosphatase (corrected for carbon content)
 Point Source Pollution - Outfall Pipe Discharging (Y/N) (choice list)
 Point Source Pollution - Outfall Pipe Present (Y/N) (choice list)
