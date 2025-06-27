@@ -1,6 +1,18 @@
 # https://www.waterqualitydata.us/Codes/characteristicname?mimeType=xml
 # characteristicName:
 
+  cdom:
+    - "Absorbance at 280 nanometers"
+    - "Absorbance at 370 nanometers"
+    - "Absorption coefficient at 440 nm"
+    - "Beam Attenuation (Seabird)"
+    - "Colored dissolved organic matter (CDOM)"
+    - "Fluorescence index"
+    - "Specific UV Absorbance at 254 nm"
+    - "Specific UV Absorbance at 254 nm, corrected for Fe"
+    - "UV 254"
+    - "UV Absorption, relative conc. of organic constituents"
+
   chlorophyll:
     - "Chlorophyll a"
     - "Chlorophyll a (probe relative fluorescence)"
@@ -9,10 +21,7 @@
     - "Chlorophyll a, free of pheophytin"
     - "Chlorophyll a, uncorrected for pheophytin"
     - "Chlorophyll a - Phytoplankton (suspended)"
-    
-  cdom:
-    - "Colored dissolved organic matter (CDOM)"
-    
+
   doc:
     - "Organic carbon"
     - "Total carbon"

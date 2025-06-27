@@ -47,6 +47,12 @@ p1_targets_list <- list(
     command = p1_wqp_params["sdd"]
   ),
   
+  # Colored dissolved organic matter
+  tar_target(
+    name = p1_wqp_params_cdom,
+    command = p1_wqp_params["cdom"]
+  ),
+  
   
   # Export parameter yaml info ----------------------------------------------
   
@@ -119,6 +125,19 @@ p1_targets_list <- list(
     error = "stop"
   ),
   
+  # CDOM
+  tar_target(
+    name = p1_wqp_params_file_cdom,
+    command = export_single_file(target = p1_wqp_params_cdom,
+                                 drive_path = p0_cdom_output_path,
+                                 stable = p0_workflow_config$chl_create_stable,
+                                 google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp),
+    packages = c("tidyverse", "googledrive"),
+    cue = tar_cue("always"),
+    error = "stop"
+  ),
+  
   
   # Parameter-characteristic crosswalks -------------------------------------
   
@@ -153,6 +172,12 @@ p1_targets_list <- list(
   tar_target(
     name = p1_char_names_crosswalk_sdd,
     command = crosswalk_characteristics(p1_wqp_params_sdd)
+  ),
+  
+  # CDOM
+  tar_target(
+    name = p1_char_names_crosswalk_cdom,
+    command = crosswalk_characteristics(p1_wqp_params_cdom)
   ),
   
   
@@ -230,6 +255,19 @@ p1_targets_list <- list(
     error = "stop"
   ),
   
+  # CDOM
+  tar_target(
+    name = p1_char_names_crosswalk_cdom_file,
+    command = export_single_file(target = p1_char_names_crosswalk_cdom,
+                                 drive_path = p0_cdom_output_path,
+                                 stable = p0_workflow_config$cdom_create_stable,
+                                 google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp),
+    packages = c("tidyverse", "googledrive"),
+    cue = tar_cue("always"),
+    error = "stop"
+  ),
+  
   
   # Get a vector of WQP characteristic names to match parameter groups of interest
   
@@ -269,6 +307,14 @@ p1_targets_list <- list(
   tar_target(
     name = p1_char_names_sdd,
     command = filter_characteristics(p1_char_names_crosswalk_sdd,
+                                     p0_param_groups_select),
+    packages = c("tidyverse", "xml2")
+  ),
+  
+  # CDOM
+  tar_target(
+    name = p1_char_names_cdom,
+    command = filter_characteristics(p1_char_names_crosswalk_cdom,
                                      p0_param_groups_select),
     packages = c("tidyverse", "xml2")
   ),
@@ -314,6 +360,14 @@ p1_targets_list <- list(
     name = p1_similar_char_names_sdd_txt,
     command = find_similar_characteristics(p1_char_names_sdd,
                                            "sdd",
+                                           "1_inventory/out"),
+    packages = c("tidyverse", "xml2")
+  ),
+  
+  tar_file(
+    name = p1_similar_char_names_cdom_txt,
+    command = find_similar_characteristics(p1_char_names_cdom,
+                                           "cdom",
                                            "1_inventory/out"),
     packages = c("tidyverse", "xml2")
   ),
@@ -438,6 +492,19 @@ p1_targets_list <- list(
     packages = c("tidyverse", "retry", "sf", "dataRetrieval", "units")
   ),
   
+  # CDOM
+  tar_target(
+    name = p1_wqp_inventory_cdom,
+    command = {
+      inventory_wqp(grid = p1_global_grid_aoi,
+                    char_names = p1_char_names_cdom,
+                    wqp_args = p0_wqp_args)
+    },
+    pattern = cross(p1_global_grid_aoi, p1_char_names_cdom),
+    error = "continue",
+    packages = c("tidyverse", "retry", "sf", "dataRetrieval", "units")
+  ),
+  
   
   # Subset the WQP inventory to only retain sites within the area of interest
   
@@ -469,6 +536,12 @@ p1_targets_list <- list(
   tar_target(
     name = p1_wqp_inventory_aoi_sdd,
     command = subset_inventory(p1_wqp_inventory_sdd, p1_AOI_sf)
+  ),
+  
+  # CDOM
+  tar_target(
+    name = p1_wqp_inventory_aoi_cdom,
+    command = subset_inventory(p1_wqp_inventory_cdom, p1_AOI_sf)
   ),
   
   
@@ -542,6 +615,19 @@ p1_targets_list <- list(
     error = "stop"
   ),
   
+  # CDOM
+  tar_target(
+    name = p1_wqp_inventory_aoi_cdom_file,
+    command = export_single_file(target = p1_wqp_inventory_aoi_cdom,
+                                 drive_path = p0_cdom_output_path,
+                                 stable = p0_workflow_config$cdom_create_stable,
+                                 google_email = p0_workflow_config$google_email,
+                                 date_stamp = p0_date_stamp),
+    packages = c("tidyverse", "googledrive"),
+    cue = tar_cue("always"),
+    error = "stop"
+  ),
+  
   # Summarize the data that would come back from the WQP
   
   # Chlorophyll
@@ -577,6 +663,12 @@ p1_targets_list <- list(
     name = p1_wqp_inventory_sdd_summary_csv,
     command = summarize_wqp_inventory(p1_wqp_inventory_aoi_sdd,
                                       "1_inventory/log/sdd_summary_wqp_inventory.csv")
-  )
+  ),
   
+  # CDOM
+  tar_file(
+    name = p1_wqp_inventory_cdom_summary_csv,
+    command = summarize_wqp_inventory(p1_wqp_inventory_aoi_cdom,
+                                      "1_inventory/log/cdom_summary_wqp_inventory.csv")
+  )
 )
