@@ -24,13 +24,26 @@
 
   cdom:
     - "Absorbance at 280 nanometers"
+    - "Absorbance at 280 nm"
     - "Absorbance at 370 nanometers"
-    - "Absorption coefficient at 440 nm"
-    - "Beam Attenuation (Seabird)"
+    - "Absorbance at 412 nm"
+    - "Absorbance at 440 nm"
+    - "Absorption spectral slope (Sag)"
     - "Colored dissolved organic matter (CDOM)"
+    - "Emission intensity ratio"
     - "Fluorescence index"
+    - "Fluorescence, excitation 260 emission 450"
+    - "Fluorescence, excitation 275 emission 304"
+    - "Fluorescence, excitation 275 emission 340"
+    - "Fluorescence, excitation 280 emission 370"
+    - "Fluorescence, excitation 300 emission 390"
+    - "Fluorescence, excitation 340 emission 440"
+    - "Fluorescence, excitation 370 emission 460"
+    - "Fluorescence, excitation 390 emission 510"
+    - "Fluorescence, excitation 420 emission 460"
     - "Specific UV Absorbance at 254 nm"
     - "Specific UV Absorbance at 254 nm, corrected for Fe"
     - "UV 254"
     - "UV Absorption, relative conc. of organic constituents"
+    
     
