@@ -28,6 +28,7 @@
     - "Absorbance at 370 nanometers"
     - "Absorbance at 412 nm"
     - "Absorbance at 440 nm"
+    - "Absorption coefficient at 440 nm"
     - "Absorption spectral slope (Sag)"
     - "Colored dissolved organic matter (CDOM)"
     - "Emission intensity ratio"
