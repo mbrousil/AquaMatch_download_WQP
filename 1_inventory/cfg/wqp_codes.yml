@@ -1,26 +1,5 @@
-# https://www.waterqualitydata.us/Codes/Characteristicname?mimeType=xml
+# https://www.waterqualitydata.us/Codes/characteristicname?mimeType=xml
 # characteristicName:
-
-  chlorophyll:
-    - "Chlorophyll a"
-    - "Chlorophyll a (probe relative fluorescence)"
-    - "Chlorophyll a, corrected for pheophytin"
-    - "Chlorophyll a (probe)"
-    - "Chlorophyll a, free of pheophytin"
-    - "Chlorophyll a, uncorrected for pheophytin"
-    - "Chlorophyll a - Phytoplankton (suspended)"
-    
-  doc:
-    - "Organic carbon"
-    - "Total carbon"
-    - "Non-purgeable Organic Carbon (NPOC)"
-    
-  sdd:
-    - "Depth, Secchi disk depth"
-    - "Depth, Secchi disk depth (choice list)"
-    - "Secchi Reading Condition (choice list)"
-    - "Secchi depth"
-    - "Water transparency, Secchi disc"
 
   cdom:
     - "Absorbance at 280 nanometers"
@@ -46,5 +25,32 @@
     - "Specific UV Absorbance at 254 nm, corrected for Fe"
     - "UV 254"
     - "UV Absorption, relative conc. of organic constituents"
+
+  chlorophyll:
+    - "Chlorophyll a"
+    - "Chlorophyll a (probe relative fluorescence)"
+    - "Chlorophyll a, corrected for pheophytin"
+    - "Chlorophyll a (probe)"
+    - "Chlorophyll a, free of pheophytin"
+    - "Chlorophyll a, uncorrected for pheophytin"
+    - "Chlorophyll a - Phytoplankton (suspended)"
+
+  doc:
+    - "Organic carbon"
+    - "Total carbon"
+    - "Non-purgeable Organic Carbon (NPOC)"
     
-    
+  sdd:
+    - "Depth, Secchi disk depth"
+    - "Depth, Secchi disk depth (choice list)"
+    - "Secchi Reading Condition (choice list)"
+    - "Secchi depth"
+    - "Water transparency, Secchi disc"
+
+  tss:
+    - "Total suspended solids"
+    - "Total Particulate Matter"
+    - "Suspended Sediment Concentration (SSC)"
+
+  ssc:
+    - "Suspended Sediment Concentration (SSC)"

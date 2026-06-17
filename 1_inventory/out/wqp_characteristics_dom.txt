@@ -1,0 +1,805 @@
+The following characteristics are already included in the WQP codes cfg file: 
+Colored dissolved organic matter (CDOM)
+
+
+The following characteristics might be relevant to the selected parameter and are not included in the WQP codes cfg file: 
+10:2 Fluorotelomer sulfonic acid
+1,12-Dodecanediamine
+1,2,3,4,5-Pentabromobenzene
+1,2,3,4,6,7,8-Heptabromodibenzofuran
+1,2,3,4,7,8-Hexabromodibenzo-p-dioxin
+1,2-Benzenedicarboxamide, N2-[1,1-dimethyl-2-(methylsulfonyl)ethyl]-3-iodo-N1-[2-methyl-4-[1,2,2,2-tetrafluoro-1-(trifluoromethyl)ethyl]phenyl]-
+1,2-bis(2,4,6-tribromophenoxy)ethane
+1,2-Dibromo-3-chloropropane
+1,2-Dibromoethylene
+1,2-Dimethyl-3-ethylbenzene
+1,2-Dimethyl-4-ethylbenzene
+1,2-Dimethylnaphthalene
+13C1-D3-Erythromycin-H2O
+13C2-PFDoA
+1,3-Dibromopropane
+1,3-Dimethyl-5-ethylbenzene
+1,3-Dimethyladamantane
+1,3-Dimethylnaphthalene
+1,4-Dibromobenzene
+1,4-Dimethoxyanthracene
+1,4-Dimethylnaphthalene
+1,5-Dimethylnaphthalene
+1,6-Dimethylindan
+1,6-Dimethylnaphthalene
+1,7-Dimethylfluorene
+1,7-Dimethylphenanthrene
+1,7-Dimethylxanthine
+1,8-Dimethylnaphthalene
+1,8-Dimethylphenanthrene
+1-(Aminomethyl)cyclohexaneacetic acid
+1-Bromo-2-chloroethane
+1-Bromo-3-chloropropane-d6
+1-Cyclopentyl-4-n-octyldodecane
+1H-Indol-4-ol
+1H-Indol-5-ol
+1H-Pyrazole-3-carboxamide, 5-amino-1-[2,6-dichloro-4-(trifluoromethyl)phenyl]-4-[(trifluoromethyl)sulfinyl]-
+2,2',3,3',4,4',5,5',6-NOBDE***retired***use Nonabromophenoxybenzene
+2,2`,3,3`,4,5,5`,6,6`-Nonabromodiphenyl ether
+2,2',3,3',4,5,5',6-Octabromodiphenyl ether
+2,2`,3,3`,4,5`,6,6`-Octabromodiphenyl ether
+2,2',3,3',4',5,6-Heptabromodiphenyl ether
+2,2`,3,4,4`,5,5`,6-Octabromodiphenyl ether
+2,2`,3,4,4`,5,5`-Heptabromodiphenyl ether
+2,2`,3,4,4`,5,6,6`-Octabromodiphenyl ether
+2,2',3,4,4',5,6-Heptabromodiphenyl ether
+2,2',3,4,4',5',6-Heptabromodiphenyl ether
+2,2',3,4,4',5'-Hexabromodiphenyl ether
+2,2`,3,4,4`,6`-Hexabromodiphenyl ether
+2,2`,3,4,4`,6-Hexabromodiphenyl ether
+2,2',3,4,4',6'-Hexabromodiphenyl ether
+2,2',3,4',5,5',6-Heptabromodiphenyl ether
+2,2',3,5'-Tetrabromodiphenyl ether
+2,2,3-Trifluoro-3-[1,1,2,2,3,3-hexafluoro-3-(trifluoromethoxy)propoxy]propanoate
+2,2',4,4',5,5'-Hexabromobiphenyl
+2,2',4,4',5-Pentabromodiphenyl ether***retired***use BDE-099
+2,2',4,4',6-pentabrominated diphenyl ether
+2,2',4,4'-tetrabrominated diphenyl ether
+2,2',4,4'-Tetrabromodiphenyl ether
+2,2',4,6'-Tetrabromodiphenyl ether
+2,2-Bis(chloromethyl)-1,3-propanediyl bis[bis(2-chloroethyl)phosphate]
+2,3,3`,4,4`,5,5`,6-Octabromodiphenyl ether
+2,3',4,4'-tetrabrominated diphenyl ether
+2,3,5,6-Tetrabromo-p-xylene
+2,3-Dimethylnaphthalene
+2,3-Dimethylphenanthrene
+2,3-Dimethylpyridine
+2,4,4'-Tribromodiphenyl ether
+2,4,6-Tribromophenol
+2,4-Dimethyldibenzothiophene
+2,4-Dimethylphenol
+2,4-Dimethylpyridine
+2,4-D methyl ester
+2,5-Dimethyl phenanthrene
+2,5-dimethyl-Undecane
+2,6,10-trimethyldodecane
+2,6,11-trimethyl-Dodecane
+2,6-Dimethyl-4-heptanone
+2,6-Dimethylnaphthalene
+2,6-Dimethylnaphthalene-D12
+2,6-dimethyloct-7-en-2-ol
+2,6-Dimethylphenanthrene
+2,6-Dimethylpyridine
+2,7,8-trimethyl-2-(4,8,12-trimethyltridecyl)chroma
+2,7-Dimethylnaphthalene
+2,7-Dimethylphenanthrene
+2,8-Dimethyldibenzothiophene
+2-Bromo-1-chloropropane
+2-(Dimethylamino)-N-hydroxy-2-oxoethanimidothioic acid methyl ester
+2-ethylhexyl-2,3,4,5-tetrabromobenzoate
+2-ethylidene-1,5-dimethyl-3,3-diphenylpyrrolidine
+2-(Methylsulfonyl)-4-(trifluoromethyl)benzoic acid (diketonitrile-isoxaflutole benzoic acid analog)
+2-Naphthacenecarboxamide, 4-(dimethylamino)-1,4,4a,5,12,12a-hexahydro-3,10,11,12a-tetrahydroxy-6-methyl-1,12-dioxo-, hydrochloride (1:1), (4R,4aS,12aS)-
+2-(N-Ethyl-perfluorooctanesulfonamido)acetate
+2-(N-methylperfluoro-1-octanesulfonamido)-ethanol
+2-(N-Methylperfluorooctanesulfonamido)acetate
+2-Phenyldodecane
+3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,12,12,12-Heneicosafluoro-1-dodecanesulfonic acid, sodium salt (1:1)
+3,3'-Dibromodiphenyl ether
+3,3'-Dimethoxybenzidine
+3,3'-Dimethylbenzidine
+3:3 Fluorotelomer carboxylate, ion(1-)
+3,4-Dimethylbenzoic acid
+3,4-Dimethylphenol
+3,5-Dimethylphenol
+3,6-Dimethylphenanthrene
+(3-Bromopropyl)benzene
+3-Methylindole
+3-(Trifluoromethyl)aniline
+3-(Trifluoromethyl)phenylurea
+4,4'-Dibromo-2,2',3,3',5,5',6,6'-octafluorobiphenyl
+4,4'-Dibromodiphenyl ether***retired***use p,p'-Dibromodiphenyl ether
+4,5-dimethyl-Phenanthrene
+4,6-Dimethyldodecane
+4-Bromo-3,5-dimethylphenyl N-Methylcarbamate
+4-Chloro-3,5-dimethylphenol
+4-Dimethylaminoazobenzene
+4-(Hydroxymethyl) pendimethalin
+4-Phenyldodecane
+5,6-Dimethylbenzotriazole
+5,9-Dimethylchrysene
+5-Phenyldodecane
+6:2 Fluorotelomersulfonate
+6-Phenyldodecane
+7,12-Dimethylbenz[a]anthracene
+9,10-Dimethylanthracene
+9-n-Dodecyl[tetradecahydroanthracene]
+Absorbance at 280 nanometers
+Absorbance at 370 nanometers
+Acetaldol
+Acetamide, 2-(diethylamino)-N-(2,6-dimethylphenyl)-
+Actinomycetes
+Actinomycetes-specific geosmin geoA gene
+Actinomycetes-specific methyl-isoborneol (MIB) mic gene
+Activities - Algal bloom (Y/N) (choice list)
+Activities - Commercial (choice list)
+Activities - Dams (choice list)
+Activities - Dumping (choice list)
+Activities - Odors (choice list)
+Aerobic endospores
+Afidopyropen
+Algal Bloom Severity (choice list)
+Alluaudomyia
+.alpha.,.alpha.-Dimethylphenethylamine
+.alpha.-Endosulfan
+Aluminum, Organic + Inorganic Monomeric (reactive aluminum)
+Aluminum, Organic Monomeric (reactive aluminum)
+Aminomethanesulfonic acid
+Aminomethylphosphonic acid
+Aminomethylphosphonic Acid
+Anhydroerthromycin
+Aromatics fraction
+Arsenic, dimethyl
+Arsenic, monomethyl
+Azithromycin
+Azithromycin-d3
+Barometric pressure
+Bedload sediment flux
+Bedload sediment particle size
+Bed sediment particle size
+Benomyl
+Benzamide, 3-(benzoylmethylamino)-N-[2-bromo-4-[1,2,2,2-tetrafluoro-1-(trifluoromethyl)ethyl]-6-(trifluoromethyl)phenyl]-2-fluoro
+Benzene, 1,1'-[1,2-ethanediylbis(oxy)]bis[2,4,6-tribromo-
+Benzene, 1,1-oxybis[3,4-dibromo-
+Benzene, 1,2,3,4,5-pentabromo-6-(2,3,4,5-tetrabromophenoxy)-***retired***use Nonabromophenoxybenzene
+Benzene, 1,2,3,4,5-pentabromo-6-(2,3,4,6-tetrabromophenoxy)-***retired***use BDE-207
+Benzene, 1,2,3,4,5-pentabromo-6-(3,4-dibromophenoxy)-
+Benzene, 1,2,3-tribromo-4-(2,3,4-tribromophenoxy)-
+Benzene, 1,2,4-tribromo-5-(2,4-dibromophenoxy)-***retired***use BDE-099
+Benzene, 1,2,4-tribromo-5-(3,4-dibromophenoxy)-
+Benzene, 1,2,4-tribromo-5-(3,5-dibromophenoxy)-
+Benzene, 1,3-dibromo-2-(4-bromophenoxy)-
+Benzene, 2,4-dibromo-1-phenoxy-
+Benzene, pentabromophenoxy-
+Benzenepropanenitrile, .alpha.-(cyclopropylcarbonyl)- 2-(methylsulfonyl)-.beta.- oxo-4-(trifluoromethyl)-
+Benzyldimethyldecylammonium chloride
+Benzyldimethyldodecyl ammonium
+Benzyldimethyldodecylammonium chloride
+Benzyldimethylhexadecyl ammonium
+Benzyldimethylhexadecylammonium chloride
+Benzyldimethyloctylammonium chloride
+Benzyldimethylstearylammonium chloride
+Benzyldimethyltetradecyl ammonium
+Benzyldimethyltetradecylammonium chloride
+.beta.-Endosulfan
+Biochemical oxygen demand, non-standard conditions
+Biochemical oxygen demand, standard conditions
+Biomass
+Biomass, benthic
+Biomass/chlorophyll ratio
+Biomass, drift macroinvertebrates
+Biomass, mysid
+Biomass, periphyton
+Biomass, phytoplankton
+Biomass, plankton
+Biomass, species 25-30 mm size class
+Biomass, species 30-35 mm size class
+Biomass, species 35-40 mm size class
+Biomass, species 40-45 mm size class
+Biomass, species 45-50 mm size class
+Biomass, zooplankton
+Bis(2-ethylhexyl) 3,4,5,6-tetrabromophthalate
+Bis(2-ethylhexyl) 3,4,5,6-tetrabromophthalate (BETBP)
+bis(2-ethylhexyl)tetrabromophthalate
+Bis(chloromethyl) ether
+BOD, Sediment Load
+Boscalid metabolite M510F01
+Bottom substrate, description
+Bovine-associated M3 bacteria
+Bovine polyomavirus
+Brillouin Taxonomic Diversity Index
+Bromacil
+Bromadiolone
+Bromate
+Brombuterol
+Bromide
+Bromine
+Bromoacetic acid
+Bromoacetonitrile
+Bromobenzene
+Bromochloroacetic acid
+Bromochloroacetonitrile
+Bromochloroiodomethane
+Bromochloromethane
+Bromochloronitromethane
+Bromoconazole
+Bromodichloroacetonitrile
+Bromodichloronitromethane
+Bromodichloropropane
+Bromodiiodomethane
+Bromoethane
+Bromoform-d
+Bromomethoxynaphthalene
+Bromonitromethane
+Bromoxynil
+Bromoxynil-13C6
+Bromoxynil octanoate
+C10-C12 Aromatics
+C11-C22 Aromatics
+C11-C22 Aromatics, Unadjusted
+C12-C13 Aromatics
+C12-C16 Aromatics
+C-13 Labeled Isomer/Congener 156+157 mixture
+C16-C21 Aromatics
+C21-C34 Aromatics
+C8-C10 Aromatics
+C9-C10 Aromatic Hydrocarbons
+C9-C10 Aromatics
+Cadmium
+Canopy Measure Center Down
+Carbadox
+Carbonaceous biochemical oxygen demand, non-standard conditions
+Carbonaceous biochemical oxygen demand, standard conditions
+Carcinogenic polycyclic aromatic hydrocarbons
+Carisoprodol
+Chemical oxygen demand
+Chemical oxygen demand, (high level)
+Chemical oxygen demand, (low level)
+Chironomidae
+Chironomus
+Chlordimeform
+Chlorine dose
+Chlorodibromomethane
+Chlorodiiodomethane
+Chloromethane
+Chloromethyl methyl ether
+Chlorthal-dimethyl
+Chlorthal-Monomethyl
+Chromium
+Chromium-51
+Chromium-52
+Chromium-53
+Chromium(III)
+Chromium(VI)
+Chydoridae
+cis-1,2-Dimethylcyclopropane
+Cladopelma
+Cladophora, visual observation
+Cladotanytarsus
+Clarithromycin
+Clethodim
+Clethodim sulfone
+Clethodim sulfoxide
+Clindamycin
+Clomazone
+Clopidogrel
+Clopidogrel carboxylic acid
+Composite flow volume, mean
+Composite flow volume, total
+Compression Index
+Condition class (Dissolved oxygen (DO))
+Crocidolite Asbestos
+Cryptochironomus
+Cryptochironomus blarina
+Cryptochironomus fulvus
+Cyclododecane, 1,2,5,6,9,10-hexabromo-
+Cyclopropanecarboxylic acid, 3-(2,2-dichloroethenyl)-2,2-dimethyl-, methyl ester, (1R,3R)-rel-
+D3-1,7-Dimethylxanthine
+D3-Carbadox
+D3-Clarithromycin
+D3-Lincomycin
+D6-Sulfadimethoxine
+D7-Roxithromycin
+Dacthal Acid Metabolites
+Daunomycin
+DDD, o,o'-, o,p'-, and p,p'- isomers
+DDD, o,p'- and p,p'- isomers
+DDE, o,o'-, o,p'-, and p,p'- isomers
+DDE, o,p'- and p,p'- isomers
+DDMU
+DDT/DDD/DDE, sum of o,p' isomers
+DDT/DDD/DDE, sum of p,p' isomers
+DDT/DDD/DDE, sum of p,p' & o,p' isomers
+DDT, o,p'- and p,p'- isomers
+Dead centric diatoms
+Dead pennate diatoms
+Decabromodiphenylethane
+Decabromodiphenyl ether
+Decabromodiphenyl oxide
+Dechlorodimethenamid
+Dechlorometolachlor
+Deiodo flubendiamide
+Deisopropyl prometryn
+delta chromium-53/chromium-52
+delta Chromium-53/chromium-52 analytical uncertainty
+Deltamethrin mixt. with Tralomethrin
+Demeclocycline
+Demethylfluometuron
+Demethyl hexazinone B
+Demeton
+Demeton-methyl
+Demeton-O
+Demeton-S
+Demicryptochironomus
+Depth, below bottom surface
+Depth, bottom
+Depth, from below top of casing to water level
+Depth, from bottom of the sediment core
+Depth, from ground surface to well water level
+Depth from surface to lower boundary of soil layer
+Depth, Photic zone includes bottom (Y/N) (choice list)
+Depth, Secchi disk visible at bottom (Y/N) (choice list)
+Depth to bottom of sample interval
+Depth to bottom of water-bearing zone
+Depth, total, from below top of casing
+Depth to water from rim of well casing
+Dextromethorphan
+Diaphanosoma
+Diaptomus
+Diatom conversion factor
+Diatoms
+Dibromoacetic acid
+Dibromoacetonitrile
+Dibromochloroacetonitrile
+Dibromochloroethane
+Dibromochloronitromethane
+Dibromochloropropane
+Dibromodichloromethane
+Dibromofluoromethane
+Dibromoiodomethane
+Dibromomethane
+Dibromonitromethane
+Dichlorobromomethane
+Dichlorodifluoromethane***retired***use CFC-12
+Dichloroiodomethane
+Dichloronitromethane
+Didemethyl hexazinone F
+Didymo Cover
+Dihydromorphine
+Dimerin
+Dimethachlor
+Dimethachlor ESA
+Dimethachlor sulfonic acid
+Dimethenamid
+Dimethenamid ESA
+Dimethenamid OA
+Dimethenamid oxanilic acid
+Dimethenamid sulfinylacetic acid
+Dimethoate
+Dimethomorph
+Dimethoxymethane
+Dimethylnaphthalene
+Dimethylphenanthrene
+Dimethyl phthalate
+Dimethylphthalate-d6
+Dimethyl selenoxide
+Dimethyl sulfide
+Dimethyl terephthalate
+Dinitrobenzene (All Isomers)
+Dipropyl isocinchomeronate
+Diquat dibromide
+Dissolved microcystins plus nodularins
+Dissolved oxygen (DO)
+Dissolved Oxygen***retired***use Dissolved Oxygen (DO)
+Distance From Left Bank
+Distance from Shore to Riparian
+Distance from/to
+Distance to Thalweg from Stream Left
+Docosane
+Dodecamethylcyclohexasiloxane
+Dodecane
+Dodecylbenzene
+DogBact DNA marker
+Dolichopodidae
+Dolichospermum-specific microcystin (MC) mcyE gene
+Dolophilodes
+Dominant Habitat Type
+Dominant Land Use (choice list)
+Dominant Wolman Pebble Size/Range
+Domoic acid
+Donepezil
+Dotriacontane
+Doxepin
+Doxorubicin
+Doxycycline
+Drawdown level
+Ecclisomyia
+(E)-Dimethomorph
+Eggs in Ovaries or Attached to Abdomen
+Endochironomus
+Endosulfan
+Endosulfan and Metabolites
+Endosulfan ether
+Endosulfan sulfate
+Endothall
+Erythromycin
+Erythromycin A
+Erythromycin-anhydro
+Erythromycin-H20
+Ethanamine, 2-(diphenylmethoxy)-N,N-dimethyl-
+Ethanimidothioic acid, N-hydroxy-, methyl ester
+Ethanone, 1-[6-(1,1-dimethylethyl)-2,3-dihydro-1,1-dimethyl-1H-inden-4-yl]-
+Ethylene dibromide
+Extractable organic matter (EOM)
+Famoxadone
+Fenamidone
+Field or Lab Anomaly
+Fish Anomalies - Deformities
+Fish Anomalies - Erosions
+Fish Anomalies - Lesions
+Fish Anomalies - Multiples
+Fish Anomalies - Tumors
+Flatheaded mayfly COI gene
+Floating solids, unspecified mix (choice list)
+Fluometuron
+Fluorotelomer sulfonate 4:2
+Fluorotelomer sulfonate 8:2
+Fluridone
+Fomesafen
+Forcipomyia
+Gadolinium
+Glossosoma
+Glossosomatidae
+Glycine-7-amido-4-methylcoumarin
+Goeldichironomus
+Gonomyia
+Harmful Algal Blooms Present (Y/N) (choice list)
+Hemerodromia
+Hexabromobenzene
+Hexabromocyclododecane
+Hexabromocyclododecane, alpha-
+Hexabromocyclododecane, beta-
+Hexabromocyclododecane, gamma-
+Hexabromodiphenyl ether
+Hexafluoropropylene oxide dimer acid
+Hexafluoropropylene oxide-dimer acid
+Hexatoma
+Hexavalent chromium compounds
+Hirudo
+Homoanatoxin
+Horizontal Distance from waterline to high water mark
+Human Influence: Commercial (choice list)
+Human Influence: Docks/Boats (choice list)
+Human Influence - Wall/Dike/Revetment/Riprap/Dam (choice list)
+Human polyomavirus
+Hydrocarbons, Chlorinated (Unspecified Mix)
+Hydrocodone
+Hydrocodone-d3
+Hydrocodone-D6
+Hydromorphone
+Hydromorphone-D3
+Hydromorphone hydrochloride
+Hydroxy didemethyl fluometuron
+Hydroxydimethenamid
+Hydroxyfluometuron
+Hydroxy monodemethyl fluometuron
+Immediate oxygen demand
+Indole
+Indoxacarb
+Inhibited biochemical oxygen demand
+Inorganic monomeric aluminum
+Inundation Evidence: Sediment deposits (choice list)
+Iopamidol
+Iopamidol-d8
+Iopromide
+Iopromide-d3
+Isomer/Congener 126+178 mixture
+Isomer/Congener 136+163 mixture
+Isomer/Congener 157+201 mixture
+Isoxaflutole acid metabolite RPA 203328
+Labeled Decabromodiphenyl Ether
+L-Alanine-7-amido-4-methylcoumarin
+L-Arginine-7-amido-4-methylcoumarin
+Lepidoptera
+Lepidostoma
+Leptodora
+Lime (chemical), dolomitic
+Lime Demand
+Limnochironomus
+Lincomycin
+Littoral Substrate - Bottom Dominant
+Littoral Substrate - Bottom, Method of Determining
+Littoral Substrate - Bottom Secondary
+Littoral Substrate - Shore Dominant
+Live centric diatoms
+Live pennate diatoms
+L-Leucine 7-amido-4-methylcoumarin
+Location in cross section, distance from left bank looking downstream
+Lomefloxacin
+Margalef Taxonomic Diversity Index
+Maximum total trihalomethane potential
+m-Cresol compd. with p-cresol (2:1)
+MDMA
+Methadone
+Methadone-D3
+Methadone-d9
+Methamidophos
+Methomyl
+Methyl bromide
+Methyl trans-3-(2,2-dichlorovinyl)-2,2-dimethylcyclopropane-1-carboxylate
+Micrometer Conversion Factor, crustaceans
+Micrometer Conversion Factor, rotifers
+Micrometer units
+Momfluorothrin
+Monomeric aluminum
+Monomethylarsonate
+Monomethylarsonic acid***retired***use Methylarsonic acid
+Motor oil range organic compounds
+Nadolol
+Nematomorpha
+Neodymium
+Neodymium-147
+N-Ethylperfluorooctanesulfonamidoacetate
+N-ethyl perfluorooctanesulfonamidoacetic acid
+N-Ethylperfluorooctanesulfonamidoacetic acid (N-EtFOSAA) (N-ethyl-D5, 98%)
+N-Ethyl perfluorooctane sulfonamido ethanol
+Nitrogenous biochemical oxygen demand
+N-Methyl-2-pyrrolidone
+N-Methylperfluorooctanesulfonamidoacetate
+N-methyl perfluorooctanesulfonamidoacetic acid
+N-Methylperfluorooctanesulfonamidoacetic acid (N-MeFOSAA) (N-methyl-D3, 98%)
+N-Methylperfluorooctane sulfonamido ethanol
+N,N-Dimethyloctadecylamine
+N,N-Dimethyloctylamine
+N-Nitrosodimethylamine
+N-Nitrosodimethylamine-d6
+N-Nitrosomethylethylamine
+N-Nitrosomorpholine
+Nomegestrol acetate
+Nonabromophenoxybenzene
+Noncarcinogenic polycyclic aromatic hydrocarbons
+Nordoxepin
+NPS POLLUTION - Domestic Pets Present (Y/N) (choice list)
+Odontomesa
+Odor (adverse or offensive) (Y/N) (choice list)
+Odor, atmospheric
+Odor severity (choice list)
+Odor threshold number
+Odor type (choice list)
+Oleandomycin phosphate
+Oligostomis
+Omeprazole
+Omeprazole/Esomeprazole mix
+Omethoate
+Organic compounds
+Organic monomeric aluminum
+Other Hydrologic Evidence: Geomorphic position (choice list)
+Oxidized Matrix Color (soil)
+Oxirane, 2-(chloromethyl)-2-methyl
+Oxycodone-d3
+Oxycodone-d6
+Oxydemeton-methyl
+Palpomyia
+Parachironomus
+Parachironomus monochromus
+Parachironomus sublettei
+Paracladopelma
+Particle size, Hydrometer (0.001mm)
+Particle size, Hydrometer (0.004mm)
+Particle size, Hydrometer (0.007mm)
+Particle size, Hydrometer (0.010mm)
+Particle size, Hydrometer (0.014mm)
+Particle size, Hydrometer (0.023mm)
+Particle size, Hydrometer (0.036mm)
+Particle size, Hydrometer (.008 mm)
+Particle size, Hydrometer (.011 mm)
+Particle size, Hydrometer (.015 mm)
+Particle size, Hydrometer (.026 mm)
+Particle size, Hydrometer (.040 mm)
+PBDE Isomer/Congener 154+PBB153 mixture
+PBDE Isomer/Congener 156+169 mixture
+p-Bromofluorobenzene
+p-Bromophenyl phenyl ether
+Pendimethalin
+Pentabromodiphenyl ether
+Pentabromoethylbenzene
+Pentabromotoluene
+Pepper mild mottle virus
+Perfluoro[1,2-13C2]dodecanoic acid
+Perfluoro-1-dodecanesulfonate
+Perfluorododecanesulfonate
+Perfluorododecanesulfonic acid
+Perfluorododecanoate
+Perfluorododecanoic acid
+Perfluorolauric acid***retired***use Perfluorododecanoic acid
+Perfluoromyristic acid***retired***use Perfluorotetradecanoic acid
+Pericoma
+PFAS Total, Ionic Compounds
+Phendimetrazine
+Phenol, 2-(1,1-dimethylethyl)-4-methoxy-
+Phenol, 2,4-bis(1,1-dimethylethyl)-6-methyl-
+Phenol, 2,4-bis(1,1-dimethylpropyl)-
+Phenol, 4,4'-[2,2,2-trifluoro-1-(trifluoromethyl)ethylidene]bis-
+Phosphamidon
+Phosphamidon-E
+Photomirex
+Pindolol
+Plutonium-239 and Plutonium-240 combined
+Polybrominated biphenyls
+Polybrominated diphenyl ethers
+Polycyclic aromatic hydrocarbons
+Polycyclic aromatic hydrocarbons as benzo[a]pyrene TEQ
+Polycyclic aromatic hydrocarbons, high molecular weight
+Polycyclic aromatic hydrocarbons, low molecular weight
+p,p'-Dibromodiphenyl ether
+Praseodymium
+Presumptive Aeromonas
+Primidone
+Primidone-d5
+Promecard
+Promethazine
+Promethazine-d4
+Promethium-147
+Prometon
+Prometryn
+Propanoic acid, 2,2,3-trifluoro-3-[1,1,2,2,3,3-hexafluoro-3-(trifluoromethoxy)propoxy]-
+Prostoma
+Pseudochironomus
+Pseudochironomus articaudus
+Pseudochironomus fulviventris
+Pseudochironomus pseudoviridis
+Pseudodiamesa
+Pseudoephedrine-d3
+Pseudoephedrine/Ephedrine mix
+Pseudolimnophila
+Pseudomonas
+Pseudomonas aeruginosa
+Pseudostenophylax
+Psychomyia
+Ptilostomis
+Radon
+Radon-219
+Radon-222
+RBP2, Aquatic Vegetation, Dominant Type & Species (choice list)
+RBP2, Habitat type, general comments
+RBP2, Habitat type, sand-silt-mud-muck (%)
+RBP2, Habitat type, submerged macrophytes (%)
+RBP2, High G, Sediment Deposition (choice list)
+RBP2, Instream Features, Dam Present (Y/N) (choice list)
+RBP2, Low G, Sediment Deposition (choice list)
+RBP2, Riparian Vegetation, Dominant Species Present (choice list)
+RBP2, Sediment/Substrate, Deposits (choice list)
+RBP2, Sediment/Substrate, Embedded Stone Undersides Black (choice list)
+RBP2, Sediment/Substrate, Odors (choice list)
+RBP2, Sediment/Substrate, Oils (choice list)
+RBP2, Substrate, organic, detritus, sticks, wood, etc. (CPOM)
+RBP2, Substrate, organic, muck-mud, black-fine (FPOM)
+RBP2, Water Quality, Water Odors (choice list)
+RBP2, Watershed, Predominant Surrounding Landuse (choice list)
+RBP3, Riffle/Run, Sediment Deposition (choice list)
+RBP Predominant Surrounding Land Use (choice list)
+RBP Sediment Deposition (choice list)
+RBP Sediment Odors (choice list)
+RBP Sediment Oils (choice list)
+RBP Water Odors (choice list)
+Reach Length, Downstream
+Recompression Index
+Redoximorphic Features (%)
+Redoximorphic Features (choice list)
+Redoximorphic Features Color: Chroma
+Redoximorphic Features Color: Hue
+Redoximorphic Features Color: Value
+Rhodamine WT
+Riparian - Dam (choice list)
+Riparian - Docks or marinas (choice list)
+Riparian vegetation composition (choice list)
+Riparian vegetation, dominant species present
+Roxithromycin
+(RS)-AMPA (Aminomethyl phosphonic acid)
+Salinomycin
+Sample location, distance downstream
+Sample location, relative to right bank, looking downstream
+Saturation Index Chalcedony
+Saturation Index Dolomite
+Second Suite of PCBs in air from Hoff, 1999
+Sediment
+Sediment compaction
+Sediment Depth
+Sediment, inorganic, classification (choice list)
+Sediment, organic, classification (choice list)
+Sediment Oxygen Demand
+Sediment percent organic
+Sediment/ Substrate Odors (choice list)
+Selenomethionine
+Sethoxydim
+Shannon & Wiener Macroinvert Taxonomic Diversity Index
+Silanol, dimethyl(1,1,2-trimethylpropyl)-
+Simpson Taxonomic Diversity Index
+Simultaneously extracted metals
+Simultaneously extracted metals/acid volatile sulfides
+Simultaneously extracted metals/acid volatile sulfides (Metals ESB based on Final Chron. Value for AVS (fOC))
+Simultaneously extracted metals minus AVS
+Sodium chromate(VI)
+Sodium dodecafluoro-3H-4,8-dioxanonanoate
+Soft/Small Sediment Present (Y/N) (choice list)
+Soil Metric Color (Moist): Chroma
+Soil Saturation Evidence: Hydrogen sulfide odor (choice list)
+Specific Conductance, Calculated/Measured Ratio
+Specific drawdown capacity
+Stenochironomus
+Stictochironomus
+Stratiomys
+Stream Reach Average - Canopy Cover % (Densiometer)
+Substrate Dominant, Channel (choice list)
+Substrate Dominant, Transect (choice list)
+Substrate - sediment thickness
+Substrate Subdominant, Transect (choice list)
+Suite of PCBs from Ind. Univ.
+Suite of PCBs in air from Hoff, 1999
+Sulfadimethoxine
+Sulfometuron methyl
+Surfactants, unspecified mix
+Suspended sediment concentration (SSC)
+Suspended Sediment Concentration (SSC)
+Suspended Sediment Discharge
+Taphromysis
+Taxonomic Diversity, Shannon-Weaver Index
+Taxonomic Evenness
+Taxonomic Richness
+Taxonomic Richness, Ephemeroptera, Plecoptera, Tricoptera
+Temperature, sediment
+Tetrabromobisphenol A
+Tetrabromodiphenyl ether
+Tetrabromophthalic anhydride
+Tetrachlorvinphos (mixed isomers)
+Theobromine
+Torrent Deposition-Massive deposits of sediment, logs, and debris in the reach (Y/N) (choice list)
+Torrent Deposition-Stream has begun to erode newly laid matrix supported deposits (Y/N) (choice list)
+Torrent Scouring-Downstream of scoured reach are massive deposits of sediment and debris (Y/N) (choice list)
+Torrent Scouring-Stream channel is scoured down to bedrock for substantial portion of reach (Y/N) (choice list)
+Total Brominated Flame Retardants
+Toxicity, sediment, Ampelisca abdita, significant (choice list)
+Toxicity, sediment, Ampelisca abdita, survival**retired**useBiologicalSample,SubjectTaxon,IntentToxicity
+Toxicity sediment control survival
+Toxicity, sediment, Leptocheirus plumulosus, survival**retired**useBiologicalSample,SubjectTaxon,IntentToxicity
+Toxicity, sediment, microtox, Vibrio fischeri, EC50**retired**useBiologicalSample,SubjectTaxon,IntentToxicity
+Toxicity sediment survival
+Tralkoxydim
+Tralkoxydim acid
+Tralomethrin
+Tramadol
+Trazodone
+Triadimefon
+Triadimenol
+Tribromoacetaldehyde
+Tribromoacetonitrile
+Tribromomethane
+Tribromonitromethane
+Tridemethyl hexazinone G
+Trihalomethanes
+Triiodomethane
+Tris(2,3-dibromopropyl) Phosphate
+Unconfined Compression
+Unconfined compressive strength
+Unnatural bottom deposits (choice list)
+Unnatural odor (choice list)
+Vertical Height from waterline to high water mark
+Vinyl bromide
+Water level in well, depth from a reference point
+Water Odor (choice list)
+Watershed, predominant surrounding land use
+Weather comments (text)
+Wiedemannia
+Wind direction (direction from, expressed 0-360 deg)
+Wind direction from (choice list)
+Xenochironomus
+(Z)-Dimethomorph
+Zidovudine
+Zidovudine-d3
+Zolpidem
+Zolpidem phenyl-4-carboxylic acid
