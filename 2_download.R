@@ -122,10 +122,10 @@ p2_targets_list <- list(
                 by = "CharacteristicName")
   ),
   
-  # CDOM
+  # True Color
   tar_target(
-    name = p2_site_counts_cdom,
-    command = p1_wqp_inventory_aoi_cdom %>%
+    name = p2_site_counts_tc,
+    command = p1_wqp_inventory_aoi_tc %>%
       # Hold onto location info, grid_id, characteristic, and provider data
       # and use them for grouping
       group_by(MonitoringLocationIdentifier, lon, lat, datum, grid_id,
@@ -135,7 +135,7 @@ p2_targets_list <- list(
                 .groups = "drop") %>%
       # Add the overarching parameter names to the dataset
       left_join(x = .,
-                y = p1_wqp_params_cdom %>%
+                y = p1_wqp_params_tc %>%
                   map2_df(.x,
                           .y = names(.),
                           .f = ~{
@@ -211,12 +211,12 @@ p2_targets_list <- list(
     error = "stop"
   ),
   
-  # CDOM
+  # True Color
   tar_target(
-    name = p2_site_counts_cdom_file,
-    command = export_single_file(target = p2_site_counts_cdom,
-                                 drive_path = p0_cdom_output_path,
-                                 stable = p0_workflow_config$cdom_create_stable,
+    name = p2_site_counts_tc_file,
+    command = export_single_file(target = p2_site_counts_tc,
+                                 drive_path = p0_tc_output_path,
+                                 stable = p0_workflow_config$tc_create_stable,
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp),
     cue = tar_cue("always"),
@@ -275,10 +275,10 @@ p2_targets_list <- list(
     packages = c("tidyverse", "MESS")
   ),
   
-  # SDD
+  # True Color
   tar_target(
-    name = p2_site_counts_grouped_sdd,
-    command = add_download_groups(p2_site_counts_sdd, 
+    name = p2_site_counts_grouped_tc,
+    command = add_download_groups(p2_site_counts_tc, 
                                   max_sites = 100,
                                   max_results = 250000) %>%
       group_by(download_grp) %>%
@@ -287,10 +287,10 @@ p2_targets_list <- list(
     packages = c("tidyverse", "MESS")
   ),
   
-  # CDOM
+  # SDD
   tar_target(
-    name = p2_site_counts_grouped_cdom,
-    command = add_download_groups(p2_site_counts_cdom, 
+    name = p2_site_counts_grouped_sdd,
+    command = add_download_groups(p2_site_counts_sdd, 
                                   max_sites = 100,
                                   max_results = 250000) %>%
       group_by(download_grp) %>%
@@ -375,13 +375,13 @@ p2_targets_list <- list(
     packages = c("dataRetrieval", "tidyverse", "sf", "retry")
   ),
   
-  # CDOM
+  # True Color
   tar_target(
-    name = p2_wqp_data_aoi_cdom,
-    command = fetch_wqp_data(p2_site_counts_grouped_cdom,
-                             char_names = unique(p2_site_counts_grouped_cdom$CharacteristicName),
+    name = p2_wqp_data_aoi_tc,
+    command = fetch_wqp_data(p2_site_counts_grouped_tc,
+                             char_names = unique(p2_site_counts_grouped_tc$CharacteristicName),
                              wqp_args = p0_wqp_args),
-    pattern = map(p2_site_counts_grouped_cdom),
+    pattern = map(p2_site_counts_grouped_tc),
     error = "continue",
     format = "feather",
     packages = c("dataRetrieval", "tidyverse", "sf", "retry")
@@ -430,6 +430,14 @@ p2_targets_list <- list(
   tar_target(
     name = p2_wqp_data_aoi_sdd_anon,
     command = anonymize_text(p2_wqp_data_aoi_sdd),
+    packages = "tidyverse",
+    error = "stop"
+  ),
+  
+  # True Color
+  tar_target(
+    name = p2_wqp_data_aoi_tc_anon,
+    command = anonymize_text(p2_wqp_data_aoi_tc),
     packages = "tidyverse",
     error = "stop"
   ),
@@ -507,12 +515,12 @@ p2_targets_list <- list(
     error = "stop"
   ),
   
-  # CDOM
+  # True Color
   tar_target(
-    name = p2_wqp_data_aoi_cdom_file,
-    command = export_single_file(target = p2_wqp_data_aoi_cdom_anon,
-                                 drive_path = p0_cdom_output_path,
-                                 stable = p0_workflow_config$cdom_create_stable,
+    name = p2_wqp_data_aoi_tc_file,
+    command = export_single_file(target = p2_wqp_data_aoi_tc_anon,
+                                 drive_path = p0_tc_output_path,
+                                 stable = p0_workflow_config$tc_create_stable,
                                  google_email = p0_workflow_config$google_email,
                                  date_stamp = p0_date_stamp,
                                  feather = TRUE),
@@ -566,12 +574,12 @@ p2_targets_list <- list(
                                      "2_download/log/sdd_summary_wqp_data.csv")
   ),
   
-  # CDOM
+  # True Color
   tar_file(
-    name = p2_wqp_data_cdom_summary_csv,
-    command = summarize_wqp_download(wqp_inventory_summary_csv = p1_wqp_inventory_cdom_summary_csv,
-                                     wqp_data = p2_wqp_data_aoi_cdom_anon,
-                                     "2_download/log/cdom_summary_wqp_data.csv")
+    name = p2_wqp_data_tc_summary_csv,
+    command = summarize_wqp_download(wqp_inventory_summary_csv = p1_wqp_inventory_tc_summary_csv,
+                                     wqp_data = p2_wqp_data_aoi_tc_anon,
+                                     "2_download/log/tc_summary_wqp_data.csv")
   ),
   
   
@@ -655,18 +663,20 @@ p2_targets_list <- list(
     packages = c("tidyverse", "googledrive")
   ),
   
-  # CDOM
+  # True Color
   tar_file_read(
-    name = p2_cdom_drive_ids,
+    name = p2_tc_drive_ids,
     command = get_file_ids(google_email = p0_workflow_config$google_email,
-                           drive_folder = p0_cdom_output_path,
-                           file_path = "2_download/out/cdom_drive_ids.csv",
-                           depend = p2_wqp_data_aoi_cdom_file
+                           drive_folder = p0_tc_output_path,
+                           file_path = "2_download/out/tc_drive_ids.csv",
+                           # Optional, indicates that this step depends on another
+                           # target finishing first
+                           depend = p2_wqp_data_aoi_tc_file
     ),
     read = read_csv(file = !!.x),
     cue = tar_cue("always"),
     packages = c("tidyverse", "googledrive")
-  ),
+  ), 
   
   # General purpose
   tar_file_read(
@@ -680,6 +690,5 @@ p2_targets_list <- list(
     cue = tar_cue("always"),
     packages = c("tidyverse", "googledrive")
   )
-  
   
 )

@@ -51,6 +51,11 @@
     - "Total suspended solids"
     - "Total Particulate Matter"
     - "Suspended Sediment Concentration (SSC)"
-
+    
+  true_color:
+    - "Color"
+    - "Apparent color"
+    - "True color"
+    
   ssc:
     - "Suspended Sediment Concentration (SSC)"
