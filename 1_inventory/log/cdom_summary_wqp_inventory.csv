@@ -1,11 +1,23 @@
 CharacteristicName,n_sites,n_records
 Absorbance at 280 nanometers,1398,30346
 Absorbance at 370 nanometers,419,2743
+Absorbance at 412 nm,435,2963
+Absorbance at 440 nm,978,6731
 Absorption coefficient at 440 nm,41,123
-Beam Attenuation (Seabird),85,415578
-Colored dissolved organic matter (CDOM),547,8841
+Absorption spectral slope (Sag),419,10887
+Colored dissolved organic matter (CDOM),547,8866
+Emission intensity ratio,1,5
 Fluorescence index,419,2748
-Specific UV Absorbance at 254 nm,129,2755
+"Fluorescence, excitation 260 emission 450",419,2748
+"Fluorescence, excitation 275 emission 304",419,2748
+"Fluorescence, excitation 275 emission 340",419,2748
+"Fluorescence, excitation 280 emission 370",419,2748
+"Fluorescence, excitation 300 emission 390",419,2748
+"Fluorescence, excitation 340 emission 440",419,2748
+"Fluorescence, excitation 370 emission 460",419,2748
+"Fluorescence, excitation 390 emission 510",419,2748
+"Fluorescence, excitation 420 emission 460",65,159
+Specific UV Absorbance at 254 nm,129,2780
 "Specific UV Absorbance at 254 nm, corrected for Fe",14,154
 UV 254,2911,95578
 "UV Absorption, relative conc. of organic constituents",208,323

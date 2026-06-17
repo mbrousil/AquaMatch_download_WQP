@@ -52,6 +52,7 @@ Recompression Index
 Riparian vegetation composition (choice list)
 Riparian vegetation, dominant species present
 Sediment compaction
+Spring, Channel Dominant Discharge Type (choice list)
 Substrate Dominant, Channel (choice list)
 Substrate Dominant, Transect (choice list)
 Substrate Subdominant, Transect (choice list)
